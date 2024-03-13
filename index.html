@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>National Skill</title>
+    <link rel="stylesheet" href="./static/css/styles.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+
+<body>
+    <div class="popup-overlay" id="popup">
+        <div class="popup-content">
+            <div class="heading">
+                <p>Korean Passed Student</p>
+                <span id="closePopup">&times</span>
+            </div>
+            <div class="horizontal-line"></div>
+            <img src="./static/img/12345.png" alt="">
+        </div>
+    </div>
+
+
+    <header>
+        <nav>
+            <div class="nav-bar">
+
+                <a class="logo" href="#">
+                    <img class="logo-img" src="./static/img/logo-2.jpg" alt="National Skill">
+                </a>
+
+                <ul class="nav-list">
+                    <a class="home-tab active" href="#">
+                        <li>Home</li>
+                    </a>
+                    <a class="about-tab" href="#">
+                        <li>About Us</li>
+                    </a>
+                    <a class="notice-tab" href="#">
+                        <li>Notice Board</li>
+                    </a>
+                    <a class="gallery-tab" href="#">
+                        <li>Gallery</li>
+                    </a>
+                    <a class="contact-tab" href="#">
+                        <li>Contact Us</li>
+                    </a>
+                </ul>
+
+            </div>
+
+        </nav>
+        <div class="horizontal-line below-nav"></div>
+    </header>
+
+    <div class="container">
+
+        <div class="course-wrapper">
+            <div class="heading">
+                <p>FIND YOUR <span>COURSE</span></p>
+            </div>
+
+            <div class="course-cards">
+                <div class="course-card">
+                    <p class="course-name">COMPUTER COURSE</p>
+                </div>
+                <div class="course-card">
+                    <p class="course-name">LANGUAGE COURSE</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="gallery-notice-container">
+
+            <div class="gallery-wrapper">
+                <div class="heading">
+                    <p><span>GALLERY</span></p>
+                </div>
+                <div class="images">
+                    <img class="first-img" src="./static/img/gallery/1.jpg" alt="">
+                    <img src="./static/img/gallery/2.jpg" alt="">
+                    <img class="showallphoto-overlay" src="./static/img/gallery/31.jpg" alt="">
+                    <a href="./gallery.html">
+                        <p>Show All Photos</p>
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="notice-wrapper">
+                <div class="heading">
+                    <p><span>NOTICE</span> BOARD</p>
+                </div>
+                <ul class="notice-list">
+                    <li class="notice-item">
+                        <div class="date">
+                            <p style="display: flex; flex-direction: column;"><span>1</span> Mar</p>
+                        </div>
+
+                        <div class="context">
+                            <p>Notice 1</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script>
+        $(document).ready(function () {
+            function showPopup() {
+                $('#popup').fadeIn();
+            }
+
+            function hidePopup() {
+                $('#popup').fadeOut();
+            }
+
+            if ($('.home-tab').hasClass('active')) {
+                showPopup();
+            }
+
+            $('.nav-list a').click(function () {
+                $('.nav-list a').removeClass('active');
+                $(this).addClass('active');
+
+
+                if ($(this).hasClass('home-tab')) {
+                    showPopup();
+                } else {
+                    hidePopup();
+                }
+            });
+
+
+            $('#closePopup').click(function () {
+                hidePopup();
+            });
+
+            $(document).keydown(function (e) {
+                if (e.keyCode === 27) {
+                    hidePopup();
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>
