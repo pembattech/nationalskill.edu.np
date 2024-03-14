@@ -42,7 +42,7 @@
                     <a class="notice-tab" href="#">
                         <li>Notice Board</li>
                     </a>
-                    <a class="gallery-tab" href="#">
+                    <a class="gallery-tab" href="./gallery.html">
                         <li>Gallery</li>
                     </a>
                     <a class="contact-tab" href="#">
@@ -58,18 +58,66 @@
 
     <div class="container">
 
+        <div class="aboutus-wrapper">
+            <div class="heading">
+                <p><span>ABOUT</span> US</p>
+            </div>
+
+            <div class="content">
+                <p>
+                    Welcome to <b>National Skill</b> Institute! We're in Bhaktapur, Suryabinayak, and we offer classes
+                    in Korean language and computer skills. Our goal is to help you become better at these things.
+
+                    In our Korean classes, you'll learn to speak, listen, read, and write. Whether you want to chat with
+                    Koreans or work in South Korea, our teachers will help you get there.
+
+                    We also have computer classes for all levels. From basic stuff to advanced coding, we'll teach you
+                    what you need to know to succeed in the tech world.
+
+                    Our teachers are great, and our school is modern and cool. Come learn with us and open up new
+                    opportunities for yourself!
+                </p>
+            </div>
+        </div>
+
         <div class="course-wrapper">
             <div class="heading">
                 <p>FIND YOUR <span>COURSE</span></p>
             </div>
 
             <div class="course-cards">
-                <div class="course-card">
-                    <p class="course-name">COMPUTER COURSE</p>
+                <div class="course-card card-bg">
+                    <div class="course-name">COMPUTER COURSE</div>
+                    <div class="horizontal-line"></div>
+                    <ul class="courses">
+                        <li>Basic computer</li>
+                        <li>Account Package</li>
+                        <li>Graphic Design</li>
+                        <li>Hardware / Software</li>
+                        <li>Programming</li>
+                    </ul>
+
+                    <div class="apply">
+                        <a href="#register">
+                            <p class="clickme">Apply</p>
+                        </a>
+                    </div>
                 </div>
-                <div class="course-card">
-                    <p class="course-name">LANGUAGE COURSE</p>
+
+                <div class="course-card card-bg">
+                    <div class="course-name">LANGUAGE COURSE</div>
+                    <div class="horizontal-line"></div>
+                    <ul class="courses">
+                        <li>Korean Language</li>
+                    </ul>
+
+                    <div class="apply">
+                        <a href="#register">
+                            <p class="clickme">Apply</p>
+                        </a>
+                    </div>
                 </div>
+
             </div>
         </div>
 
@@ -84,7 +132,7 @@
                     <img src="./static/img/gallery/2.jpg" alt="">
                     <img class="showallphoto-overlay" src="./static/img/gallery/31.jpg" alt="">
                     <a href="./gallery.html">
-                        <p>Show All Photos</p>
+                        <p class="clickme">Show All Photos</p>
                     </a>
                 </div>
 
@@ -95,7 +143,7 @@
                     <p><span>NOTICE</span> BOARD</p>
                 </div>
                 <ul class="notice-list">
-                    <li class="notice-item">
+                    <li class="notice-item card-bg">
                         <div class="date">
                             <p style="display: flex; flex-direction: column;"><span>1</span> Mar</p>
                         </div>
@@ -111,44 +159,7 @@
     </div>
 
 
-    <script>
-        $(document).ready(function () {
-            function showPopup() {
-                $('#popup').fadeIn();
-            }
-
-            function hidePopup() {
-                $('#popup').fadeOut();
-            }
-
-            if ($('.home-tab').hasClass('active')) {
-                showPopup();
-            }
-
-            $('.nav-list a').click(function () {
-                $('.nav-list a').removeClass('active');
-                $(this).addClass('active');
-
-
-                if ($(this).hasClass('home-tab')) {
-                    showPopup();
-                } else {
-                    hidePopup();
-                }
-            });
-
-
-            $('#closePopup').click(function () {
-                hidePopup();
-            });
-
-            $(document).keydown(function (e) {
-                if (e.keyCode === 27) {
-                    hidePopup();
-                }
-            });
-        });
-    </script>
+    <script src="./static/js/script.js"></script>
 
 </body>
 
