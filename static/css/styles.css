@@ -100,7 +100,8 @@ ul {
     font-weight: 700;
 }
 
-.content, .content a {
+.content,
+.content a {
     color: #fff;
 }
 
@@ -132,6 +133,11 @@ header {
     top: 0;
     background-color: #242424;
     z-index: 9;
+}
+
+footer {
+    background-color: #3c3c3c;
+    color: #fff;
 }
 
 .nav-bar {
@@ -184,7 +190,7 @@ nav {
     width: 80px;
 }
 
-.aboutus-wrapper .content p{
+.aboutus-wrapper .content p {
     margin: 0;
 
 }
@@ -285,6 +291,11 @@ ul.notice-list {
     padding: 0;
 }
 
+.notice-list {
+    max-height: 352px;
+    overflow: auto;
+}
+
 .notice-item p {
     font-size: 14px;
     margin: 0;
@@ -292,6 +303,19 @@ ul.notice-list {
 
 .notice-item span {
     font-size: 28px;
+}
+
+.notice-list .content {
+    font-weight: 500;
+    color: #fff;
+}
+
+.notice-item {
+    margin: 0px 5px 5px 0;
+}
+
+.notice-item:hover {
+    border-color: #fff;
 }
 
 .gallery-allphoto-wrapper .gallery-thumnail {
@@ -303,13 +327,16 @@ ul.notice-list {
     gap: 8px;
 }
 
-.contact-loc, .contact-call, .contact-connect {
+.contact-loc,
+.contact-call,
+.contact-connect {
     padding: 5px;
     width: 500px;
     border-radius: 5px;
 }
 
-.contact-flex .content, .contact-flex .short-info {
+.contact-flex .content,
+.contact-flex .short-info {
     margin: 30px 0;
     text-align: center;
 }
@@ -327,4 +354,42 @@ ul.notice-list {
 
 .contactus-wrapper .content p {
     margin: 0;
+}
+
+.footer-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.footer-flex {
+    display: flex;
+    justify-content:space-evenly;
+}
+
+.footer-flex .heading {
+    padding: 0;
+    font-weight: 500;
+    text-align: left;
+}
+
+.footer-flex ul {
+    padding: 0;
+    margin: 0;
+}
+
+.footer-img__content {
+    display: flex;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.footer-img__content p {
+    margin: 0;
+}
+
+.footer-img__content .footer-img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
 }
