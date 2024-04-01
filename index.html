@@ -267,21 +267,15 @@
 
 
     <script>
-
         const courseCards = document.querySelectorAll('.course-card .apply p');
 
         courseCards.forEach(courseLink => {
-            console.log(courseLink)
-            courseLink.addEventListener('click', function (event) {
-                event.preventDefault(); // Prevent default form submission if #register links to one
-
+            courseLink.addEventListener('click', function(event) {
+                event.preventDefault();
                 const courseName = this.parentElement.parentElement.querySelector('.course-name').textContent.trim();
-
                 localStorage.setItem('appliedCourse', courseName);
-
-                // Redirect or display message based on your application logic
                 console.log(`You applied for the ${courseName} course!`);
-                window.location.href = "register.html"
+                window.location.href = "register.html";
             });
         });
 

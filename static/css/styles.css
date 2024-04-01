@@ -323,6 +323,12 @@ ul.notice-list {
     width: 300px;
 }
 
+.gallery-allphoto-wrapper .images {
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+
 .contactus-wrapper .contact-flex {
     display: flex;
     gap: 8px;
