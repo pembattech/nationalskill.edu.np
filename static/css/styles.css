@@ -369,6 +369,11 @@ ul.notice-list {
     padding: 20px;
 }
 
+.footer-wrapper .short-brief {
+    display: flex;
+    gap: 10px;
+}
+
 .footer-flex {
     display: flex;
     justify-content:space-evenly;
