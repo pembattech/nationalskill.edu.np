@@ -2,9 +2,10 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>National Skill</title>
+    <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
 
     <link rel="stylesheet" href="./static/css/styles.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -266,16 +267,12 @@
 
 
     <script>
-        const courseCards = document.querySelectorAll('.course-card .apply p');
-
-        courseCards.forEach(courseLink => {
-            courseLink.addEventListener('click', function(event) {
-                event.preventDefault();
-                const courseName = this.parentElement.parentElement.querySelector('.course-name').textContent.trim();
-                localStorage.setItem('appliedCourse', courseName);
-                console.log(`You applied for the ${courseName} course!`);
-                window.location.href = "register.html";
-            });
+        $('.apply p').click(function (event) {
+            event.preventDefault();
+            var courseName = $(this).closest('.course-card').find('.course-name').text().trim();
+            localStorage.setItem('appliedCourse', courseName);
+            console.log('You applied for the ' + courseName + ' course!');
+            // window.location.href = "register.html";
         });
 
     </script>
