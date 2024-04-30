@@ -10,6 +10,39 @@
     <link rel="stylesheet" href="./static/css/styles.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+    <style>
+        /* CSS for the dropdown */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            min-width: 160px;
+            z-index: 1;
+            border-radius: 5px;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #111;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 
 <body>
@@ -29,6 +62,15 @@
                     <a class="nav-link about-tab" href="./aboutus.html">
                         <li>About Us</li>
                     </a>
+
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" class="dropbtn">Dropdown</a>
+                        <div class="dropdown-content">
+                            <a href="lang_course/korea.html">About Korea</a>
+                            <a href="lang_course/japanese.html">About Japan</a>
+                        </div>
+                    </li>
+
                     <a class="nav-link notice-tab" href="#">
                         <li>Notice Board</li>
                     </a>
@@ -40,6 +82,9 @@
                     </a>
                 </ul>
 
+                <a class="logo" href="./quicklink.html" style="float: right;">
+                    Quick Link
+                </a>
             </div>
 
         </nav>

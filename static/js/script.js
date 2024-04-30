@@ -10,38 +10,40 @@ $(document).ready(function () {
     });
 
 
-    function showPopup() {
-        $('#popup').fadeIn();
-    }
+    
 
-    function hidePopup() {
-        $('#popup').fadeOut();
-    }
+    // function showPopup() {
+    //     $('#popup').fadeIn();
+    // }
 
-    if ($('.home-tab').hasClass('active')) {
-        showPopup();
-    }
+    // function hidePopup() {
+    //     $('#popup').fadeOut();
+    // }
 
-    $('.nav-list a').click(function () {
-        $('.nav-list a').removeClass('active');
-        $(this).addClass('active');
+    // if ($('.home-tab').hasClass('active')) {
+    //     showPopup();
+    // }
 
-
-        if ($(this).hasClass('home-tab')) {
-            showPopup();
-        } else {
-            hidePopup();
-        }
-    });
+    // $('.nav-list a').click(function () {
+    //     $('.nav-list a').removeClass('active');
+    //     $(this).addClass('active');
 
 
-    $('#closePopup').click(function () {
-        hidePopup();
-    });
+    //     if ($(this).hasClass('home-tab')) {
+    //         showPopup();
+    //     } else {
+    //         hidePopup();
+    //     }
+    // });
 
-    $(document).keydown(function (e) {
-        if (e.keyCode === 27) {
-            hidePopup();
-        }
-    });
+
+    // $('#closePopup').click(function () {
+    //     hidePopup();
+    // });
+
+    // $(document).keydown(function (e) {
+    //     if (e.keyCode === 27) {
+    //         hidePopup();
+    //     }
+    // });
 });
