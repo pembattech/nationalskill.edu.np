@@ -9,6 +9,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #242424;
+    font-size: 16px;
 }
 
 img {
@@ -21,8 +22,10 @@ a {
     text-decoration: none;
 }
 
+a:focus,
 a:hover {
     color: #fff;
+    text-decoration: none;
 }
 
 ul {
@@ -145,6 +148,7 @@ footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    font-size: 15px;
 }
 
 .nav-list {
@@ -161,6 +165,37 @@ footer {
     color: #fff;
     font-weight: 600;
     transition: font-weight 0.3s ease;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    min-width: 160px;
+    z-index: 1;
+    border-radius: 5px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #111;
+    border-radius: 5px;
 }
 
 .container {
@@ -190,7 +225,7 @@ nav {
 }
 
 .logo-img {
-    width: 80px;
+    width: 60px;
 }
 
 .aboutus-wrapper .content p {
@@ -322,12 +357,13 @@ ul.notice-list {
 }
 
 .gallery-allphoto-wrapper .gallery-thumnail {
-    width: 300px;
+    width: 280px;
 }
 
 .gallery-allphoto-wrapper .images {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
 
 }
 

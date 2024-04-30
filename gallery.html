@@ -2,13 +2,21 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gallery - National Skill</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>National Skill</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
   <link rel="stylesheet" href="./static/css/styles.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
 </head>
 
 <body>
@@ -22,12 +30,13 @@
         </a>
 
         <ul class="nav-list">
-          <a class="nav-link home-tab" href="./index.html">
+          <a class="nav-link home-tab active" href="./index.html">
             <li>Home</li>
           </a>
           <a class="nav-link about-tab" href="./aboutus.html">
             <li>About Us</li>
           </a>
+
           <a class="nav-link notice-tab" href="#">
             <li>Notice Board</li>
           </a>
@@ -37,13 +46,30 @@
           <a class="nav-link contact-tab" href="./contactus.html">
             <li>Contact Us</li>
           </a>
+
         </ul>
 
+        <div class="right-nav" style="display: flex; gap: 20px;">
+          <div class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">DropdownName</a>
+            <div class="dropdown-content">
+              <a href="lang_course/korea.html">About Korea</a>
+              <a href="lang_course/japanese.html">About Japan</a>
+            </div>
+          </div>
+          <div>
+            <a class="logo" href="./quicklink.html">
+              Quick Link
+            </a>
+          </div>
+
+        </div>
       </div>
 
     </nav>
     <div class="horizontal-line below-nav"></div>
   </header>
+
   <div class="container">
     <div class="gallery-allphoto-wrapper">
 
@@ -52,7 +78,7 @@
       </div>
 
       <div class="images">
-        
+
         <a href="./static/img/gallery/images3.jpg" data-fancybox="images">
           <img class="gallery-thumnail" src="./static/img/gallery/images3.jpg" />
         </a>
