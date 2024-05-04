@@ -85,6 +85,10 @@ ul {
     list-style-type: none;
 }
 
+.logo-forsmallscreen {
+    display: none;
+}
+
 .theme-switch {
     background: var(--thirdBgColor);
     width: 70px;
@@ -564,7 +568,8 @@ ul.notice-list {
         display: block;
     }
 
-    .nav-bar, .nav-item {
+    .nav-bar,
+    .nav-item {
         padding: 10px;
     }
 
@@ -572,4 +577,7 @@ ul.notice-list {
         margin-left: 10px;
     }
 
+    .logo-forsmallscreen {
+        display: block;
+    }
 }
