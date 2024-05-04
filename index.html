@@ -41,11 +41,6 @@
             }
 
             .header__icon {
-                position: relative;
-                display: block;
-                float: left;
-                width: 50px;
-                height: 66px;
                 cursor: pointer;
             }
 
@@ -105,12 +100,16 @@
         <div class="site-pusher">
 
             <header>
-                <div class="hamburger-bar" style="position: sticky; top: 0; display: flex; justify-content: space-between;">
-                    <a href="#" class="header__icon" id="header__icon"></a>
+                <div class="hamburger-bar" style="display: flex; justify-content: space-between; padding: 10px;">
+                    <div class="hamburger">
+                        <a href="#" class="header__icon" id="header__icon"></a>
+                    </div>
 
-                    <a class="logo" href="./index.html">
-                        <img class="logo-img" src="./static/img/logo-2.jpg" alt="National Skill">
-                    </a>
+                    <div class="logo-div">
+                        <a class="logo" href="./index.html">
+                            <img class="logo-img" src="./static/img/logo-2.jpg" alt="National Skill">
+                        </a>
+                    </div>
                 </div>
 
 
