@@ -85,6 +85,10 @@ ul {
     list-style-type: none;
 }
 
+.main-container {
+    overflow: hidden;
+}
+
 .logo-forsmallscreen {
     display: none;
 }
@@ -544,22 +548,9 @@ ul.notice-list {
     .gallery-wrapper .showallphoto-overlay {
         opacity: 0.9;
     }
-}
 
-@media only screen and (max-width: 768px) {
-    .course-cards {
-        flex-direction: column;
-    }
-
-    .gallery-wrapper .images {
-        grid-template-columns: 1fr;
-    }
-
-    .gallery-wrapper .images .first-img {
-        grid-column: auto;
-        grid-row: auto;
-        width: 273px;
-        border-radius: 5px;
+    .popup-content {
+        top: 30%;
     }
 
     .nav-bar,
@@ -579,5 +570,78 @@ ul.notice-list {
 
     .logo-forsmallscreen {
         display: block;
+    }
+
+    .site-pusher,
+    .main-container {
+        height: 100%;
+    }
+
+    .site-pusher {
+        transition-duration: 0.3s;
+        transform: translateX(0px);
+    }
+
+    .header__icon {
+        position: relative;
+        display: block;
+        width: 50px;
+        height: 66px;
+        cursor: pointer;
+    }
+
+    .header__icon:after {
+        content: '';
+        position: absolute;
+        display: block;
+        width: 1rem;
+        height: 0;
+        top: 16px;
+        left: 15px;
+        box-shadow: 0 10px 0 1px var(--thirdBgColor-dark), 0 16px 0 1px var(--thirdBgColor-dark), 0 22px 0 1px var(--thirdBgColor-dark);
+    }
+
+    .dark-mode .header__icon:after {
+        box-shadow: 0 10px 0 1px var(--thirdBgColor-light), 0 16px 0 1px var(--thirdBgColor-light), 0 22px 0 1px var(--thirdBgColor-light);
+    }
+
+    .menu {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 220px;
+        transform: translateX(-220px);
+    }
+
+    .with--sidebar .site-pusher {
+        transform: translateX(220px);
+        max-height: 100vh;
+    }
+
+    .with--sidebar .site-cache {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .course-cards {
+        flex-direction: column;
+    }
+
+    .gallery-wrapper .images {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-wrapper .images .first-img {
+        grid-column: auto;
+        grid-row: auto;
+        width: 273px;
+        border-radius: 5px;
     }
 }
