@@ -39,7 +39,7 @@ $(document).ready(function () {
     }
 
     navLinks.forEach(link => {
-        if (link.getAttribute('href') == '/' || link.getAttribute('href').endsWith(currentPath) == '/' || link.getAttribute('href').endsWith(currentPath)) {
+        if (link.getAttribute('href') == '/' || currentPath == '/' || link.getAttribute('href').endsWith(currentPath)) {
             showPopup();
         }
     });
