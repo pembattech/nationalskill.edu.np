@@ -27,17 +27,17 @@ $(document).ready(function () {
         }
     });
 
-    // function showPopup() {
-    //     $('#popup').fadeIn();
-    // }
+    function showPopup() {
+        $('#popup').fadeIn();
+    }
 
-    // function hidePopup() {
-    //     $('#popup').fadeOut();
-    // }
+    function hidePopup() {
+        $('#popup').fadeOut();
+    }
 
-    // if ($('.home-tab').hasClass('active')) {
-    //     showPopup();
-    // }
+    if ($('.home-tab').hasClass('active')) {
+        showPopup();
+    }
 
     $('.nav-list a').click(function () {
         $('.nav-list a').removeClass('active');
