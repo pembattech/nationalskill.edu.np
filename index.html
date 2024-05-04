@@ -64,26 +64,12 @@
                 left: 0;
                 top: 0;
                 bottom: 0;
-                background-color: #3849a2;
-                overflow-y: scroll;
-                -webkit-overflow-scrolling: touch;
-                width: 250px;
-                transform: translateX(-250px);
-                display: flex;
-                flex-direction: column;
-                height: 1000px;
-            }
-
-            .menu a {
-                display: block;
-                height: 40px;
-                text-align: center;
-                line-height: 40px;
-                border-bottom: 1px solid #3f51b5;
+                width: 220px;
+                transform: translateX(-220px);
             }
 
             .with--sidebar .site-pusher {
-                transform: translateX(250px);
+                transform: translateX(220px);
                 max-height: 100vh;
             }
 
@@ -119,50 +105,48 @@
 
                 <nav class="menu">
                     <div class="nav-bar">
-
-                        <a class="logo" href="./index.html">
+                        <a class="logo nav-item" href="./index.html">
                             <img class="logo-img" src="./static/img/logo-2.jpg" alt="National Skill">
                         </a>
                         
                         <ul class="nav-list">
                             <a class="nav-link home-tab active" href="./index.html">
-                                <li>Home</li>
+                                <li class="nav-item">Home</li>
                             </a>
                             <a class="nav-link about-tab" href="./aboutus.html">
-                                <li>About Us</li>
+                                <li class="nav-item">About Us</li>
                             </a>
 
                             <a class="nav-link notice-tab" href="#">
-                                <li>Notice Board</li>
+                                <li class="nav-item">Notice Board</li>
                             </a>
                             <a class="nav-link gallery-tab" href="./gallery.html">
-                                <li>Gallery</li>
+                                <li class="nav-item">Gallery</li>
                             </a>
                             <a class="nav-link contact-tab" href="./contactus.html">
-                                <li>Contact Us</li>
+                                <li class="nav-item">Contact Us</li>
                             </a>
                             <a class="nav-link register-tab" href="#">
-                                <li>Register</li>
+                                <li class="nav-item">Register</li>
                             </a>
 
                         </ul>
 
-                        <div class="right-nav"
-                            style="display: flex; gap: 20px; justify-content: center; align-items: center;">
-                            <div class="dropdown">
+                        <div class="right-nav">
+                            <div class="dropdown nav-item">
                                 <a href="javascript:void(0)" class="dropbtn">DropdownName</a>
                                 <div class="dropdown-content">
                                     <a href="lang_course/korea.html" title="About Korea">About Korea</a>
                                     <a href="lang_course/japanese.html" title="About Japan">About Japan</a>
                                 </div>
                             </div>
-                            <div>
+                            <div class="nav-item">
                                 <a class="logo" href="./quicklink.html">
                                     Quick Link
                                 </a>
                             </div>
 
-                            <div class="theme-switch">
+                            <div class="theme-switch nav-item">
                                 <div class="switch"></div>
                             </div>
 

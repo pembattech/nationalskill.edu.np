@@ -245,6 +245,13 @@ footer {
     transition: font-weight 0.3s ease;
 }
 
+.right-nav {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
 .dropdown {
     position: relative;
     display: inline-block;
@@ -551,18 +558,18 @@ ul.notice-list {
         border-radius: 5px;
     }
 
-    .nav-bar {
-        flex-direction: column;
-
-    }
-
-    .nav-list {
-        flex-direction: column;
-    }
-
+    .nav-bar,
+    .nav-list,
     .right-nav {
-        flex-direction: column;
+        display: block;
     }
 
-    
+    .nav-bar, .nav-item {
+        padding: 10px;
+    }
+
+    .theme-switch {
+        margin-left: 10px;
+    }
+
 }
