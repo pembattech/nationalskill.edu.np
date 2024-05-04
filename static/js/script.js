@@ -18,11 +18,8 @@ $(document).ready(function () {
 
     const navLinks = document.querySelectorAll('.nav-link');
     const currentPath = window.location.pathname;
-    console.log(currentPath);
-    console.log(typeof currentPath);
     navLinks.forEach(link => {
-        console.log(link.getAttribute('href'));
-        if (link.getAttribute('href').endsWith(currentPath)) {
+        if (link.getAttribute('href').endsWith(currentPath) || currentPath == '/') {
             link.classList.add('active');
         } else {
             link.classList.remove('active');
