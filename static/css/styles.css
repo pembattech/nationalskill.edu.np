@@ -1,25 +1,22 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500&display=swap");
 
 
+
+
 :root {
     --mainBgColor-light: rgb(249, 250, 251);
-    --secondarBgColor-light: #f0f4f9 ;
+    --secondarBgColor-light: #f0f4f9;
     --thirdBgColor-light: #dde3ea;
     --mainTextColor-light: #1f1f1f;
     --secondaryTextColor-light: rgb(51 51 51);
-    --mainLinkColor-light: #0da2b8;
     --mainBorderColor-light: rgb(218, 218, 218);
-
-
-
-
-
-
+    --overlayBgColor-light: #dde3ea99;
 
 
 
     --mainBgColor-dark: #242424;
-    --secondaryBgColor-dark:#3c3c3c;
+    --secondaryBgColor-dark: #3c3c3c;
+    --thirdBgColor-dark: #505050;
     --mainTextColor-dark: #fff;
     --secondaryTextColor-dark: #adb0b1;
     --mainBorderColor-dark: #666666ba;
@@ -31,18 +28,19 @@
     --thirdBgColor: var(--thirdBgColor-light);
     --mainTextColor: var(--mainTextColor-light);
     --secondaryTextColor: var(--secondaryTextColor-light);
-    --mainLinkColor: var(--mainLinkColor-light);
     --mainBorderColor: var(--mainBorderColor-light);
+    --overlayBgColor: var(--overlayBgColor-light);
 
 }
 
 .dark-mode {
     --mainBgColor: var(--mainBgColor-dark);
     --secondaryBgColor: var(--secondaryBgColor-dark);
+    --thirdBgColor: var(--thirdBgColor-dark);
     --mainTextColor: var(--mainTextColor-dark);
     --secondaryTextColor: var(--secondaryTextColor-dark);
     --mainBorderColor: var(--mainBorderColor-dark);
-    --overlayBgColor: var(var(--overlayBgColor-dark));
+    --overlayBgColor: var(--overlayBgColor-dark);
 }
 
 
@@ -56,8 +54,15 @@
 body {
     margin: 0;
     padding: 0;
-    background-color:var(--mainBgColor);
+    background-color: var(--mainBgColor);
     font-size: 16px;
+    transition: background-color .2s;
+}
+
+ol,
+ul {
+    margin: 0;
+    padding: 0;
 }
 
 img {
@@ -80,6 +85,31 @@ ul {
     list-style-type: none;
 }
 
+.theme-switch {
+    background: var(--thirdBgColor);
+    width: 70px;
+    height: 30px;
+    border-radius: 50px;
+    position: relative;
+    cursor: pointer;
+}
+
+.theme-switch .switch {
+    width: 24px;
+    height: 24px;
+    background: #fff url('../img/assets/theme-assets/sun.png') center center no-repeat;
+    border-radius: 100%;
+    position: absolute;
+    top: 3px;
+    left: 4px;
+    transition: 0.5s all ease;
+}
+
+.dark-mode .theme-switch .switch {
+    background: #fff url('../img/assets/theme-assets/moon.png') center center no-repeat;
+    transform: translateX(37px);
+}
+
 .popup-overlay {
     display: none;
     position: fixed;
@@ -97,7 +127,7 @@ ul {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: var(--mainBgColor);
+    background-color: var(--secondaryBgColor);
     color: var(--mainTextColor);
     padding: 10px;
     border-radius: 10px;
@@ -133,8 +163,8 @@ ul {
 }
 
 .horizontal-line {
-    border-bottom: 1px solid #6666668f;
-    margin: 10px 0;
+    border-bottom: 1px solid var(--mainBorderColor);
+    margin: 0 0 10px 0;
 }
 
 .heading {
@@ -183,7 +213,6 @@ ul {
 header {
     position: sticky;
     top: 0;
-    background-color: var(--mainBgColor);
     z-index: 999;
     background-color: var(--secondaryBgColor);
 }
@@ -225,13 +254,15 @@ footer {
     display: none;
     position: absolute;
     background-color: var(--thirdBgColor);
-    min-width: 160px;
+    border: 1px solid var(--mainBorderColor);
+    min-width: 130px;
     z-index: 1;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 
 .dropdown:hover .dropdown-content {
     display: block;
+    border-radius: 10px;
 }
 
 .dropdown-content a {
@@ -244,7 +275,7 @@ footer {
 
 .dropdown-content a:hover {
     background-color: var(--secondaryBgColor);
-    border-radius: 5px;
+    border-radius: 10px;
 }
 
 .container {
