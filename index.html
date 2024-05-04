@@ -16,323 +16,443 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
-    
+
+
+    <style>
+
+        .main-container{
+            overflow: hidden;
+        }
+
+        /* MENU */
+        .menu {
+            float: left;
+        }
+
+        .menu a {
+            padding: 0 10px;
+        }
+
+        .menu a:hover {
+            color: #c5cae9;
+        }
+
+        /* RESPONSIVE */
+        @media only screen and (max-width: 768px) {
+
+            .site-pusher,
+            .main-container {
+                height: 100%;
+            }
+
+            .main-container {
+                overflow: hidden;
+            }
+
+            .site-pusher {
+                transition-duration: 0.3s;
+                transform: translateX(0px);
+            }
+
+            .header__icon {
+                position: relative;
+                display: block;
+                float: left;
+                width: 50px;
+                height: 66px;
+                cursor: pointer;
+            }
+
+            .header__icon:after {
+                content: '';
+                position: absolute;
+                display: block;
+                width: 1rem;
+                height: 0;
+                top: 16px;
+                left: 15px;
+                box-shadow: 0 10px 0 1px #fff, 0 16px 0 1px #fff, 0 22px 0 1px #fff;
+            }
+
+            .menu {
+                position: absolute;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                background-color: #3849a2;
+                overflow-y: scroll;
+                -webkit-overflow-scrolling: touch;
+                width: 250px;
+                transform: translateX(-250px);
+                display: flex;
+                flex-direction: column;
+                height: 1000px;
+            }
+
+            .menu a {
+                display: block;
+                height: 40px;
+                text-align: center;
+                line-height: 40px;
+                border-bottom: 1px solid #3f51b5;
+            }
+
+            .with--sidebar .site-pusher {
+                transform: translateX(250px);
+            }
+
+            .with--sidebar .site-cache {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: rgba(0, 0, 0, 0.6);
+            }
+        }
+    </style>
 </head>
 
 <body>
+    <div class="main-container">
+        <div class="site-pusher">
 
-    <header>
-        <nav>
-            <div class="nav-bar">
+            <header>
+                <a href="#" class="header__icon" id="header__icon"></a>
 
-                <a class="logo" href="./index.html">
-                    <img class="logo-img" src="./static/img/logo-2.jpg" alt="National Skill">
-                </a>
+                <div class="nav-bar">
 
-                <ul class="nav-list">
-                    <a class="nav-link home-tab active" href="./index.html">
-                        <li>Home</li>
-                    </a>
-                    <a class="nav-link about-tab" href="./aboutus.html">
-                        <li>About Us</li>
+                    <a class="logo" href="./index.html">
+                        <img class="logo-img" src="./static/img/logo-2.jpg" alt="National Skill">
                     </a>
 
-                    <a class="nav-link notice-tab" href="#">
-                        <li>Notice Board</li>
-                    </a>
-                    <a class="nav-link gallery-tab" href="./gallery.html">
-                        <li>Gallery</li>
-                    </a>
-                    <a class="nav-link contact-tab" href="./contactus.html">
-                        <li>Contact Us</li>
-                    </a>
-                    <a class="nav-link register-tab" href="#">
-                        <li>Register</li>
-                    </a>
+                    <nav class="menu">
 
-                </ul>
+                        <ul class="nav-list">
+                            <a class="nav-link home-tab active" href="./index.html">
+                                <li>Home</li>
+                            </a>
+                            <a class="nav-link about-tab" href="./aboutus.html">
+                                <li>About Us</li>
+                            </a>
 
-                <div class="right-nav" style="display: flex; gap: 20px; justify-content: center; align-items: center;">
-                    <div class="dropdown">
-                        <a href="javascript:void(0)" class="dropbtn">DropdownName</a>
-                        <div class="dropdown-content">
-                            <a href="lang_course/korea.html" title="About Korea">About Korea</a>
-                            <a href="lang_course/japanese.html" title="About Japan">About Japan</a>
+                            <a class="nav-link notice-tab" href="#">
+                                <li>Notice Board</li>
+                            </a>
+                            <a class="nav-link gallery-tab" href="./gallery.html">
+                                <li>Gallery</li>
+                            </a>
+                            <a class="nav-link contact-tab" href="./contactus.html">
+                                <li>Contact Us</li>
+                            </a>
+                            <a class="nav-link register-tab" href="#">
+                                <li>Register</li>
+                            </a>
+
+                        </ul>
+
+                        <div class="right-nav"
+                            style="display: flex; gap: 20px; justify-content: center; align-items: center;">
+                            <div class="dropdown">
+                                <a href="javascript:void(0)" class="dropbtn">DropdownName</a>
+                                <div class="dropdown-content">
+                                    <a href="lang_course/korea.html" title="About Korea">About Korea</a>
+                                    <a href="lang_course/japanese.html" title="About Japan">About Japan</a>
+                                </div>
+                            </div>
+                            <div>
+                                <a class="logo" href="./quicklink.html">
+                                    Quick Link
+                                </a>
+                            </div>
+
+                            <div class="theme-switch">
+                                <div class="switch"></div>
+                            </div>
+
+
                         </div>
-                    </div>
-                    <div>
-                        <a class="logo" href="./quicklink.html">
-                            Quick Link
-                        </a>
-                    </div>
-
-                    <div class="theme-switch">
-                        <div class="switch"></div>
-                    </div>
-
-
-                </div>
-            </div>
-
-        </nav>
-        <div class="horizontal-line below-nav"></div>
-    </header>
-
-    <div class="popup-overlay" id="popup">
-        <div class="popup-content">
-            <div class="heading">
-                <p>Korean Passed Student</p>
-                <span id="closePopup">&times</span>
-            </div>
-            <div class="horizontal-line"></div>
-            <img src="./static/img/12345.png" alt="">
-        </div>
-    </div>
-
-    <div class="container">
-
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">
-            <!-- Indicators -->
-            <ol class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                <li data-target="#myCarousel" data-slide-to="1"></li>
-                <li data-target="#myCarousel" data-slide-to="2"></li>
-                <li data-target="#myCarousel" data-slide-to="3"></li>
-            </ol>
-
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner">
-                <div class="item active">
-                    <img src="./static/img/assets/carousel-assets/graphic.jpg" alt="Graphic" style="width:100%;">
                 </div>
 
-                <div class="item">
-                    <img src="./static/img/assets/carousel-assets/programm.jpg" alt="Programming" style="width:100%;">
-                </div>
+                </nav>
+                <div class="horizontal-line below-nav"></div>
+            </header>
 
-                <div class="item">
-                    <img src="./static/img/assets/carousel-assets/hardware.jpg" alt="Hardware" style="width:100%;">
-                </div>
 
-                <div class="item">
-                    <img src="./static/img/assets/carousel-assets/web.jpg" alt="Web Development" style="width:100%;">
-                </div>
-            </div>
-
-            <!-- Left and right controls -->
-            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
-
-        <div class="aboutus-wrapper">
-            <div class="heading">
-                <p><span>ABOUT</span> US</p>
-            </div>
-
-            <div class="content">
-                <p>
-                    Welcome to <b>National Skill</b> Institute! We're in Bhaktapur, Suryabinayak, and we offer classes
-                    in Korean language and computer skills. Our goal is to help you become better at these things.
-
-                    In our Korean classes, you'll learn to speak, listen, read, and write. Whether you want to chat with
-                    Koreans or work in South Korea, our teachers will help you get there.
-
-                    We also have computer classes for all levels. From basic stuff to advanced coding, we'll teach you
-                    what you need to know to succeed in the tech world.
-
-                    Our teachers are great, and our school is modern and cool. Come learn with us and open up new
-                    opportunities for yourself!
-                </p>
-            </div>
-        </div>
-
-        <div class="course-wrapper">
-            <div class="heading">
-                <p>FIND YOUR <span>COURSE</span></p>
-            </div>
-
-            <div class="course-cards">
-                <div class="course-card card-bg">
-                    <div class="course-name">COMPUTER COURSE</div>
-                    <div class="horizontal-line"></div>
-                    <ul class="courses">
-                        <li>Basic computer</li>
-                        <li>Account Package</li>
-                        <li>Graphic Design</li>
-                        <li>Hardware / Software</li>
-                        <li>Programming</li>
-                    </ul>
-
-                    <div class="apply">
-                        <p class="clickme">Apply</p>
-                    </div>
-                </div>
-
-                <div class="course-card card-bg">
-                    <div class="course-name">LANGUAGE COURSE</div>
-                    <div class="horizontal-line"></div>
-                    <ul class="courses">
-                        <li>Korean Language</li>
-                    </ul>
-
-                    <div class="apply">
-                        <p class="clickme">Apply</p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="gallery-notice-container">
-
-            <div class="gallery-wrapper">
-                <div class="heading">
-                    <p><span>GALLERY</span></p>
-                </div>
-                <div class="images">
-                    <img class="first-img" src="./static/img/gallery/1.jpg" alt="">
-                    <img src="./static/img/gallery/2.jpg" alt="">
-                    <img class="showallphoto-overlay" src="./static/img/gallery/31.jpg" alt="">
-                    <a href="./gallery.html">
-                        <p class="clickme">Show All Photos</p>
-                    </a>
-                </div>
-
-            </div>
-
-            <div class="notice-wrapper">
-                <div class="heading">
-                    <p><span>NOTICE</span> BOARD</p>
-                </div>
-                <ul class="notice-list">
-                    <li class="notice-item card-bg">
-                        <div class="date">
-                            <p style="display: flex; flex-direction: column;"><span>1</span> Mar</p>
-                        </div>
-
-                        <div class="content">
-                            <p>Notice 1</p>
-                        </div>
-                    </li>
-
-                    <li class="notice-item card-bg">
-                        <div class="date">
-                            <p style="display: flex; flex-direction: column;"><span>1</span> Mar</p>
-                        </div>
-
-                        <div class="content">
-                            <p>Notice 1</p>
-                        </div>
-                    </li>
-                    <li class="notice-item card-bg">
-                        <div class="date">
-                            <p style="display: flex; flex-direction: column;"><span>1</span> Mar</p>
-                        </div>
-
-                        <div class="content">
-                            <p>Notice 1</p>
-                        </div>
-                    </li>
-                    <li class="notice-item card-bg">
-                        <div class="date">
-                            <p style="display: flex; flex-direction: column;"><span>1</span> Mar</p>
-                        </div>
-
-                        <div class="content">
-                            <p>Notice 1</p>
-                        </div>
-                    </li>
-                    <li class="notice-item card-bg">
-                        <div class="date">
-                            <p style="display: flex; flex-direction: column;"><span>1</span> Mar</p>
-                        </div>
-
-                        <div class="content">
-                            <p>Notice 1</p>
-                        </div>
-                    </li>
-
-                </ul>
-            </div>
-        </div>
-
-    </div>
-
-    <footer>
-        <div class="footer-wrapper">
-            <div class="content short-brief">
-                <a class="logo" href="./index.html">
-                    <img class="logo-img" src="./static/img/logo-2.jpg" alt="National Skill">
-                </a>
-
-                <p>Welcome to the National Skill Institute! Based in Bhaktapur, Suryabinayak, we specialize in Korean
-                    language and computer skills training. Our courses cover speaking, listening, reading, and writing
-                    Korean, along with computer topics from basic to advanced levels including graphic design and
-                    programming. Join us to boost your skills and explore new opportunities in language and technology.
-                </p>
-            </div>
-
-            <div class="footer-flex">
-                <div class="company-info">
+            <div class="popup-overlay" id="popup">
+                <div class="popup-content">
                     <div class="heading">
-                        <p>Company</p>
+                        <p>Korean Passed Student</p>
+                        <span id="closePopup">&times</span>
+                    </div>
+                    <div class="horizontal-line"></div>
+                    <img src="./static/img/12345.png" alt="">
+                </div>
+            </div>
+
+            <div class="container">
+
+                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#myCarousel" data-slide-to="1"></li>
+                        <li data-target="#myCarousel" data-slide-to="2"></li>
+                        <li data-target="#myCarousel" data-slide-to="3"></li>
+                    </ol>
+
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <img src="./static/img/assets/carousel-assets/graphic.jpg" alt="Graphic"
+                                style="width:100%;">
+                        </div>
+
+                        <div class="item">
+                            <img src="./static/img/assets/carousel-assets/programm.jpg" alt="Programming"
+                                style="width:100%;">
+                        </div>
+
+                        <div class="item">
+                            <img src="./static/img/assets/carousel-assets/hardware.jpg" alt="Hardware"
+                                style="width:100%;">
+                        </div>
+
+                        <div class="item">
+                            <img src="./static/img/assets/carousel-assets/web.jpg" alt="Web Development"
+                                style="width:100%;">
+                        </div>
+                    </div>
+
+                    <!-- Left and right controls -->
+                    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+
+                <div class="aboutus-wrapper">
+                    <div class="heading">
+                        <p><span>ABOUT</span> US</p>
                     </div>
 
                     <div class="content">
-                        <ul>
-                            <a class="about-tab" href="./aboutus.html">
-                                <li>About Us</li>
+                        <p>
+                            Welcome to <b>National Skill</b> Institute! We're in Bhaktapur, Suryabinayak, and we offer
+                            classes
+                            in Korean language and computer skills. Our goal is to help you become better at these
+                            things.
+
+                            In our Korean classes, you'll learn to speak, listen, read, and write. Whether you want to
+                            chat
+                            with
+                            Koreans or work in South Korea, our teachers will help you get there.
+
+                            We also have computer classes for all levels. From basic stuff to advanced coding, we'll
+                            teach
+                            you
+                            what you need to know to succeed in the tech world.
+
+                            Our teachers are great, and our school is modern and cool. Come learn with us and open up
+                            new
+                            opportunities for yourself!
+                        </p>
+                    </div>
+                </div>
+
+                <div class="course-wrapper">
+                    <div class="heading">
+                        <p>FIND YOUR <span>COURSE</span></p>
+                    </div>
+
+                    <div class="course-cards">
+                        <div class="course-card card-bg">
+                            <div class="course-name">COMPUTER COURSE</div>
+                            <div class="horizontal-line"></div>
+                            <ul class="courses">
+                                <li>Basic computer</li>
+                                <li>Account Package</li>
+                                <li>Graphic Design</li>
+                                <li>Hardware / Software</li>
+                                <li>Programming</li>
+                            </ul>
+
+                            <div class="apply">
+                                <p class="clickme">Apply</p>
+                            </div>
+                        </div>
+
+                        <div class="course-card card-bg">
+                            <div class="course-name">LANGUAGE COURSE</div>
+                            <div class="horizontal-line"></div>
+                            <ul class="courses">
+                                <li>Korean Language</li>
+                            </ul>
+
+                            <div class="apply">
+                                <p class="clickme">Apply</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="gallery-notice-container">
+
+                    <div class="gallery-wrapper">
+                        <div class="heading">
+                            <p><span>GALLERY</span></p>
+                        </div>
+                        <div class="images">
+                            <img class="first-img" src="./static/img/gallery/1.jpg" alt="">
+                            <img src="./static/img/gallery/2.jpg" alt="">
+                            <img class="showallphoto-overlay" src="./static/img/gallery/31.jpg" alt="">
+                            <a href="./gallery.html">
+                                <p class="clickme">Show All Photos</p>
                             </a>
-                            <a class="notice-tab" href="#">
-                                <li>Notice Board</li>
-                            </a>
-                            <a class="gallery-tab" href="./gallery.html">
-                                <li>Gallery</li>
-                            </a>
-                            <a class="contact-tab" href="./contactus.html">
-                                <li>Contact Us</li>
-                            </a>
+                        </div>
+
+                    </div>
+
+                    <div class="notice-wrapper">
+                        <div class="heading">
+                            <p><span>NOTICE</span> BOARD</p>
+                        </div>
+                        <ul class="notice-list">
+                            <li class="notice-item card-bg">
+                                <div class="date">
+                                    <p style="display: flex; flex-direction: column;"><span>1</span> Mar</p>
+                                </div>
+
+                                <div class="content">
+                                    <p>Notice 1</p>
+                                </div>
+                            </li>
+
+                            <li class="notice-item card-bg">
+                                <div class="date">
+                                    <p style="display: flex; flex-direction: column;"><span>1</span> Mar</p>
+                                </div>
+
+                                <div class="content">
+                                    <p>Notice 1</p>
+                                </div>
+                            </li>
+                            <li class="notice-item card-bg">
+                                <div class="date">
+                                    <p style="display: flex; flex-direction: column;"><span>1</span> Mar</p>
+                                </div>
+
+                                <div class="content">
+                                    <p>Notice 1</p>
+                                </div>
+                            </li>
+                            <li class="notice-item card-bg">
+                                <div class="date">
+                                    <p style="display: flex; flex-direction: column;"><span>1</span> Mar</p>
+                                </div>
+
+                                <div class="content">
+                                    <p>Notice 1</p>
+                                </div>
+                            </li>
+                            <li class="notice-item card-bg">
+                                <div class="date">
+                                    <p style="display: flex; flex-direction: column;"><span>1</span> Mar</p>
+                                </div>
+
+                                <div class="content">
+                                    <p>Notice 1</p>
+                                </div>
+                            </li>
+
                         </ul>
                     </div>
                 </div>
 
-                <div class="getintouch">
-                    <div class="heading">
-                        <p>Get In Touch</p>
-                    </div>
-                    <div class="content">
-                        <div class="footer-img__content">
-                            <img class="footer-img" src="./static/img/assets/location.png" alt="">
-                            <p>
-                                Suryabinayak, Bhaktapur
-                            </p>
-                        </div>
-                        <div class="footer-img__content">
-                            <img class="footer-img" src="./static/img/assets/phone-call.png" alt="">
-                            <p>
-                                <a href="tel:9849053065">9849053065</a>
-                                <a href="tel:9808812515">9808812515</a>
-                            </p>
-                        </div>
-                        <div class="footer-img__content">
-                            <img class="footer-img" src="./static/img/assets/gmail.png" alt="">
-                            <p>
-                                <a href="mailto:example@gmail.com">nationalskill.edu.np@gmail.com</a>
-                            </p>
-                        </div>
+            </div>
+
+            <footer>
+                <div class="footer-wrapper">
+                    <div class="content short-brief">
+                        <a class="logo" href="./index.html">
+                            <img class="logo-img" src="./static/img/logo-2.jpg" alt="National Skill">
+                        </a>
+
+                        <p>Welcome to the National Skill Institute! Based in Bhaktapur, Suryabinayak, we specialize in
+                            Korean
+                            language and computer skills training. Our courses cover speaking, listening, reading, and
+                            writing
+                            Korean, along with computer topics from basic to advanced levels including graphic design
+                            and
+                            programming. Join us to boost your skills and explore new opportunities in language and
+                            technology.
+                        </p>
                     </div>
 
+                    <div class="footer-flex">
+                        <div class="company-info">
+                            <div class="heading">
+                                <p>Company</p>
+                            </div>
+
+                            <div class="content">
+                                <ul>
+                                    <a class="about-tab" href="./aboutus.html">
+                                        <li>About Us</li>
+                                    </a>
+                                    <a class="notice-tab" href="#">
+                                        <li>Notice Board</li>
+                                    </a>
+                                    <a class="gallery-tab" href="./gallery.html">
+                                        <li>Gallery</li>
+                                    </a>
+                                    <a class="contact-tab" href="./contactus.html">
+                                        <li>Contact Us</li>
+                                    </a>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="getintouch">
+                            <div class="heading">
+                                <p>Get In Touch</p>
+                            </div>
+                            <div class="content">
+                                <div class="footer-img__content">
+                                    <img class="footer-img" src="./static/img/assets/location.png" alt="">
+                                    <p>
+                                        Suryabinayak, Bhaktapur
+                                    </p>
+                                </div>
+                                <div class="footer-img__content">
+                                    <img class="footer-img" src="./static/img/assets/phone-call.png" alt="">
+                                    <p>
+                                        <a href="tel:9849053065">9849053065</a>
+                                        <a href="tel:9808812515">9808812515</a>
+                                    </p>
+                                </div>
+                                <div class="footer-img__content">
+                                    <img class="footer-img" src="./static/img/assets/gmail.png" alt="">
+                                    <p>
+                                        <a href="mailto:example@gmail.com">nationalskill.edu.np@gmail.com</a>
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
-            </div>
+
+            </footer>
+            <div class="site-cache" id="site-cache"></div>
         </div>
 
-    </footer>
+    </div>
 
     <script src="./static/js/script.js"></script>
 
@@ -344,6 +464,15 @@
             localStorage.setItem('appliedCourse', courseName);
             console.log('You applied for the ' + courseName + ' course!');
             window.location.href = "register.html";
+        });
+
+        $("#header__icon").click(function (e) {
+            e.preventDefault();
+            $("body").toggleClass("with--sidebar");
+        });
+
+        $("#site-cache").click(function (e) {
+            $("body").removeClass("with--sidebar");
         });
 
     </script>

@@ -524,3 +524,45 @@ ul.notice-list {
     height: 20px;
     margin-right: 10px;
 }
+
+@media only screen and (max-width: 992px) {
+    .gallery-notice-container {
+        flex-direction: column;
+    }
+
+    .gallery-wrapper .showallphoto-overlay {
+        opacity: 0.9;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .course-cards {
+        flex-direction: column;
+    }
+
+    .gallery-wrapper .images {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-wrapper .images .first-img {
+        grid-column: auto;
+        grid-row: auto;
+        width: 273px;
+        border-radius: 5px;
+    }
+
+    .nav-bar {
+        flex-direction: column;
+
+    }
+
+    .nav-list {
+        flex-direction: column;
+    }
+
+    .right-nav {
+        flex-direction: column;
+    }
+
+    
+}
