@@ -669,4 +669,17 @@ ul.notice-list {
         position: absolute;
         right: 10%;
     }
+
+    .footer-wrapper .short-brief .logo {
+        margin: 0 auto;
+    }
+
+    .footer-wrapper .short-brief {
+        flex-direction: column;
+    }
+
+    .footer-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
 }
