@@ -218,7 +218,7 @@ ul {
     background-color: var(--thirdBgColor);
 }
 
-header {
+.header {
     position: sticky;
     top: 0;
     z-index: 999;
@@ -334,8 +334,12 @@ nav {
     border: 1px solid var(--mainBorderColor);
     border-radius: 10px;
     transition: box-shadow 0.3s ease, transform 0.3s ease;
-    position: relative;
     z-index: 1;
+}
+
+.computer-course,
+.language-course {
+    position: relative
 }
 
 .course-wrapper .course-card:hover {
@@ -627,6 +631,16 @@ ul.notice-list {
         bottom: 0;
         background-color: rgba(0, 0, 0, 0.6);
     }
+
+    .gallery-wrapper .images p {
+        bottom: 15%;
+        left: 50%;
+
+    }
+
+    .notice-list {
+        max-height: 450px;
+    }
 }
 
 @media only screen and (max-width: 768px) {
@@ -638,10 +652,21 @@ ul.notice-list {
         grid-template-columns: 1fr;
     }
 
+    .gallery-wrapper .images img {
+        display: block;
+        margin: 0 auto;
+        width: 100%;
+    }
+
     .gallery-wrapper .images .first-img {
         grid-column: auto;
         grid-row: auto;
-        width: 273px;
-        border-radius: 5px;
+        width: 100%;
+    }
+
+    .computer-course .apply,
+    .language-course .apply {
+        position: absolute;
+        right: 10%;
     }
 }
