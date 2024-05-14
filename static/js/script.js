@@ -12,7 +12,7 @@ $(document).ready(function () {
         $("body").toggleClass("dark-mode");
 
         // Save theme preference to local storage
-        const currentTheme = $("body").hasClass("dark-mode") ? "biswo" : "";
+        const currentTheme = $("body").hasClass("dark-mode") ? "dark-mode" : "";
         localStorage.setItem('theme', currentTheme);
     });
 

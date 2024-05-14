@@ -7,6 +7,7 @@
     --mainBgColor-light: rgb(249, 250, 251);
     --secondarBgColor-light: #f0f4f9;
     --thirdBgColor-light: #dde3ea;
+    --scrollbarBgColor-light: #ccd5df;
     --mainTextColor-light: #1f1f1f;
     --secondaryTextColor-light: rgb(51 51 51);
     --mainBorderColor-light: rgb(218, 218, 218);
@@ -17,6 +18,7 @@
     --mainBgColor-dark: #242424;
     --secondaryBgColor-dark: #3c3c3c;
     --thirdBgColor-dark: #505050;
+    --scrollbarBgColor-dark: #999999;
     --mainTextColor-dark: #fff;
     --secondaryTextColor-dark: #adb0b1;
     --mainBorderColor-dark: #666666ba;
@@ -26,6 +28,7 @@
     --mainBgColor: var(--mainBgColor-light);
     --secondaryBgColor: var(--secondarBgColor-light);
     --thirdBgColor: var(--thirdBgColor-light);
+    --scrollbarBgColor: var(--scrollbarBgColor-light);
     --mainTextColor: var(--mainTextColor-light);
     --secondaryTextColor: var(--secondaryTextColor-light);
     --mainBorderColor: var(--mainBorderColor-light);
@@ -37,6 +40,7 @@
     --mainBgColor: var(--mainBgColor-dark);
     --secondaryBgColor: var(--secondaryBgColor-dark);
     --thirdBgColor: var(--thirdBgColor-dark);
+    --scrollbarBgColor: var(--scrollbarBgColor-dark);
     --mainTextColor: var(--mainTextColor-dark);
     --secondaryTextColor: var(--secondaryTextColor-dark);
     --mainBorderColor: var(--mainBorderColor-dark);
@@ -56,6 +60,28 @@ body {
     padding: 0;
     background-color: var(--mainBgColor);
     font-size: 16px;
+    transition: background-color .2s;
+}
+
+body::-webkit-scrollbar, .popup-content::-webkit-scrollbar, ul.notice-list::-webkit-scrollbar {
+    width: 8px;
+    background-color: var(--mainBgColor);
+    transition: background-color .2s;
+}
+
+body::-webkit-scrollbar-track, .popup-content::-webkit-scrollbar-track, ul.notice-list::-webkit-scrollbar-track {
+    background-color: var(--mainBgColor);
+    transition: background-color .2s;
+}
+
+body::-webkit-scrollbar-thumb, .popup-content::-webkit-scrollbar-thumb, ul.notice-list::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbarBgColor);
+    border-radius: 10px;
+    transition: background-color .2s;
+}
+
+body::-webkit-scrollbar-thumb:active, .popup-content::-webkit-scrollbar-thumb:active, ul.notice-list::-webkit-scrollbar-thumb:active {
+    background-color: var(--thirdBgColor);
     transition: background-color .2s;
 }
 
@@ -83,10 +109,6 @@ a:hover {
 
 ul {
     list-style-type: none;
-}
-
-.main-container {
-    overflow: hidden;
 }
 
 .logo-forsmallscreen {
@@ -640,6 +662,11 @@ ul.notice-list {
 
     .notice-list {
         max-height: 450px;
+    }
+
+    .footer-flex {
+        flex-direction: row;
+        gap: 10px;
     }
 }
 
