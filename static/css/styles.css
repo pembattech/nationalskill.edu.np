@@ -1,8 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500&display=swap");
 
-
-
-
 :root {
     --mainBgColor-light: rgb(249, 250, 251);
     --secondarBgColor-light: #f0f4f9;
@@ -13,8 +10,6 @@
     --mainBorderColor-light: rgb(218, 218, 218);
     --overlayBgColor-light: #dde3ea99;
 
-
-
     --mainBgColor-dark: #242424;
     --secondaryBgColor-dark: #3c3c3c;
     --thirdBgColor-dark: #505050;
@@ -23,7 +18,6 @@
     --secondaryTextColor-dark: #adb0b1;
     --mainBorderColor-dark: #666666ba;
     --overlayBgColor-dark: rgba(0, 0, 0, 0.5);
-
 
     --mainBgColor: var(--mainBgColor-light);
     --secondaryBgColor: var(--secondarBgColor-light);
@@ -63,24 +57,32 @@ body {
     transition: background-color .2s;
 }
 
-body::-webkit-scrollbar, .popup-content::-webkit-scrollbar, ul.notice-list::-webkit-scrollbar {
+body::-webkit-scrollbar,
+.popup-content::-webkit-scrollbar,
+ul.notice-list::-webkit-scrollbar {
     width: 8px;
     background-color: var(--mainBgColor);
     transition: background-color .2s;
 }
 
-body::-webkit-scrollbar-track, .popup-content::-webkit-scrollbar-track, ul.notice-list::-webkit-scrollbar-track {
+body::-webkit-scrollbar-track,
+.popup-content::-webkit-scrollbar-track,
+ul.notice-list::-webkit-scrollbar-track {
     background-color: var(--mainBgColor);
     transition: background-color .2s;
 }
 
-body::-webkit-scrollbar-thumb, .popup-content::-webkit-scrollbar-thumb, ul.notice-list::-webkit-scrollbar-thumb {
+body::-webkit-scrollbar-thumb,
+.popup-content::-webkit-scrollbar-thumb,
+ul.notice-list::-webkit-scrollbar-thumb {
     background-color: var(--scrollbarBgColor);
     border-radius: 10px;
     transition: background-color .2s;
 }
 
-body::-webkit-scrollbar-thumb:active, .popup-content::-webkit-scrollbar-thumb:active, ul.notice-list::-webkit-scrollbar-thumb:active {
+body::-webkit-scrollbar-thumb:active,
+.popup-content::-webkit-scrollbar-thumb:active,
+ul.notice-list::-webkit-scrollbar-thumb:active {
     background-color: var(--thirdBgColor);
     transition: background-color .2s;
 }
@@ -109,6 +111,55 @@ a:hover {
 
 ul {
     list-style-type: none;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 10px;
+    border: 1px solid var(--mainBorderColor);
+    text-align: center;
+}
+
+tr.odd {
+    background-color: var(--secondaryBgColor);
+}
+
+tr.even {
+    background-color: var(--thirdBgColor);
+}
+
+.table-collapse {
+    animation: slideIn 0.5s forwards;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(5%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+.table-collapse.hidden {
+    font-weight: 900;
+    animation: slideOut 0.5s forwards;
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(10%);
+    }
 }
 
 .logo-forsmallscreen {
@@ -269,7 +320,7 @@ footer {
     transition: color 0.3s ease;
 }
 
-.nav-list .active {
+nav .active {
     color: var(--mainTextColor);
     font-weight: 600;
     transition: font-weight 0.3s ease;
@@ -327,7 +378,8 @@ footer {
 .course-wrapper,
 .gallery-notice-container,
 .gallery-allphoto-wrapper,
-.quicklink-wrapper {
+.quicklink-wrapper,
+.noticeboard-wrapper {
     padding: 10px 0;
 }
 
@@ -390,7 +442,7 @@ nav {
 
 .apply p {
     position: absolute;
-    bottom: 10%;
+    bottom: 11%;
     left: 84.5%;
     transform: translate(-50%, 50%);
     transition: box-shadow 0.3s ease, transform 0.3s ease;
@@ -564,6 +616,26 @@ ul.notice-list {
     width: 20px;
     height: 20px;
     margin-right: 10px;
+}
+
+/* QUICKLINK */
+.link-card {
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+
+.link-card p {
+    padding: 20px;
+    margin: 0;
+}
+
+.link-card p,
+.link-card td {
+    cursor: pointer;
+}
+
+.link-card:hover {
+    background-color: var(--thirdBgColor);
 }
 
 @media only screen and (max-width: 992px) {

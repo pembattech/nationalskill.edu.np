@@ -14,157 +14,190 @@
     <link rel="stylesheet" href="./static/css/styles.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
 </head>
 
 <body>
+    <div class="main-container">
+        <div class="site-pusher">
 
-    <header>
-        <nav>
-            <div class="nav-bar">
-
-                <a class="logo" href="./index.html">
-                    <img class="logo-img" src="./static/img/logo-2.jpg" alt="National Skill">
-                </a>
-
-                <ul class="nav-list">
-                    <a class="nav-link home-tab active" href="./index.html">
-                        <li>Home</li>
-                    </a>
-                    <a class="nav-link about-tab" href="./aboutus.html">
-                        <li>About Us</li>
-                    </a>
-
-                    <a class="nav-link notice-tab" href="#">
-                        <li>Notice Board</li>
-                    </a>
-                    <a class="nav-link gallery-tab" href="./gallery.html">
-                        <li>Gallery</li>
-                    </a>
-                    <a class="nav-link contact-tab" href="./contactus.html">
-                        <li>Contact Us</li>
-                    </a>
-
-                </ul>
-
-                <div class="right-nav" style="display: flex; gap: 20px;">
-                    <div class="dropdown">
-                        <a href="javascript:void(0)" class="dropbtn">DropdownName</a>
-                        <div class="dropdown-content">
-                            <a href="lang_course/korea.html">About Korea</a>
-                            <a href="lang_course/japanese.html">About Japan</a>
-                        </div>
+            <header class="header">
+                <div class="hamburger-bar" style="display: flex; justify-content: space-between; padding:0 10px;">
+                    <div class="hamburger">
+                        <a href="#" class="header__icon" id="header__icon"></a>
                     </div>
-                    <div>
-                        <a class="logo" href="./quicklink.html">
-                            Quick Link
+
+                    <div class="logo-forsmallscreen">
+                        <a class="logo" href="./index.html">
+                            <img class="logo-img" src="./static/img/logo-2.jpg" alt="National Skill">
                         </a>
                     </div>
-
                 </div>
-            </div>
 
-        </nav>
-        <div class="horizontal-line below-nav"></div>
-    </header>
 
-    <div class="container">
+                <nav class="menu">
+                    <div class="nav-bar">
+                        <a class="logo nav-item" href="./index.html">
+                            <img class="logo-img" src="./static/img/logo-2.jpg" alt="National Skill">
+                        </a>
 
-        <div class="aboutus-wrapper">
-            <div class="heading">
-                <p><span>ABOUT</span> US</p>
-            </div>
-
-            <div class="content">
-                <p>
-                    Welcome to <b>National Skill</b> Institute! We're in Bhaktapur, Suryabinayak, and we offer classes
-                    in Korean language and computer skills. Our goal is to help you become better at these things.
-
-                    In our Korean classes, you'll learn to speak, listen, read, and write. Whether you want to chat with
-                    Koreans or work in South Korea, our teachers will help you get there.
-
-                    We also have computer classes for all levels. From basic stuff to advanced coding, we'll teach you
-                    what you need to know to succeed in the tech world.
-
-                    Our teachers are great, and our school is modern and cool. Come learn with us and open up new
-                    opportunities for yourself!
-                </p>
-            </div>
-        </div>
-
-        <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3533.659237735016!2d85.42131621420063!3d27.666012733915988!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb1aa6e99b3cf5%3A0x7309a7178e950b65!2sNational+Skill+It+Land!5e0!3m2!1sne!2snp!4v1461991850130"
-            width="100%" height="450" frameborder="0" style="border:0" allowfullscreen=""></iframe>
-
-    </div>
-
-    <footer>
-        <div class="footer-wrapper">
-            <div class="content short-brief">
-                <a class="logo" href="./index.html">
-                    <img class="logo-img" src="./static/img/logo-2.jpg" alt="National Skill">
-                </a>
-
-                <p>Welcome to the National Skill Institute! Based in Bhaktapur, Suryabinayak, we specialize in Korean
-                    language and computer skills training. Our courses cover speaking, listening, reading, and writing
-                    Korean, along with computer topics from basic to advanced levels including graphic design and
-                    programming. Join us to boost your skills and explore new opportunities in language and technology.
-                </p>
-            </div>
-
-            <div class="footer-flex">
-                <div class="company-info">
-                    <div class="heading">
-                        <p>Company</p>
-                    </div>
-
-                    <div class="content">
-                        <ul>
-                            <a class="about-tab" href="./aboutus.html">
-                                <li>About Us</li>
+                        <ul class="nav-list">
+                            <a class="nav-link home-tab" href="./index.html">
+                                <li class="nav-item">Home</li>
                             </a>
-                            <a class="notice-tab" href="#">
-                                <li>Notice Board</li>
+                            <a class="nav-link about-tab" href="./aboutus.html">
+                                <li class="nav-item">About Us</li>
                             </a>
-                            <a class="gallery-tab" href="./gallery.html">
-                                <li>Gallery</li>
+
+                            <a class="nav-link notice-tab" href="./noticeboard.html">
+                                <li class="nav-item">Notice Board</li>
                             </a>
-                            <a class="contact-tab" href="./contactus.html">
-                                <li>Contact Us</li>
+                            <a class="nav-link gallery-tab" href="./gallery.html">
+                                <li class="nav-item">Gallery</li>
                             </a>
+                            <a class="nav-link contact-tab" href="./contactus.html">
+                                <li class="nav-item">Contact Us</li>
+                            </a>
+                            <a class="nav-link register-tab" href="#">
+                                <li class="nav-item">Register</li>
+                            </a>
+
                         </ul>
-                    </div>
-                </div>
 
-                <div class="getintouch">
+                        <div class="right-nav">
+                            <div class="dropdown nav-item">
+                                <a href="javascript:void(0)" class="dropbtn">DropdownName</a>
+                                <div class="dropdown-content">
+                                    <a href="lang_course/korea.html" title="About Korea">About Korea</a>
+                                    <a href="lang_course/japanese.html" title="About Japan">About Japan</a>
+                                </div>
+                            </div>
+                            <div class="nav-item">
+                                <a class="nav-link quicklink-tab" href="./quicklink.html">
+                                    Quick Link
+                                </a>
+                            </div>
+
+                            <div class="theme-switch nav-item">
+                                <div class="switch"></div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </nav>
+                <div class="horizontal-line below-nav"></div>
+            </header>
+
+            <div class="container">
+
+                <div class="aboutus-wrapper">
                     <div class="heading">
-                        <p>Get In Touch</p>
+                        <p><span>ABOUT</span> US</p>
                     </div>
+
                     <div class="content">
-                        <div class="footer-img__content">
-                            <img class="footer-img" src="./static/img/assets/location.png" alt="">
-                            <p>
-                                Suryabinayak, Bhaktapur
-                            </p>
-                        </div>
-                        <div class="footer-img__content">
-                            <img class="footer-img" src="./static/img/assets/phone-call.png" alt="">
-                            <p>
-                                <a href="tel:9849053065">9849053065</a>
-                                <a href="tel:9808812515">9808812515</a>
-                            </p>
-                        </div>
-                        <div class="footer-img__content">
-                            <img class="footer-img" src="./static/img/assets/gmail.png" alt="">
-                            <p>
-                                <a href="mailto:example@gmail.com">nationalskill.edu.np@gmail.com</a>
-                            </p>
-                        </div>
+                        <p>
+                            Welcome to <b>National Skill</b> Institute! We're in Bhaktapur, Suryabinayak, and we offer
+                            classes
+                            in Korean language and computer skills. Our goal is to help you become better at these
+                            things.
+
+                            In our Korean classes, you'll learn to speak, listen, read, and write. Whether you want to
+                            chat with
+                            Koreans or work in South Korea, our teachers will help you get there.
+
+                            We also have computer classes for all levels. From basic stuff to advanced coding, we'll
+                            teach you
+                            what you need to know to succeed in the tech world.
+
+                            Our teachers are great, and our school is modern and cool. Come learn with us and open up
+                            new
+                            opportunities for yourself!
+                        </p>
+                    </div>
+                </div>
+
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3533.659237735016!2d85.42131621420063!3d27.666012733915988!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb1aa6e99b3cf5%3A0x7309a7178e950b65!2sNational+Skill+It+Land!5e0!3m2!1sne!2snp!4v1461991850130"
+                    width="100%" height="450" frameborder="0" style="border:0" allowfullscreen=""></iframe>
+
+            </div>
+
+            <footer>
+                <div class="footer-wrapper">
+                    <div class="content short-brief">
+                        <a class="logo" href="./index.html">
+                            <img class="logo-img" src="./static/img/logo-2.jpg" alt="National Skill">
+                        </a>
+
+                        <p>Welcome to the National Skill Institute! Based in Bhaktapur, Suryabinayak, we specialize in
+                            Korean
+                            language and computer skills training. Our courses cover speaking, listening, reading, and
+                            writing
+                            Korean, along with computer topics from basic to advanced levels including graphic design
+                            and
+                            programming. Join us to boost your skills and explore new opportunities in language and
+                            technology.
+                        </p>
                     </div>
 
+                    <div class="footer-flex">
+                        <div class="company-info">
+                            <div class="heading">
+                                <p>Company</p>
+                            </div>
+
+                            <div class="content">
+                                <ul>
+                                    <a class="about-tab" href="./aboutus.html">
+                                        <li>About Us</li>
+                                    </a>
+                                    <a class="notice-tab" href="#">
+                                        <li>Notice Board</li>
+                                    </a>
+                                    <a class="gallery-tab" href="./gallery.html">
+                                        <li>Gallery</li>
+                                    </a>
+                                    <a class="contact-tab" href="./contactus.html">
+                                        <li>Contact Us</li>
+                                    </a>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="getintouch">
+                            <div class="heading">
+                                <p>Get In Touch</p>
+                            </div>
+                            <div class="content">
+                                <div class="footer-img__content">
+                                    <img class="footer-img" src="./static/img/assets/location.png" alt="">
+                                    <p>
+                                        Suryabinayak, Bhaktapur
+                                    </p>
+                                </div>
+                                <div class="footer-img__content">
+                                    <img class="footer-img" src="./static/img/assets/phone-call.png" alt="">
+                                    <p>
+                                        <a href="tel:9849053065">9849053065</a>
+                                        <a href="tel:9808812515">9808812515</a>
+                                    </p>
+                                </div>
+                                <div class="footer-img__content">
+                                    <img class="footer-img" src="./static/img/assets/gmail.png" alt="">
+                                    <p>
+                                        <a href="mailto:example@gmail.com">nationalskill.edu.np@gmail.com</a>
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
 
-    </footer>
+            </footer>
 
-    <script src="./static/js/script.js"></script>
+            <script src="./static/js/script.js"></script>

@@ -14,82 +14,323 @@
     <link rel="stylesheet" href="./static/css/styles.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
 </head>
 
 <body>
+    <div class="main-container">
+        <div class="site-pusher">
 
-    <header>
-        <nav>
-            <div class="nav-bar">
-
-                <a class="logo" href="./index.html">
-                    <img class="logo-img" src="./static/img/logo-2.jpg" alt="National Skill">
-                </a>
-
-                <ul class="nav-list">
-                    <a class="nav-link home-tab active" href="./index.html">
-                        <li>Home</li>
-                    </a>
-                    <a class="nav-link about-tab" href="./aboutus.html">
-                        <li>About Us</li>
-                    </a>
-
-                    <a class="nav-link notice-tab" href="#">
-                        <li>Notice Board</li>
-                    </a>
-                    <a class="nav-link gallery-tab" href="./gallery.html">
-                        <li>Gallery</li>
-                    </a>
-                    <a class="nav-link contact-tab" href="./contactus.html">
-                        <li>Contact Us</li>
-                    </a>
-
-                </ul>
-
-                <div class="right-nav" style="display: flex; gap: 20px;">
-                    <div class="dropdown">
-                        <a href="javascript:void(0)" class="dropbtn">DropdownName</a>
-                        <div class="dropdown-content">
-                            <a href="lang_course/korea.html">About Korea</a>
-                            <a href="lang_course/japanese.html">About Japan</a>
-                        </div>
+            <header class="header">
+                <div class="hamburger-bar" style="display: flex; justify-content: space-between; padding:0 10px;">
+                    <div class="hamburger">
+                        <a href="#" class="header__icon" id="header__icon"></a>
                     </div>
-                    <div>
-                        <a class="logo" href="./quicklink.html">
-                            Quick Link
+
+                    <div class="logo-forsmallscreen">
+                        <a class="logo" href="./index.html">
+                            <img class="logo-img" src="./static/img/logo-2.jpg" alt="National Skill">
                         </a>
                     </div>
-
                 </div>
+
+
+                <nav class="menu">
+                    <div class="nav-bar">
+                        <a class="logo nav-item" href="./index.html">
+                            <img class="logo-img" src="./static/img/logo-2.jpg" alt="National Skill">
+                        </a>
+
+                        <ul class="nav-list">
+                            <a class="nav-link home-tab" href="./index.html">
+                                <li class="nav-item">Home</li>
+                            </a>
+                            <a class="nav-link about-tab" href="./aboutus.html">
+                                <li class="nav-item">About Us</li>
+                            </a>
+
+                            <a class="nav-link notice-tab" href="./noticeboard.html">
+                                <li class="nav-item">Notice Board</li>
+                            </a>
+                            <a class="nav-link gallery-tab" href="./gallery.html">
+                                <li class="nav-item">Gallery</li>
+                            </a>
+                            <a class="nav-link contact-tab" href="./contactus.html">
+                                <li class="nav-item">Contact Us</li>
+                            </a>
+                            <a class="nav-link register-tab" href="#">
+                                <li class="nav-item">Register</li>
+                            </a>
+
+                        </ul>
+
+                        <div class="right-nav">
+                            <div class="dropdown nav-item">
+                                <a href="javascript:void(0)" class="dropbtn">DropdownName</a>
+                                <div class="dropdown-content">
+                                    <a href="lang_course/korea.html" title="About Korea">About Korea</a>
+                                    <a href="lang_course/japanese.html" title="About Japan">About Japan</a>
+                                </div>
+                            </div>
+                            <div class="nav-item">
+                                <a class="nav-link quicklink-tab" href="./quicklink.html">
+                                    Quick Link
+                                </a>
+                            </div>
+
+                            <div class="theme-switch nav-item">
+                                <div class="switch"></div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </nav>
+                <div class="horizontal-line below-nav"></div>
+            </header>
+
+
+
+            <div class="container">
+
+                <div class="quicklink-wrapper">
+                    <div class="heading">
+                        <p>QUICK<span>&nbsp;LINK</span></p>
+                    </div>
+
+                    <div class="content">
+                        <div class="link-card card-bg">
+                            <p>Government of Nepal</p>
+
+                            <div class="table-collapse hide">
+                                <table>
+                                    <tr class="odd">
+                                        <td>Office of the Prime Minister and Council of Ministers</td>
+                                        <td>प्रधानमन्त्री तथा मन्त्रिपरिषदको कार्यालय</td>
+                                    </tr>
+                                    <tr class="even">
+                                        <td>Ministry of Home Affairs</td>
+                                        <td>गृह मन्त्रालय</td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td>Ministry of Tourism and Civil Aviation</td>
+                                        <td>पर्यटन तथा नागरिक उड्डयन मन्त्रालय</td>
+                                    </tr>
+                                    <tr class="even">
+                                        <td>Ministry of Defense</td>
+                                        <td>रक्षा मन्त्रालay</td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td>Ministry of Education</td>
+                                        <td>शिक्षा मन्त्रालय</td>
+                                    </tr>
+                                    <tr class="even">
+                                        <td>Ministry of Finance</td>
+                                        <td>अर्थ मन्त्रालय</td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td>Ministry of Foreign Affairs</td>
+                                        <td>परराष्ट्र मन्त्रालय</td>
+                                    </tr>
+                                    <tr class="even">
+                                        <td>Ministry of Forests and Soil Conservation</td>
+                                        <td>वन तथा भू–संरक्षण मन्त्रालय</td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td>Ministry of General Administration</td>
+                                        <td>सामान्य प्रसाशन मन्त्रालय</td>
+                                    </tr>
+                                    <tr class="even">
+                                        <td>Ministry of Health and Population</td>
+                                        <td>स्वास्थ्य तथा जनसंख्या मन्त्रालय</td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td>Ministry of Agriculture and Cooperatives</td>
+                                        <td>कृषि तथा सहकारी मन्त्रालय</td>
+                                    </tr>
+                                    <tr class="even">
+                                        <td>Ministry of Commerce and Supplies</td>
+                                        <td>वाणिज्य तथा आपूर्ति मन्त्रालय</td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td>Ministry of Information & Communication</td>
+                                        <td>सूचना तथा संचार मन्त्रालय</td>
+                                    </tr>
+                                    <tr class="even">
+                                        <td>Ministry of Labour & Transport Management</td>
+                                        <td>श्रम तथा यातायात व्यवस्था मन्त्रालय</td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td>Ministry of Land, Reform and Management</td>
+                                        <td>भूमि सुधार तथा व्यवस्था मन्त्रालय</td>
+                                    </tr>
+                                    <tr class="even">
+                                        <td>Ministry of Law and Justice</td>
+                                        <td>कानुन तथा न्याय मन्त्रालय</td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td>Ministry of Physical Planning and Works</td>
+                                        <td>भौतिक योजना तथा निर्माण मन्त्रालय</td>
+                                    </tr>
+                                    <tr class="even">
+                                        <td>Ministry of Local Development</td>
+                                        <td>स्थानीय विकास मन्त्रालय</td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td>Ministry of Science and Technology</td>
+                                        <td>बिज्ञान तथा प्रबिधि मन्त्रालय</td>
+                                    </tr>
+                                    <tr class="even">
+                                        <td>Ministry of Energy</td>
+                                        <td>उर्जा मन्त्रालय</td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td>Ministry of Women, Children and Social Welfare</td>
+                                        <td>महिला बालबालिका तथा समाज कल्याण मन्त्रालय</td>
+                                    </tr>
+                                    <tr class="even">
+                                        <td>Ministry of Peace and Reconstruction</td>
+                                        <td>शान्ति तथा पुनर्निर्माण मन्त्रालय</td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td>Ministry of Environment</td>
+                                        <td>वातावरण मन्त्रालय</td>
+                                    </tr>
+                                    <tr class="even">
+                                        <td>Ministry of Industry</td>
+                                        <td>उद्योग मन्त्रालय</td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td>Ministry of Federal Affairs, Parliamentary Affairs, Constituent Assembly and
+                                            Culture
+                                        </td>
+                                        <td>संघिय मामिला , सविधान सभा ,संसदिय व्यवस्था तथा संस्कृति मन्त्रालय</td>
+                                    </tr>
+                                    <tr class="even">
+                                        <td>Ministry of Irrigation</td>
+                                        <td>सिचाई मन्त्रालय</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="link-card card-bg">
+                            <p>News and Information</p>
+
+                            <div class="table-collapse hide">
+                                <table>
+                                    <tr>
+                                        <td>f</td>
+                                        <td>g</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="link-card card-bg">
+                            <p>Education</p>
+
+                            <div class="table-collapse hide">
+                                <table>
+                                    <tr class="odd">
+                                        <td>Tribhuvan University</td>
+                                        <td>त्रिभुवन विश्वविद्यालय</td>
+                                    </tr>
+                                    <tr class="even">
+                                        <td>Higher Secondary Education Board</td>
+                                        <td>उच्च शिक्षा परिषद</td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td>Education Sansar</td>
+                                        <td>एजुकेशन संसार</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="link-card card-bg">
+                            <p>Other Important Nepali Site</p>
+
+                            <div class="table-collapse hide">
+                                <table>
+                                    <tr class="odd">
+                                        <td>Law Commission</td>
+                                        <td>नेपाल कानुन आयोग</td>
+                                    </tr>
+                                    <tr class="even">
+                                        <td>Public Service Commission</td>
+                                        <td>लोकसेवा आयोग</td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td>Election Commission</td>
+                                        <td>निर्वाचन आयोग</td>
+                                    </tr>
+                                    <tr class="even">
+                                        <td>National Human Right Commission</td>
+                                        <td>राष्ट्रिय मानव अधिकार आयोग</td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td>National Planning Commision</td>
+                                        <td>राष्ट्रिय योजना आयोग</td>
+                                    </tr>
+                                    <tr class="even">
+                                        <td>Nepal Electricity Authority</td>
+                                        <td>नेपाल बिधुत प्राधिकरण</td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td>Nepal Airlines</td>
+                                        <td>नेपाल वायुसेवा निगम</td>
+                                    </tr>
+                                    <tr class="even">
+                                        <td>Department of Transport Management</td>
+                                        <td>यातायात व्यवस्था विभाग</td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td>Nepal Food Corporation</td>
+                                        <td>नेपाल खाद्य संस्थान</td>
+                                    </tr>
+                                    <tr class="even">
+                                        <td>Nepal Telecom</td>
+                                        <td>नेपाल टेलिकम</td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td>Nepal Rastra Bank</td>
+                                        <td>नेपाल राष्ट्र बैक</td>
+                                    </tr>
+                                    <tr class="even">
+                                        <td>Supreme Court of Nepal</td>
+                                        <td>सर्बोच्च अदालत</td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td>Commission for the Investigation of Abuse of Authority</td>
+                                        <td>अख्तियार दुरुपयोग अनुसन्धान आयोग</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="link-card card-bg">
+                            <p>Job Portal</p>
+
+                            <div class="table-collapse hide">
+                                <table>
+                                    <tr>
+                                        <td>f</td>
+                                        <td>g</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
-        </nav>
-        <div class="horizontal-line below-nav"></div>
-    </header>
+            <script>
 
-    <div class="container">
+                $(document).ready(function () {
+                    $('.link-card p').click(function () {
+                        $(this).siblings('.table-collapse').toggleClass('hide');
+                    });
+                });
+            </script>
 
-        <div class="quicklink-wrapper">
-            <div class="heading">
-                <p>QUICK<span>LINK</span></p>
-            </div>
-
-            <div class="content">
-                <ul>
-                    <a href="">
-
-                    </a>
-
-                    <a href="">
-
-                    </a>
-
-                    <a href="">
-
-                    </a>
-
-                </ul>
-            </div>
-        </div>
-
-    </div>
+            <script src="./static/js/script.js"></script>

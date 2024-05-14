@@ -10,8 +10,6 @@ $(document).ready(function () {
     // Toggle theme on click
     $(".theme-switch").on("click", function () {
         $("body").toggleClass("dark-mode");
-
-        // Save theme preference to local storage
         const currentTheme = $("body").hasClass("dark-mode") ? "dark-mode" : "";
         localStorage.setItem('theme', currentTheme);
     });
@@ -26,6 +24,14 @@ $(document).ready(function () {
         }
     });
 
+    $("#header__icon").click(function (e) {
+        e.preventDefault();
+        $("body").toggleClass("with--sidebar");
+    });
+
+    $("#site-cache").click(function (e) {
+        $("body").removeClass("with--sidebar");
+    });
 
     function showPopup() {
         $('#popup').fadeIn();
