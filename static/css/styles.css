@@ -157,9 +157,17 @@ tr.even {
     from {
         transform: translateY(100%);
     }
+
     to {
         transform: translateY(10%);
     }
+}
+
+.coming-soon, .content-space {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 34vh;
 }
 
 .logo-forsmallscreen {
