@@ -126,11 +126,11 @@ td {
     text-align: center;
 }
 
-tr.odd {
+table .odd {
     background-color: var(--secondaryBgColor);
 }
 
-tr.even {
+table .even {
     background-color: var(--thirdBgColor);
 }
 
@@ -163,7 +163,8 @@ tr.even {
     }
 }
 
-.coming-soon, .content-space {
+.coming-soon,
+.content-space {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -387,8 +388,13 @@ nav .active {
 .gallery-notice-container,
 .gallery-allphoto-wrapper,
 .quicklink-wrapper,
-.noticeboard-wrapper {
+.noticeboard-wrapper,
+.register-wrapper {
     padding: 10px 0;
+}
+
+.aboutus-wrapper {
+    min-height: 45vh;
 }
 
 nav {
@@ -751,6 +757,19 @@ ul.notice-list {
 }
 
 @media only screen and (max-width: 768px) {
+
+    tr {
+        display: flex;
+    }
+
+    th,
+    td {
+        font-size: 14px;
+        flex: 1;
+        text-align: left;
+    }
+
+
     .course-cards {
         flex-direction: column;
     }
