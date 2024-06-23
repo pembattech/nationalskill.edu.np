@@ -171,6 +171,10 @@ table .even {
     background-color: var(--secondaryBgColor);
 }
 
+.web-banner {
+    height: 450px;
+}
+
 .coming-soon,
 .content-space {
     display: flex;
