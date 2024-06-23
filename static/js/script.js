@@ -24,6 +24,14 @@ $(document).ready(function () {
         }
     });
 
+    function enableSidePusher() {
+        $('.container').addClass('fixed-height');
+    }
+
+    function disableSidePusher() {
+        $('.container').removeClass('fixed-height');
+    }
+
     $("#header__icon").click(function (e) {
         e.preventDefault();
         $("body").toggleClass("with--sidebar");
@@ -31,6 +39,7 @@ $(document).ready(function () {
 
     $("#site-cache").click(function (e) {
         $("body").removeClass("with--sidebar");
+        // disableSidePusher();
     });
 
     function showPopup() {
