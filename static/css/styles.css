@@ -163,7 +163,8 @@ table .even {
     }
 }
 
-.computer-classes th, .computer-classes td {
+.computer-classes th,
+.computer-classes td {
     background-color: var(--thirdBgColor);
 }
 
@@ -989,7 +990,7 @@ ul.notice-list {
     .with--sidebar {
         overflow: hidden;
     }
-    
+
     .with--sidebar .site-pusher {
         transform: translateX(220px);
         max-height: 100vh;
@@ -1033,8 +1034,8 @@ ul.notice-list {
         text-align: left;
     }
 
-     .popup-content {
-        top: 15%;
+    .popup-content {
+        top: 11%;
     }
 
     .course-cards {
@@ -1074,5 +1075,11 @@ ul.notice-list {
     .footer-flex {
         flex-direction: column;
         gap: 10px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .popup-content {
+        top: 15%;
     }
 }
