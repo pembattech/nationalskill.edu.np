@@ -1033,6 +1033,9 @@ ul.notice-list {
         text-align: left;
     }
 
+     .popup-content {
+        top: 15%;
+    }
 
     .course-cards {
         flex-direction: column;
