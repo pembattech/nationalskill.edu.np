@@ -913,7 +913,7 @@ ul.notice-list {
     background-color: var(--thirdBgColor);
 }
 
-@media only screen and (max-width: 992px) {
+@media only screen and (min-width: 769) and (max-width: 992px) {
     .gallery-notice-container {
         flex-direction: column;
     }
@@ -923,7 +923,7 @@ ul.notice-list {
     }
 
     .popup-content {
-        top: 30%;
+        top: 25%;
     }
 
     .nav-bar,
@@ -1034,10 +1034,6 @@ ul.notice-list {
         text-align: left;
     }
 
-    .popup-content {
-        top: 11%;
-    }
-
     .course-cards {
         flex-direction: column;
     }
@@ -1080,6 +1076,6 @@ ul.notice-list {
 
 @media only screen and (max-width: 400px) {
     .popup-content {
-        top: 15%;
+        top: 11%;
     }
 }
