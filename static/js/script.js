@@ -14,15 +14,15 @@ $(document).ready(function () {
         localStorage.setItem('theme', currentTheme);
     });
 
-    const navLinks = document.querySelectorAll('.nav-link');
-    const currentPath = window.location.pathname;
-    navLinks.forEach(link => {
-        if (link.getAttribute('href').endsWith(currentPath)) {
-            link.classList.add('active');
-        } else {
-            link.classList.remove('active');
-        }
-    });
+    // const navLinks = document.querySelectorAll('.nav-link');
+    // const currentPath = window.location.pathname;
+    // navLinks.forEach(link => {
+    //     if (link.getAttribute('href').endsWith(currentPath)) {
+    //         link.classList.add('active');
+    //     } else {
+    //         link.classList.remove('active');
+    //     }
+    // });
 
     function enableSidePusher() {
         $('.container').addClass('fixed-height');
