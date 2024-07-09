@@ -1034,6 +1034,10 @@ ul.notice-list {
         text-align: left;
     }
 
+    .popup-content {
+        top: 15%;
+    }
+
     .course-cards {
         flex-direction: column;
     }
@@ -1071,12 +1075,5 @@ ul.notice-list {
     .footer-flex {
         flex-direction: column;
         gap: 10px;
-    }
-}
-
-
-@media only screen and (max-width: 400px) {
-    .popup-content {
-        top: 15%;
     }
 }
