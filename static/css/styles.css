@@ -1074,8 +1074,10 @@ ul.notice-list {
     }
 }
 
+/*
 @media only screen and (max-width: 400px) {
     .popup-content {
         top: 11%;
     }
 }
+*/
