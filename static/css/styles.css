@@ -1043,10 +1043,6 @@ ul.notice-list {
         top: 15%;
     }
 
-    .popup-content.korean-pass-std { 
-        top: 28%;
-    }
-
     .course-cards {
         flex-direction: column;
     }
