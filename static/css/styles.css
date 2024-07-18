@@ -928,7 +928,7 @@ ul.notice-list {
     }
 
     .popup-content.korean-pass-std {
-        top: 15%;
+        top: 18%;
     }
 
     .nav-bar,
@@ -1012,7 +1012,7 @@ ul.notice-list {
 
     .gallery-allphoto-wrapper .images {
         grid-template-columns: 1fr 1fr;
-        justify-content: space-around;
+        text-align: center;
     }
 
     .gallery-wrapper .images p {
@@ -1046,6 +1046,10 @@ ul.notice-list {
 
     .popup-content {
         top: 15%;
+    }
+    
+    .popup-content.korean-pass-std {
+        top: 18%;
     }
 
     .course-cards {
@@ -1089,5 +1093,6 @@ ul.notice-list {
 
     .gallery-allphoto-wrapper .images {
         grid-template-columns: 1fr;
+        text-align: center;
     }
 }
