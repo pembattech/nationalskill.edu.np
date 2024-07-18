@@ -927,6 +927,10 @@ ul.notice-list {
         top: 25%;
     }
 
+    .popup-content.korean-pass-std {
+        top: 47%;
+    }
+
     .nav-bar,
     .nav-list,
     .right-nav {
