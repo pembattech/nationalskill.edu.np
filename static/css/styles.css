@@ -998,7 +998,7 @@ ul.notice-list {
 
     .with--sidebar .site-pusher {
         transform: translateX(220px);
-        max-height: 100vh;
+        max-height: 100%;
     }
 
     .with--sidebar .site-cache {
@@ -1047,7 +1047,7 @@ ul.notice-list {
     .popup-content {
         top: 15%;
     }
-    
+
     .popup-content.korean-pass-std {
         top: 18%;
     }
