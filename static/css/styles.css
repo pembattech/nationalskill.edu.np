@@ -928,7 +928,7 @@ ul.notice-list {
     }
 
     .popup-content.korean-pass-std {
-        top: 30%;
+        top: 47%;
     }
 
     .nav-bar,
@@ -1041,6 +1041,10 @@ ul.notice-list {
 
     .popup-content {
         top: 15%;
+    }
+
+    .popup-content.korean-pass-std { 
+        top: 18%;
     }
 
     .course-cards {
