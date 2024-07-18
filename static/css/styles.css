@@ -914,7 +914,7 @@ ul.notice-list {
     background-color: var(--thirdBgColor);
 }
 
-@media only screen and (min-width: 769) and (max-width: 992px) {
+@media only screen and (max-width: 992px) {
     .gallery-notice-container {
         flex-direction: column;
     }
@@ -1035,6 +1035,10 @@ ul.notice-list {
         text-align: left;
     }
 
+    .popup-content {
+        top: 15%;
+    }
+
     .course-cards {
         flex-direction: column;
     }
@@ -1072,11 +1076,5 @@ ul.notice-list {
     .footer-flex {
         flex-direction: column;
         gap: 10px;
-    }
-}
-
-@media only screen and (max-width: 400px) {
-    .popup-content {
-        top: 11%;
     }
 }
