@@ -807,6 +807,7 @@ ul.notice-list {
 
 .gallery-allphoto-wrapper .gallery-thumnail {
     width: 280px;
+    height: 180px;
 }
 
 .gallery-allphoto-wrapper .images {
