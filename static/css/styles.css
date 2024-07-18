@@ -1010,6 +1010,11 @@ ul.notice-list {
         background-color: rgba(0, 0, 0, 0.6);
     }
 
+    .gallery-allphoto-wrapper .images {
+        grid-template-columns: 1fr 1fr;
+        justify-content: space-around;
+    }
+
     .gallery-wrapper .images p {
         bottom: 15%;
         left: 50%;
@@ -1080,5 +1085,9 @@ ul.notice-list {
     .footer-flex {
         flex-direction: column;
         gap: 10px;
+    }
+
+    .gallery-allphoto-wrapper .images {
+        grid-template-columns: 1fr;
     }
 }
