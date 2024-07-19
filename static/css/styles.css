@@ -1102,3 +1102,10 @@ ul.notice-list {
         text-align: center;
     }
 }
+
+
+@media only screen and (max-width: 480px) {
+    .popup-content.korean-pass-std {
+        top: 10%;
+    }
+}
