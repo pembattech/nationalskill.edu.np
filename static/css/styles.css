@@ -658,6 +658,18 @@ nav .active {
     padding: 10px 0;
 }
 
+.korea-wrapper .divide-container {
+    display: flex;
+    gap: 10px;
+}
+
+.korea-wrapper .divide-container .skill-test img{
+
+    width: 300px;
+    margin-bottom: 10px;
+
+}
+
 .seperate.aboutus-wrapper {
     min-height: 45vh;
 }
@@ -1035,6 +1047,10 @@ ul.notice-list {
 
     .notice-list {
         max-height: 450px;
+    }
+
+    .korea-wrapper .divide-container .skill-test img{
+        width: 200px;    
     }
 
     .footer-flex {

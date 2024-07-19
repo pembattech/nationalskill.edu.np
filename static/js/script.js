@@ -2,6 +2,9 @@ $(document).ready(function () {
     // Check if there's a theme preference in local storage
     const theme = localStorage.getItem('theme');
 
+
+    $("#currentyear").text(new Date().getFullYear());
+
     // Apply theme if it exists in local storage
     if (theme) {
         $('body').addClass(theme);
