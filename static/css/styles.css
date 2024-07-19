@@ -1031,6 +1031,12 @@ ul.notice-list {
     }
 }
 
+/* @media only screen and (max-width: 800px) {
+
+    .popup-content.korean-pass-std {
+        top: 38%;
+    }
+} */
 @media only screen and (max-width: 768px) {
 
     tr {
@@ -1049,7 +1055,7 @@ ul.notice-list {
     }
 
     .popup-content.korean-pass-std {
-        top: 18%;
+        top: 30%;
     }
 
     .course-cards {
