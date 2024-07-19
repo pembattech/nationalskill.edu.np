@@ -610,6 +610,7 @@ footer {
     align-items: center;
     justify-content: space-between;
     font-size: 15px;
+    width: 100%;
 }
 
 .nav-list {
