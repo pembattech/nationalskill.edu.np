@@ -232,7 +232,7 @@ table .even {
     border-radius: 2px;
     will-change: top, opacity;
     background-color: var(--overlayBgColor);
-
+    padding-top: 10%;
 
 
 
