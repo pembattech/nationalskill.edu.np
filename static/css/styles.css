@@ -87,6 +87,8 @@ ul.notice-list::-webkit-scrollbar-thumb:active {
     transition: background-color .2s;
 }
 
+
+
 ol,
 ul {
     margin: 0;
@@ -107,6 +109,10 @@ a:focus,
 a:hover {
     color: var(--mainTextColor);
     text-decoration: none;
+}
+
+.pemba-link:hover, .pemba-link:focus{
+    color: #636fca;
 }
 
 ul {
