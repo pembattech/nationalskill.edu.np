@@ -598,6 +598,7 @@ table .even {
     top: 0;
     z-index: 999;
     background-color: var(--secondaryBgColor);
+    width: 100%;
 }
 
 footer {
