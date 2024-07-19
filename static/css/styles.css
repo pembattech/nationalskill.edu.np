@@ -594,7 +594,7 @@ table .even {
 }
 
 .header {
-    position: sticky;
+    position: fixed;
     top: 0;
     z-index: 999;
     background-color: var(--secondaryBgColor);
@@ -639,7 +639,7 @@ nav .active {
 
 .container {
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 70px auto 0 auto;
     padding: 20px;
     color: var(--mainTextColor);
 }
