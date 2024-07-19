@@ -1027,6 +1027,7 @@ ul.notice-list {
         bottom: 0;
         width: 220px;
         transform: translateX(-220px);
+        
     }
 
     .with--sidebar {
