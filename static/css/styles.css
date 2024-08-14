@@ -87,6 +87,8 @@ ul.notice-list::-webkit-scrollbar-thumb:active {
     transition: background-color .2s;
 }
 
+
+
 ol,
 ul {
     margin: 0;
@@ -107,6 +109,10 @@ a:focus,
 a:hover {
     color: var(--mainTextColor);
     text-decoration: none;
+}
+
+.pemba-link:hover, .pemba-link:focus{
+    color: #636fca;
 }
 
 ul {
@@ -658,6 +664,18 @@ nav .active {
     padding: 10px 0;
 }
 
+.korea-wrapper .divide-container {
+    display: flex;
+    gap: 10px;
+}
+
+.korea-wrapper .divide-container .skill-test img{
+
+    width: 300px;
+    margin-bottom: 10px;
+
+}
+
 .seperate.aboutus-wrapper {
     min-height: 45vh;
 }
@@ -1035,6 +1053,10 @@ ul.notice-list {
 
     .notice-list {
         max-height: 450px;
+    }
+
+    .korea-wrapper .divide-container .skill-test img{
+        width: 200px;    
     }
 
     .footer-flex {
