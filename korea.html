@@ -9,6 +9,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./static/css/styles.css">
+
 
   <script>
     tailwind.config = {
@@ -190,22 +192,22 @@
 <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 h-[72px] flex items-center justify-between px-8 md:px-12 transition-all duration-400">
   <a href="./index.html" class="flex items-center gap-3 no-underline">
     <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-sky-500 to-sky-700 grid place-items-center shadow-blue-sm flex-shrink-0">
-      <span class="font-display font-black text-white text-lg leading-none">N</span>
+      <img src="./static/img/logo.jpg" alt="National Skill Logo">
     </div>
     <span class="font-display font-bold text-cool-800 text-[17px] tracking-tight">National Skill</span>
   </a>
 
   <ul class="hidden md:flex items-center gap-0.5 list-none m-0 p-0">
     <li><a href="./index.html"     class="nl text-[13px] font-medium text-cool-600 px-3 py-2 rounded-lg hover:text-sky-700 hover:bg-sky-50 transition-colors no-underline">Home</a></li>
-    <li><a href="./aboutus.html"   class="nl text-[13px] font-medium text-cool-600 px-3 py-2 rounded-lg hover:text-sky-700 hover:bg-sky-50 transition-colors no-underline">About Us</a></li>
+    
     <li><a href="./gallery.html"   class="nl text-[13px] font-medium text-cool-600 px-3 py-2 rounded-lg hover:text-sky-700 hover:bg-sky-50 transition-colors no-underline">Gallery</a></li>
     <li><a href="./korea.html"     class="nl active text-[13px] font-medium text-sky-700 px-3 py-2 rounded-lg hover:bg-sky-50 transition-colors no-underline">Korea</a></li>
-    <li><a href="./quicklink.html" class="nl text-[13px] font-medium text-cool-600 px-3 py-2 rounded-lg hover:text-sky-700 hover:bg-sky-50 transition-colors no-underline">Quick Link</a></li>
+    
     <li><a href="./contactus.html" class="nl text-[13px] font-medium text-cool-600 px-3 py-2 rounded-lg hover:text-sky-700 hover:bg-sky-50 transition-colors no-underline">Contact</a></li>
   </ul>
 
   <div class="hidden md:flex items-center gap-3">
-    <a href="./contactus.html" class="text-[13px] font-semibold text-cool-600 border border-cool-200 px-5 py-2.5 rounded-full hover:border-sky-400 hover:text-sky-700 transition-all no-underline">Contact</a>
+    
     <a href="https://nationalskill-register.vercel.app/" class="text-[13px] font-semibold text-white bg-sky-600 px-5 py-2.5 rounded-full hover:bg-sky-700 shadow-blue-sm hover:shadow-blue-md hover:-translate-y-px transition-all no-underline">Register Now</a>
   </div>
 
@@ -217,7 +219,11 @@
 </nav>
 
 <!-- Mobile drawer -->
-<div id="mobileMenu" class="fixed top-[72px] left-0 right-0 z-40 bg-white/97 backdrop-blur-xl border-b border-sky-100 px-8 py-6 flex flex-col gap-1 -translate-y-full transition-transform duration-500">
+ <div id="mobileMenu" class="md:hidden fixed top-[72px] left-0 right-0 z-40
+bg-white/97 backdrop-blur-xl border-b border-sky-100
+px-8 py-6 flex flex-col gap-1
+-transform -translate-y-full
+transition-transform duration-500">
   <a href="./index.html"     class="text-cool-600 text-[15px] py-3 border-b border-sky-50 hover:text-sky-700 transition-colors no-underline">Home</a>
   <a href="./aboutus.html"   class="text-cool-600 text-[15px] py-3 border-b border-sky-50 hover:text-sky-700 transition-colors no-underline">About Us</a>
   <a href="./gallery.html"   class="text-cool-600 text-[15px] py-3 border-b border-sky-50 hover:text-sky-700 transition-colors no-underline">Gallery</a>
@@ -496,7 +502,7 @@
       <div class="md:col-span-2">
         <div class="flex items-center gap-3 mb-5">
           <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-sky-500 to-sky-700 grid place-items-center flex-shrink-0">
-            <span class="font-display font-black text-white text-lg leading-none">N</span>
+            <img src="./static/img/logo.jpg" alt="National Skill Logo">
           </div>
           <span class="font-display font-bold text-white text-[17px]">National Skill</span>
         </div>
@@ -533,29 +539,9 @@
 </footer>
 
 <!-- ═══════════════ JS ═══════════════ -->
+    <script src="./static/js/script.js"></script>
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
-
-  // Nav scroll
-  const nav = document.getElementById('navbar');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 40) {
-      nav.style.background = 'rgba(255,255,255,0.92)';
-      nav.style.backdropFilter = 'blur(20px)';
-      nav.style.borderBottom = '1px solid rgba(186,222,255,0.5)';
-      nav.style.boxShadow = '0 2px 12px rgba(7,77,133,0.08)';
-    } else {
-      nav.style.background = nav.style.backdropFilter = nav.style.borderBottom = nav.style.boxShadow = '';
-    }
-  });
-
-  // Hamburger
-  const mob = document.getElementById('mobileMenu');
-  let mobOpen = false;
-  document.getElementById('hamburger').addEventListener('click', () => {
-    mobOpen = !mobOpen;
-    mob.style.transform = mobOpen ? 'translateY(0)' : 'translateY(-110%)';
-  });
 
   // Popup
   const popup    = document.getElementById('popup');
