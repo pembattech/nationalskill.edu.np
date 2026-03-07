@@ -1,421 +1,690 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-
-  <title>National Skill</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gallery — National Skill Institute</title>
   <link rel="shortcut icon" href="./static/img/logo.jpg" type="image/x-icon">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans:    ['Sora', 'sans-serif'],
+            display: ['Fraunces', 'serif'],
+          },
+          colors: {
+            sky: {
+              50:'#f0f7ff', 100:'#e0efff', 200:'#badeff', 300:'#7ec8fd',
+              400:'#38adf8', 500:'#0e91e9', 600:'#0272c7', 700:'#035aa1',
+              800:'#074d85', 900:'#0b416e', 950:'#082a4a',
+            },
+            cool: {
+              50:'#f4f7fb',  100:'#e8eef6', 200:'#cbd9ec', 300:'#9db8d9',
+              400:'#6993c0', 500:'#4675a8', 600:'#355d8d', 700:'#2b4b73',
+              800:'#263f5f', 900:'#233550', 950:'#161f30',
+            },
+          },
+          boxShadow: {
+            'blue-sm':    '0 4px 16px rgba(2,114,199,0.15)',
+            'blue-md':    '0 12px 40px rgba(2,114,199,0.22)',
+            'blue-lg':    '0 24px 64px rgba(2,114,199,0.28)',
+            'card':       '0 2px 12px rgba(7,77,133,0.08)',
+            'card-hover': '0 16px 48px rgba(7,77,133,0.16)',
+          },
+        }
+      }
+    }
+  </script>
 
-  <link rel="stylesheet" href="./static/css/styles.css">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Sora', sans-serif; overflow-x: hidden; background: #f4f7fb; color: #233550; }
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+    /* Grain */
+    body::after {
+      content:''; position:fixed; inset:0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+      pointer-events:none; z-index:9999; opacity:0.28;
+    }
+
+    /* Scroll reveal */
+    .reveal { opacity:0; transform:translateY(28px); transition:opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+    .reveal-d1 { transition-delay:0.08s; }
+    .reveal-d2 { transition-delay:0.16s; }
+    .reveal-d3 { transition-delay:0.24s; }
+
+    /* Hero stagger */
+    .ha1 { opacity:0; animation:fadeUp 0.7s 0.2s ease forwards; }
+    .ha2 { opacity:0; animation:fadeUp 0.7s 0.36s ease forwards; }
+    .ha3 { opacity:0; animation:fadeUp 0.7s 0.52s ease forwards; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);} }
+
+    /* Orbs */
+    .orb { position:absolute; border-radius:50%; filter:blur(70px); pointer-events:none; }
+    @keyframes floatA { 0%,100%{transform:translateY(0) scale(1);} 50%{transform:translateY(-24px) scale(1.04);} }
+    @keyframes floatB { 0%,100%{transform:translateY(0) scale(1);} 50%{transform:translateY(-16px) scale(1.03);} }
+
+    /* Grid bg */
+    .grid-bg {
+      background-image: linear-gradient(rgba(2,114,199,0.065) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(2,114,199,0.065) 1px, transparent 1px);
+      background-size:56px 56px;
+      mask-image: radial-gradient(ellipse 90% 90% at 50% 50%, black, transparent);
+    }
+
+    /* Nav hover underline */
+    .nl { position:relative; }
+    .nl::after { content:''; position:absolute; left:0; right:0; bottom:-2px; height:2px; background:#0272c7; border-radius:1px; transform:scaleX(0); transform-origin:left; transition:transform 0.25s cubic-bezier(0.16,1,0.3,1); }
+    .nl:hover::after,.nl.active::after { transform:scaleX(1); }
+
+    /* Pulse dot */
+    @keyframes pulseDot { 0%,100%{opacity:1;} 50%{opacity:0.25;} }
+    .pulse-dot { animation: pulseDot 1.5s ease-in-out infinite; }
+
+    /* ── MASONRY GRID ── */
+    .masonry-grid {
+      columns: 4;
+      column-gap: 16px;
+    }
+    @media (max-width: 1024px) { .masonry-grid { columns: 3; } }
+    @media (max-width: 640px)  { .masonry-grid { columns: 2; } }
+
+    .masonry-item {
+      break-inside: avoid;
+      margin-bottom: 16px;
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      display: block;
+    }
+    .masonry-item img {
+      width: 100%;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.16,1,0.3,1);
+    }
+    .masonry-item:hover img { transform: scale(1.06); }
+    .masonry-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(8,42,74,0.65) 0%, rgba(8,42,74,0.1) 50%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      display: flex; align-items: flex-end; justify-content: flex-start;
+      padding: 16px;
+    }
+    .masonry-item:hover .masonry-overlay { opacity: 1; }
+    .masonry-zoom-icon {
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,0.9);
+      border-radius: 10px;
+      display: grid; place-items: center;
+      transform: scale(0.8) translateY(4px);
+      transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
+    }
+    .masonry-item:hover .masonry-zoom-icon { transform: scale(1) translateY(0); }
+
+    /* Filter tabs */
+    .filter-tab {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 18px;
+      border-radius: 100px;
+      font-size: 13px; font-weight: 600;
+      border: 1px solid #cbd9ec;
+      color: #4675a8;
+      background: white;
+      cursor: pointer;
+      transition: all 0.22s;
+      white-space: nowrap;
+    }
+    .filter-tab:hover { border-color: #0272c7; color: #0272c7; background: #f0f7ff; }
+    .filter-tab.active { background: #0272c7; color: white; border-color: #0272c7; box-shadow: 0 4px 16px rgba(2,114,199,0.25); }
+    .filter-tab .count {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 20px; height: 20px; border-radius: 50%;
+      font-size: 10px; font-weight: 700;
+      background: rgba(255,255,255,0.2);
+    }
+    .filter-tab:not(.active) .count { background: #e0efff; color: #0272c7; }
+
+    /* Hidden masonry items */
+    .masonry-item[data-hidden="true"] { display: none; }
+
+    /* ── LIGHTBOX ── */
+    .lightbox-overlay {
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(8,42,74,0.92);
+      backdrop-filter: blur(16px);
+      display: grid; place-items: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.35s;
+    }
+    .lightbox-overlay.open { opacity: 1; pointer-events: all; }
+
+    .lightbox-box {
+      position: relative;
+      max-width: min(90vw, 960px);
+      max-height: 90vh;
+      transform: scale(0.94);
+      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+    }
+    .lightbox-overlay.open .lightbox-box { transform: scale(1); }
+
+    .lightbox-img {
+      max-width: 100%; max-height: 80vh;
+      border-radius: 20px;
+      display: block;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.5);
+      object-fit: contain;
+    }
+
+    .lb-btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 48px; height: 48px; border-radius: 50%;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: white; font-size: 20px;
+      display: grid; place-items: center;
+      cursor: pointer; backdrop-filter: blur(8px);
+      transition: background 0.2s, border-color 0.2s;
+      z-index: 10;
+    }
+    .lb-btn:hover { background: #0272c7; border-color: #0272c7; }
+    .lb-prev { right: calc(100% + 16px); }
+    .lb-next { left: calc(100% + 16px); }
+
+    .lb-close {
+      position: absolute; top: -16px; right: -16px;
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: white; font-size: 16px; font-weight: bold;
+      display: grid; place-items: center;
+      cursor: pointer; backdrop-filter: blur(8px);
+      transition: background 0.2s;
+    }
+    .lb-close:hover { background: #e05c4b; border-color: #e05c4b; }
+
+    .lb-counter {
+      position: absolute; bottom: -40px; left: 50%; transform: translateX(-50%);
+      font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.5);
+      white-space: nowrap; letter-spacing: 0.1em;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width:5px; }
+    ::-webkit-scrollbar-track { background:#e8eef6; }
+    ::-webkit-scrollbar-thumb { background:#9db8d9; border-radius:3px; }
+  </style>
 </head>
 
 <body>
-  <div class="main-container">
-    <div class="site-pusher">
 
-      <header class="header">
-        <div class="hamburger-bar" style="display: flex; justify-content: space-between; padding:0 10px;">
-          <div class="hamburger">
-            <a href="#" class="header__icon" id="header__icon"></a>
-          </div>
-
-          <div class="logo-forsmallscreen">
-            <a class="logo" href="./index.html">
-              <img class="logo-img" src="./static/img/nationalskill_baner.png" alt="National Skill" style="width: 180px;">
-            </a>
-          </div>
-        </div>
-
-
-        <nav class="menu">
-          <div class="nav-bar">
-            <a class="logo nav-item" href="./index.html">
-              <img class="logo-img" src="./static/img/nationalskill_baner.png" alt="National Skill" style="width: 180px;">
-            </a>
-
-            <ul class="nav-list">
-              <a class="nav-link home-tab" href="./index.html">
-                <li class="nav-item">Home</li>
-              </a>
-              <a class="nav-link about-tab" href="./aboutus.html">
-                <li class="nav-item">About Us</li>
-              </a>
-
-              <!-- <a class="nav-link notice-tab" href="./noticeboard.html">
-                <li class="nav-item">Notice Board</li>
-              </a> -->
-              <a class="nav-link gallery-tab" href="./gallery.html">
-                <li class="nav-item">Gallery</li>
-              </a>
-              <a class="nav-link contact-tab" href="./contactus.html">
-                <li class="nav-item">Contact Us</li>
-              </a>
-              <a class="nav-link register-tab" href="https://nationalskill-register.vercel.app/">
-                <li class="nav-item">Register</li>
-              </a>
-
-            </ul>
-
-            <div class="right-nav">
-              <div class="nav-item">
-                <a href="./korea.html" class="nav-link korea-tab">Korea</a>
-              </div>
-              <div class="nav-item">
-                <a class="nav-link quicklink-tab" href="./quicklink.html">
-                  Quick Link
-                </a>
-              </div>
-
-              <div class="theme-switch nav-item">
-                <div class="switch"></div>
-              </div>
-
-
-            </div>
-          </div>
-
-        </nav>
-        <div class="horizontal-line below-nav"></div>
-      </header>
-
-
-      <div class="container">
-
-        <div class="gallery-allphoto-wrapper">
-
-          <div class="heading">
-            <p><span>GALLERY</span></p>
-          </div>
-
-          <div class="images">
-
-            <a href="./static/img/gallery/images3.jpg" data-fancybox="images">
-              <img class="gallery-thumnail" src="./static/img/gallery/images3.jpg" />
-            </a>
-
-            <a href="./static/img/gallery/images6.jpg" data-fancybox="images">
-              <img class="gallery-thumnail" src="./static/img/gallery/images6.jpg" />
-            </a>
-
-            <a href="./static/img/gallery/images8.jpg" data-fancybox="images">
-              <img class="gallery-thumnail" src="./static/img/gallery/images8.jpg" />
-            </a>
-
-            <a href="./static/img/gallery/images10.jpg" data-fancybox="images">
-              <img class="gallery-thumnail" src="./static/img/gallery/images10.jpg" />
-            </a>
-
-            <a href="./static/img/gallery/images11.jpg" data-fancybox="images">
-              <img class="gallery-thumnail" src="./static/img/gallery/images11.jpg" />
-            </a>
-
-            <a href="./static/img/gallery/images12.jpg" data-fancybox="images">
-              <img class="gallery-thumnail" src="./static/img/gallery/images12.jpg" />
-            </a>
-
-            <a href="./static/img/gallery/images13.jpg" data-fancybox="images">
-              <img class="gallery-thumnail" src="./static/img/gallery/images13.jpg" />
-            </a>
-
-            <a href="./static/img/gallery/images15.jpg" data-fancybox="images">
-              <img class="gallery-thumnail" src="./static/img/gallery/images15.jpg" />
-            </a>
-
-            <a href="./static/img/gallery/images16.jpg" data-fancybox="images">
-              <img class="gallery-thumnail" src="./static/img/gallery/images16.jpg" />
-            </a>
-
-            <a href="./static/img/gallery/images17.jpg" data-fancybox="images">
-              <img class="gallery-thumnail" src="./static/img/gallery/images17.jpg" />
-            </a>
-
-            <a href="./static/img/gallery/images18.jpg" data-fancybox="images">
-              <img class="gallery-thumnail" src="./static/img/gallery/images18.jpg" />
-            </a>
-
-            <a href="./static/img/gallery/images20.jpg" data-fancybox="images">
-              <img class="gallery-thumnail" src="./static/img/gallery/images20.jpg" />
-            </a>
-
-            <a href="./static/img/gallery/images21.jpg" data-fancybox="images">
-              <img class="gallery-thumnail" src="./static/img/gallery/images21.jpg" />
-            </a>
-
-            <a href="./static/img/gallery/images22.jpg" data-fancybox="images">
-              <img class="gallery-thumnail" src="./static/img/gallery/images22.jpg" />
-            </a>
-
-            <a href="./static/img/gallery/images23.jpg" data-fancybox="images">
-              <img class="gallery-thumnail" src="./static/img/gallery/images23.jpg" />
-            </a>
-
-            <a href="./static/img/gallery/images24.jpg" data-fancybox="images">
-              <img class="gallery-thumnail" src="./static/img/gallery/images24.jpg" />
-            </a>
-
-            <a href="./static/img/gallery/images25.jpg" data-fancybox="images">
-              <img class="gallery-thumnail" src="./static/img/gallery/images25.jpg" />
-            </a>
-
-            <a href="./static/img/gallery/images26.jpg" data-fancybox="images">
-              <img class="gallery-thumnail" src="./static/img/gallery/images26.jpg" />
-            </a>
-
-            <a href="./static/img/gallery/images27.jpg" data-fancybox="images">
-              <img class="gallery-thumnail" src="./static/img/gallery/images27.jpg" />
-            </a>
-
-            <a href="./static/img/gallery/images28.jpg" data-fancybox="images">
-              <img class="gallery-thumnail" src="./static/img/gallery/images28.jpg" />
-            </a>
-
-            <a href="./static/img/gallery/images30.jpg" data-fancybox="images">
-              <img class="gallery-thumnail" src="./static/img/gallery/images30.jpg" />
-            </a>
-
-            <a href="./static/img/gallery/images31.jpg" data-fancybox="images">
-              <img class="gallery-thumnail" src="./static/img/gallery/images31.jpg" />
-            </a>
-
-            <a href="./static/img/gallery/images32.jpg" data-fancybox="images">
-              <img class="gallery-thumnail" src="./static/img/gallery/images32.jpg" />
-            </a>
-
-            <a href="./static/img/gallery/images33.jpg" data-fancybox="images">
-              <img class="gallery-thumnail" src="./static/img/gallery/images33.jpg" />
-            </a>
-
-            <a href="./static/img/gallery/images34.jpg" data-fancybox="images">
-              <img class="gallery-thumnail" src="./static/img/gallery/images34.jpg" />
-            </a>
-
-            <a href="./static/img/gallery/20180321_161449.jpg" data-fancybox="images">
-              <img class="gallery-thumnail" src="./static/img/gallery/20180321_161449.jpg" />
-            </a>
-
-            <a href="./static/img/gallery/20210410_113753.jpg" data-fancybox="images">
-              <img class="gallery-thumnail" src="./static/img/gallery/20210410_113753.jpg" />
-            </a>
-
-            <a href="./static/img/gallery/20230519_080255.jpg" data-fancybox="images">
-              <img class="gallery-thumnail" src="./static/img/gallery/20230519_080255.jpg" />
-            </a>
-
-            <a href="./static/img/gallery/20230930_074213.jpg" data-fancybox="images">
-              <img class="gallery-thumnail" src="./static/img/gallery/20230930_074213.jpg" />
-            </a>
-
-            <a href="./static/img/gallery/279172289_359429962659842_9167110796995617433_n.jpg" data-fancybox="images">
-              <img class="gallery-thumnail"
-                src="./static/img/gallery/279172289_359429962659842_9167110796995617433_n.jpg" />
-            </a>
-
-            <a href="./static/img/gallery/279362608_416001047012915_4998394503214043116_n.jpg" data-fancybox="images">
-              <img class="gallery-thumnail"
-                src="./static/img/gallery/279362608_416001047012915_4998394503214043116_n.jpg" />
-            </a>
-
-            <a href="./static/img/gallery/285924775_332441692379037_7839275598386049191_n.jpg" data-fancybox="images">
-              <img class="gallery-thumnail"
-                src="./static/img/gallery/285924775_332441692379037_7839275598386049191_n.jpg" />
-            </a>
-
-            <a href="./static/img/gallery/317092462_1357250581748188_3705715287239282076_n.jpg" data-fancybox="images">
-              <img class="gallery-thumnail"
-                src="./static/img/gallery/317092462_1357250581748188_3705715287239282076_n.jpg" />
-            </a>
-
-            <a href="./static/img/gallery/325407869_495139722744469_6554459032772073042_n.jpg" data-fancybox="images">
-              <img class="gallery-thumnail"
-                src="./static/img/gallery/325407869_495139722744469_6554459032772073042_n.jpg" />
-            </a>
-
-            <a href="./static/img/gallery/337555879_585321210217009_4363802541529288991_n.jpg" data-fancybox="images">
-              <img class="gallery-thumnail"
-                src="./static/img/gallery/337555879_585321210217009_4363802541529288991_n.jpg" />
-            </a>
-
-            <a href="./static/img/gallery/337561931_749256746749437_3377142674637929116_n.jpg" data-fancybox="images">
-              <img class="gallery-thumnail"
-                src="./static/img/gallery/337561931_749256746749437_3377142674637929116_n.jpg" />
-            </a>
-
-            <a href="./static/img/gallery/337565505_987227588849883_4557584877642768589_n.jpg" data-fancybox="images">
-              <img class="gallery-thumnail"
-                src="./static/img/gallery/337565505_987227588849883_4557584877642768589_n.jpg" />
-            </a>
-
-            <a href="./static/img/gallery/337634445_608351101199397_852844026539796750_n.jpg" data-fancybox="images">
-              <img class="gallery-thumnail"
-                src="./static/img/gallery/337634445_608351101199397_852844026539796750_n.jpg" />
-            </a>
-
-            <a href="./static/img/gallery/337636296_909231856829408_5857526270502267783_n.jpg" data-fancybox="images">
-              <img class="gallery-thumnail"
-                src="./static/img/gallery/337636296_909231856829408_5857526270502267783_n.jpg" />
-            </a>
-
-            <a href="./static/img/gallery/348354681_1379666869274567_5957998634751680508_n.jpg" data-fancybox="images">
-              <img class="gallery-thumnail"
-                src="./static/img/gallery/348354681_1379666869274567_5957998634751680508_n.jpg" />
-            </a>
-
-            <a href="./static/img/gallery/393143758_787827116437847_7702873194234846058_n.jpg" data-fancybox="images">
-              <img class="gallery-thumnail"
-                src="./static/img/gallery/393143758_787827116437847_7702873194234846058_n.jpg" />
-            </a>
-
-            <a href="./static/img/gallery/413924878_698560358891844_7478987234118136433_n.jpg" data-fancybox="images">
-              <img class="gallery-thumnail"
-                src="./static/img/gallery/413924878_698560358891844_7478987234118136433_n.jpg" />
-            </a>
-
-            <a href="./static/img/gallery/414096683_756453583028186_3218290085591938128_n.jpg" data-fancybox="images">
-              <img class="gallery-thumnail"
-                src="./static/img/gallery/414096683_756453583028186_3218290085591938128_n.jpg" />
-            </a>
-
-            <a href="./static/img/gallery/me.jpg" data-fancybox="images">
-              <img class="gallery-thumnail" src="./static/img/gallery/me.jpg" />
-            </a>
-
-            <a href="./static/img/gallery/UBT exam.jpg" data-fancybox="images">
-              <img class="gallery-thumnail" src="./static/img/gallery/UBT exam.jpg" />
-            </a>
-
-            <a href="./static/img/gallery/korean/401140706_203523079466950_677012777211854058_n.jpg"
-              data-fancybox="images">
-              <img class="gallery-thumnail"
-                src="./static/img/gallery/korean/401140706_203523079466950_677012777211854058_n.jpg" />
-            </a>
-
-
-            <a href="./static/img/gallery/korean/hand power.jpg" data-fancybox="images">
-              <img class="gallery-thumnail" src="./static/img/gallery/korean/hand power.jpg" />
-            </a>
-
-
-            <a href="./static/img/gallery/korean/skill test ring.jpg" data-fancybox="images">
-              <img class="gallery-thumnail" src="./static/img/gallery/korean/skill test ring.jpg" />
-            </a>
-
-
-            <a href="./static/img/gallery/korean/wood board.jpg" data-fancybox="images">
-              <img class="gallery-thumnail" src="./static/img/gallery/korean/wood board.jpg" />
-            </a>
-
-          </div>
-
-        </div>
-
-      </div>
-
-      <footer>
-        <div class="footer-wrapper">
-          <div class="content short-brief">
-            <a class="logo" href="./index.html">
-              <img class="footer logo-img" src="./static/img/logo.jpg" alt="National Skill">
-            </a>
-
-            <p>National Skill Institute (Bhaktapur) offers Korean language & computer skills training (basic
-              to advanced) - speaking, listening, reading, writing, graphic design, programming. Boost
-              your skills and explore new opportunities!
-            </p>
-          </div>
-
-          <div class="footer-flex">
-            <div class="connetwithnationalskill">
-              <div class="heading">
-                <p>Find National Skill on</p>
-              </div>
-              <div class="content social-links">
-                <div class="footer-img__content">
-
-                  <a href="https://www.facebook.com/profile.php?id=100081353035987" target="_blank">
-                    <img class="footer-img" src="./static/img/assets/facebook.png" alt="Facebook">
-                    Facebook
-                  </a>
-                </div>
-                <div class="footer-img__content">
-
-                  <a href="https://www.youtube.com/@computerskill_np@computerskill_np" target="_blank">
-                    <img class="footer-img" src="./static/img/assets/youtube.png" alt="YouTube">
-                    YouTube
-                  </a>
-                </div>
-              </div>
-
-            </div>
-            <div class="company-info">
-              <div class="heading">
-                <p>Company</p>
-              </div>
-
-              <div class="content">
-                <ul>
-                  <a class="about-tab" href="./aboutus.html">
-                    <li>About Us</li>
-                  </a>
-                  <!-- <a class="notice-tab" href="#">
-                                <li>Notice Board</li>
-                            </a> -->
-                  <a class="gallery-tab" href="./gallery.html">
-                    <li>Gallery</li>
-                  </a>
-                  <a class="contact-tab" href="./contactus.html">
-                    <li>Contact Us</li>
-                  </a>
-                </ul>
-              </div>
-            </div>
-
-            <div class="getintouch">
-              <div class="heading">
-                <p>Get In Touch</p>
-              </div>
-              <div class="content">
-                <div class="footer-img__content">
-                  <img class="footer-img" src="./static/img/assets/location.png" alt="">
-                  <p>
-                    Suryabinayak, Bhaktapur
-                  </p>
-                </div>
-                <div class="footer-img__content">
-                  <img class="footer-img" src="./static/img/assets/phone-call.png" alt="">
-                  <p>
-                    <a href="tel:9769321075">9769321075</a>
-
-                  </p>
-                </div>
-                <div class="footer-img__content">
-                  <img class="footer-img" src="./static/img/assets/gmail.png" alt="">
-                  <p>
-                    <a href="mailto:nationalskill.edu.np@gmail.com">nationalskill.edu.np@gmail.com</a>
-                  </p>
-                </div>
-              </div>
-
-            </div>
-          </div>
-          <div class="horizontal-line" style="padding-top: 10px;"></div>
-          <p style="text-align: center;">Copyright © <span id="currentyear"></span> . National Skill. All Rights Reserved. Developed By: <a href="https://www.pembatamang.com.np"><strong><u class="pemba-link">PembaTamang</u></strong></a></a></p>
-        </div>
-
-      </footer>
-      <div class="site-cache" id="site-cache"></div>
+<!-- ═══════════ LIGHTBOX ═══════════ -->
+<div id="lightbox" class="lightbox-overlay" onclick="lbClickOutside(event)">
+  <div class="lightbox-box" id="lbBox">
+    <button class="lb-close" onclick="lbClose()">✕</button>
+    <button class="lb-btn lb-prev" onclick="lbNav(-1)">‹</button>
+    <button class="lb-btn lb-next" onclick="lbNav(1)">›</button>
+    <img id="lbImg" class="lightbox-img" src="" alt="Gallery Image">
+    <div class="lb-counter" id="lbCounter">1 / 48</div>
+  </div>
+</div>
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 h-[72px] flex items-center justify-between px-8 md:px-12 transition-all duration-400">
+  <a href="./index.html" class="flex items-center gap-3 no-underline">
+    <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-sky-500 to-sky-700 grid place-items-center shadow-blue-sm flex-shrink-0">
+      <span class="font-display font-black text-white text-lg leading-none">N</span>
     </div>
+    <span class="font-display font-bold text-cool-800 text-[17px] tracking-tight">National Skill</span>
+  </a>
 
+  <ul class="hidden md:flex items-center gap-0.5 list-none m-0 p-0">
+    <li><a href="./index.html"     class="nl text-[13px] font-medium text-cool-600 px-3 py-2 rounded-lg hover:text-sky-700 hover:bg-sky-50 transition-colors no-underline">Home</a></li>
+    <li><a href="./aboutus.html"   class="nl text-[13px] font-medium text-cool-600 px-3 py-2 rounded-lg hover:text-sky-700 hover:bg-sky-50 transition-colors no-underline">About Us</a></li>
+    <li><a href="./gallery.html"   class="nl active text-[13px] font-medium text-sky-700 px-3 py-2 rounded-lg hover:bg-sky-50 transition-colors no-underline">Gallery</a></li>
+    <li><a href="./korea.html"     class="nl text-[13px] font-medium text-cool-600 px-3 py-2 rounded-lg hover:text-sky-700 hover:bg-sky-50 transition-colors no-underline">Korea</a></li>
+    <li><a href="./quicklink.html" class="nl text-[13px] font-medium text-cool-600 px-3 py-2 rounded-lg hover:text-sky-700 hover:bg-sky-50 transition-colors no-underline">Quick Link</a></li>
+    <li><a href="./contactus.html" class="nl text-[13px] font-medium text-cool-600 px-3 py-2 rounded-lg hover:text-sky-700 hover:bg-sky-50 transition-colors no-underline">Contact</a></li>
+  </ul>
+
+  <div class="hidden md:flex items-center gap-3">
+    <a href="./contactus.html" class="text-[13px] font-semibold text-cool-600 border border-cool-200 px-5 py-2.5 rounded-full hover:border-sky-400 hover:text-sky-700 transition-all no-underline">Contact</a>
+    <a href="https://nationalskill-register.vercel.app/" class="text-[13px] font-semibold text-white bg-sky-600 px-5 py-2.5 rounded-full hover:bg-sky-700 shadow-blue-sm hover:shadow-blue-md hover:-translate-y-px transition-all no-underline">Register Now</a>
   </div>
 
-  <script src="./static/js/script.js"></script>
+  <button id="hamburger" class="md:hidden flex flex-col gap-[5px] p-2 cursor-pointer bg-transparent border-0">
+    <span class="block w-6 h-0.5 bg-cool-700 rounded transition-all duration-300"></span>
+    <span class="block w-6 h-0.5 bg-cool-700 rounded transition-all duration-300"></span>
+    <span class="block w-6 h-0.5 bg-cool-700 rounded transition-all duration-300"></span>
+  </button>
+</nav>
+
+<!-- Mobile drawer -->
+<div id="mobileMenu" class="fixed top-[72px] left-0 right-0 z-40 bg-white/97 backdrop-blur-xl border-b border-sky-100 px-8 py-6 flex flex-col gap-1 -translate-y-full transition-transform duration-500">
+  <a href="./index.html"     class="text-cool-600 text-[15px] py-3 border-b border-sky-50 hover:text-sky-700 transition-colors no-underline">Home</a>
+  <a href="./aboutus.html"   class="text-cool-600 text-[15px] py-3 border-b border-sky-50 hover:text-sky-700 transition-colors no-underline">About Us</a>
+  <a href="./gallery.html"   class="text-sky-700 font-semibold text-[15px] py-3 border-b border-sky-50 no-underline">Gallery</a>
+  <a href="./korea.html"     class="text-cool-600 text-[15px] py-3 border-b border-sky-50 hover:text-sky-700 transition-colors no-underline">Korea</a>
+  <a href="./quicklink.html" class="text-cool-600 text-[15px] py-3 border-b border-sky-50 hover:text-sky-700 transition-colors no-underline">Quick Link</a>
+  <a href="./contactus.html" class="text-cool-600 text-[15px] py-3 border-b border-sky-50 hover:text-sky-700 transition-colors no-underline">Contact</a>
+  <a href="https://nationalskill-register.vercel.app/" class="text-sky-600 font-bold text-[15px] pt-3 no-underline">Register Now →</a>
+</div>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="relative min-h-[46vh] flex items-center justify-center overflow-hidden pt-[72px]">
+  <div class="absolute inset-0 bg-gradient-to-br from-sky-50 via-cool-50 to-white"></div>
+  <div class="absolute inset-0 grid-bg"></div>
+  <div class="orb w-[440px] h-[440px] bg-sky-200/45 -top-20 -right-16" style="animation:floatA 10s ease-in-out infinite;"></div>
+  <div class="orb w-[300px] h-[300px] bg-sky-300/25 bottom-0 -left-12" style="animation:floatB 8s ease-in-out infinite; animation-delay:-4s;"></div>
+
+  <div class="relative z-10 text-center px-6 py-20">
+    <div class="ha1 inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.18em] uppercase text-sky-600 bg-sky-50/80 border border-sky-200 px-4 py-2 rounded-full mb-8 backdrop-blur-sm">
+      <span class="w-1.5 h-1.5 rounded-full bg-sky-500 pulse-dot"></span>
+      Moments &amp; Memories
+    </div>
+    <h1 class="ha2 font-display font-black leading-tight tracking-tight text-cool-900 mb-5" style="font-size:clamp(42px,7vw,82px);">
+      Our <span class="text-sky-600">Gallery</span>
+    </h1>
+    <p class="ha3 text-lg text-cool-500 max-w-lg mx-auto leading-relaxed">
+      A glimpse into life at National Skill Institute — classes, exams, achievements, and the community we've built together.
+    </p>
+  </div>
+
+  <div class="absolute bottom-0 left-0 right-0">
+    <svg viewBox="0 0 1440 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full block">
+      <path d="M0 48 L0 24 Q360 0 720 24 Q1080 48 1440 24 L1440 48 Z" fill="#f4f7fb"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ═══════════ GALLERY GRID ═══════════ -->
+<section class="bg-cool-50 px-6 md:px-14 py-16">
+  <div class="max-w-7xl mx-auto">
+
+    <!-- Filter bar -->
+    <div class="reveal flex flex-wrap gap-3 mb-10 items-center">
+      <button class="filter-tab active" data-filter="all" onclick="filterGallery('all', this)">
+        All Photos <span class="count" id="count-all">48</span>
+      </button>
+      <button class="filter-tab" data-filter="general" onclick="filterGallery('general', this)">
+        Campus Life <span class="count" id="count-general">44</span>
+      </button>
+      <button class="filter-tab" data-filter="korean" onclick="filterGallery('korean', this)">
+        Korean Program <span class="count" id="count-korean">4</span>
+      </button>
+      <button class="filter-tab" data-filter="exam" onclick="filterGallery('exam', this)">
+        Exams &amp; Tests <span class="count" id="count-exam">1</span>
+      </button>
+
+      <!-- Count display -->
+      <div class="ml-auto text-[12px] font-semibold text-cool-400 hidden md:block" id="showing-count">
+        Showing all 48 photos
+      </div>
+    </div>
+
+    <!-- Masonry -->
+    <div class="masonry-grid reveal reveal-d1" id="galleryGrid">
+
+      <!-- General photos -->
+      <div class="masonry-item" data-category="general" onclick="lbOpen(0)">
+        <img src="./static/img/gallery/images3.jpg" alt="Gallery" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+      <div class="masonry-item" data-category="general" onclick="lbOpen(1)">
+        <img src="./static/img/gallery/images6.jpg" alt="Gallery" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+      <div class="masonry-item" data-category="general" onclick="lbOpen(2)">
+        <img src="./static/img/gallery/images8.jpg" alt="Gallery" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+      <div class="masonry-item" data-category="general" onclick="lbOpen(3)">
+        <img src="./static/img/gallery/images10.jpg" alt="Gallery" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+      <div class="masonry-item" data-category="general" onclick="lbOpen(4)">
+        <img src="./static/img/gallery/images11.jpg" alt="Gallery" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+      <div class="masonry-item" data-category="general" onclick="lbOpen(5)">
+        <img src="./static/img/gallery/images12.jpg" alt="Gallery" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+      <div class="masonry-item" data-category="general" onclick="lbOpen(6)">
+        <img src="./static/img/gallery/images13.jpg" alt="Gallery" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+      <div class="masonry-item" data-category="general" onclick="lbOpen(7)">
+        <img src="./static/img/gallery/images15.jpg" alt="Gallery" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+      <div class="masonry-item" data-category="general" onclick="lbOpen(8)">
+        <img src="./static/img/gallery/images16.jpg" alt="Gallery" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+      <div class="masonry-item" data-category="general" onclick="lbOpen(9)">
+        <img src="./static/img/gallery/images17.jpg" alt="Gallery" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+      <div class="masonry-item" data-category="general" onclick="lbOpen(10)">
+        <img src="./static/img/gallery/images18.jpg" alt="Gallery" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+      <div class="masonry-item" data-category="general" onclick="lbOpen(11)">
+        <img src="./static/img/gallery/images20.jpg" alt="Gallery" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+      <div class="masonry-item" data-category="general" onclick="lbOpen(12)">
+        <img src="./static/img/gallery/images21.jpg" alt="Gallery" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+      <div class="masonry-item" data-category="general" onclick="lbOpen(13)">
+        <img src="./static/img/gallery/images22.jpg" alt="Gallery" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+      <div class="masonry-item" data-category="general" onclick="lbOpen(14)">
+        <img src="./static/img/gallery/images23.jpg" alt="Gallery" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+      <div class="masonry-item" data-category="general" onclick="lbOpen(15)">
+        <img src="./static/img/gallery/images24.jpg" alt="Gallery" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+      <div class="masonry-item" data-category="general" onclick="lbOpen(16)">
+        <img src="./static/img/gallery/images25.jpg" alt="Gallery" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+      <div class="masonry-item" data-category="general" onclick="lbOpen(17)">
+        <img src="./static/img/gallery/images26.jpg" alt="Gallery" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+      <div class="masonry-item" data-category="general" onclick="lbOpen(18)">
+        <img src="./static/img/gallery/images27.jpg" alt="Gallery" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+      <div class="masonry-item" data-category="general" onclick="lbOpen(19)">
+        <img src="./static/img/gallery/images28.jpg" alt="Gallery" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+      <div class="masonry-item" data-category="general" onclick="lbOpen(20)">
+        <img src="./static/img/gallery/images30.jpg" alt="Gallery" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+      <div class="masonry-item" data-category="general" onclick="lbOpen(21)">
+        <img src="./static/img/gallery/images31.jpg" alt="Gallery" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+      <div class="masonry-item" data-category="general" onclick="lbOpen(22)">
+        <img src="./static/img/gallery/images32.jpg" alt="Gallery" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+      <div class="masonry-item" data-category="general" onclick="lbOpen(23)">
+        <img src="./static/img/gallery/images33.jpg" alt="Gallery" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+      <div class="masonry-item" data-category="general" onclick="lbOpen(24)">
+        <img src="./static/img/gallery/images34.jpg" alt="Gallery" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+      <div class="masonry-item" data-category="general" onclick="lbOpen(25)">
+        <img src="./static/img/gallery/20180321_161449.jpg" alt="Gallery" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+      <div class="masonry-item" data-category="general" onclick="lbOpen(26)">
+        <img src="./static/img/gallery/20210410_113753.jpg" alt="Gallery" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+      <div class="masonry-item" data-category="general" onclick="lbOpen(27)">
+        <img src="./static/img/gallery/20230519_080255.jpg" alt="Gallery" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+      <div class="masonry-item" data-category="general" onclick="lbOpen(28)">
+        <img src="./static/img/gallery/20230930_074213.jpg" alt="Gallery" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+      <div class="masonry-item" data-category="general" onclick="lbOpen(29)">
+        <img src="./static/img/gallery/279172289_359429962659842_9167110796995617433_n.jpg" alt="Gallery" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+      <div class="masonry-item" data-category="general" onclick="lbOpen(30)">
+        <img src="./static/img/gallery/279362608_416001047012915_4998394503214043116_n.jpg" alt="Gallery" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+      <div class="masonry-item" data-category="general" onclick="lbOpen(31)">
+        <img src="./static/img/gallery/285924775_332441692379037_7839275598386049191_n.jpg" alt="Gallery" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+      <div class="masonry-item" data-category="general" onclick="lbOpen(32)">
+        <img src="./static/img/gallery/317092462_1357250581748188_3705715287239282076_n.jpg" alt="Gallery" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+      <div class="masonry-item" data-category="general" onclick="lbOpen(33)">
+        <img src="./static/img/gallery/325407869_495139722744469_6554459032772073042_n.jpg" alt="Gallery" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+      <div class="masonry-item" data-category="general" onclick="lbOpen(34)">
+        <img src="./static/img/gallery/337555879_585321210217009_4363802541529288991_n.jpg" alt="Gallery" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+      <div class="masonry-item" data-category="general" onclick="lbOpen(35)">
+        <img src="./static/img/gallery/337561931_749256746749437_3377142674637929116_n.jpg" alt="Gallery" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+      <div class="masonry-item" data-category="general" onclick="lbOpen(36)">
+        <img src="./static/img/gallery/337565505_987227588849883_4557584877642768589_n.jpg" alt="Gallery" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+      <div class="masonry-item" data-category="general" onclick="lbOpen(37)">
+        <img src="./static/img/gallery/337634445_608351101199397_852844026539796750_n.jpg" alt="Gallery" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+      <div class="masonry-item" data-category="general" onclick="lbOpen(38)">
+        <img src="./static/img/gallery/337636296_909231856829408_5857526270502267783_n.jpg" alt="Gallery" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+      <div class="masonry-item" data-category="general" onclick="lbOpen(39)">
+        <img src="./static/img/gallery/348354681_1379666869274567_5957998634751680508_n.jpg" alt="Gallery" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+      <div class="masonry-item" data-category="general" onclick="lbOpen(40)">
+        <img src="./static/img/gallery/393143758_787827116437847_7702873194234846058_n.jpg" alt="Gallery" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+      <div class="masonry-item" data-category="general" onclick="lbOpen(41)">
+        <img src="./static/img/gallery/413924878_698560358891844_7478987234118136433_n.jpg" alt="Gallery" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+      <div class="masonry-item" data-category="general" onclick="lbOpen(42)">
+        <img src="./static/img/gallery/414096683_756453583028186_3218290085591938128_n.jpg" alt="Gallery" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+      <div class="masonry-item" data-category="general" onclick="lbOpen(43)">
+        <img src="./static/img/gallery/me.jpg" alt="Gallery" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+
+      <!-- Exam -->
+      <div class="masonry-item" data-category="exam" onclick="lbOpen(44)">
+        <img src="./static/img/gallery/UBT exam.jpg" alt="UBT Exam" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+
+      <!-- Korean program -->
+      <div class="masonry-item" data-category="korean" onclick="lbOpen(45)">
+        <img src="./static/img/gallery/korean/401140706_203523079466950_677012777211854058_n.jpg" alt="Korean Program" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+      <div class="masonry-item" data-category="korean" onclick="lbOpen(46)">
+        <img src="./static/img/gallery/korean/hand power.jpg" alt="Korean Program" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+      <div class="masonry-item" data-category="korean" onclick="lbOpen(47)">
+        <img src="./static/img/gallery/korean/skill test ring.jpg" alt="Skill Test" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+      <div class="masonry-item" data-category="korean" onclick="lbOpen(48)">
+        <img src="./static/img/gallery/korean/wood board.jpg" alt="Wood Board" loading="lazy">
+        <div class="masonry-overlay"><div class="masonry-zoom-icon"><svg class="w-4 h-4 text-cool-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      </div>
+
+    </div>
+    <!-- end masonry-grid -->
+
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="bg-cool-950 text-cool-300 px-6 md:px-16 pt-20 pb-8">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid md:grid-cols-4 gap-12 mb-16">
+      <div class="md:col-span-2">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-sky-500 to-sky-700 grid place-items-center flex-shrink-0">
+            <span class="font-display font-black text-white text-lg leading-none">N</span>
+          </div>
+          <span class="font-display font-bold text-white text-[17px]">National Skill</span>
+        </div>
+        <p class="text-[14px] text-cool-400 leading-relaxed max-w-xs mb-8">
+          Korean, English, Japanese language and computer skills training in Bhaktapur. Modern facilities, expert teachers, real results.
+        </p>
+        <div class="flex gap-3 flex-wrap">
+          <a href="https://www.facebook.com/profile.php?id=100081353035987" target="_blank" class="inline-flex items-center gap-2 text-[13px] text-cool-400 border border-cool-700 px-4 py-2 rounded-lg hover:border-sky-500 hover:text-sky-400 hover:bg-sky-500/10 transition-all no-underline"><span class="font-bold">f</span> Facebook</a>
+          <a href="https://www.youtube.com/@computerskill_np" target="_blank" class="inline-flex items-center gap-2 text-[13px] text-cool-400 border border-cool-700 px-4 py-2 rounded-lg hover:border-sky-500 hover:text-sky-400 hover:bg-sky-500/10 transition-all no-underline"><span>▶</span> YouTube</a>
+        </div>
+      </div>
+      <div>
+        <h5 class="text-[11px] font-bold tracking-[0.15em] uppercase text-cool-500 mb-5">Company</h5>
+        <ul class="space-y-3 list-none p-0 m-0">
+          <li><a href="./aboutus.html"   class="text-[14px] text-cool-400 hover:text-sky-400 transition-colors no-underline">About Us</a></li>
+          <li><a href="./gallery.html"   class="text-[14px] text-sky-400 no-underline font-medium">Gallery</a></li>
+          <li><a href="./korea.html"     class="text-[14px] text-cool-400 hover:text-sky-400 transition-colors no-underline">Korea Program</a></li>
+          <li><a href="./quicklink.html" class="text-[14px] text-cool-400 hover:text-sky-400 transition-colors no-underline">Quick Links</a></li>
+          <li><a href="./contactus.html" class="text-[14px] text-cool-400 hover:text-sky-400 transition-colors no-underline">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5 class="text-[11px] font-bold tracking-[0.15em] uppercase text-cool-500 mb-5">Get In Touch</h5>
+        <div class="space-y-4">
+          <div class="flex items-start gap-3"><span class="text-sky-500 mt-0.5 text-sm">📍</span><p class="text-[14px] text-cool-400 m-0">Suryabinayak, Bhaktapur, Nepal</p></div>
+          <div class="flex items-center gap-3"><span class="text-sky-500 text-sm">📞</span><a href="tel:9769321075" class="text-[14px] text-cool-400 hover:text-sky-400 transition-colors no-underline">9769321075</a></div>
+          <div class="flex items-start gap-3"><span class="text-sky-500 mt-0.5 text-sm">✉</span><a href="mailto:nationalskill.edu.np@gmail.com" class="text-[14px] text-cool-400 hover:text-sky-400 transition-colors no-underline break-all">nationalskill.edu.np@gmail.com</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="border-t border-cool-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-[13px] text-cool-500">
+      <p class="m-0">Copyright © <span id="year"></span> National Skill Institute. All Rights Reserved.</p>
+      <p class="m-0">Developed by <a href="https://www.pembatamang.com.np" class="text-sky-500 hover:text-sky-400 transition-colors no-underline">Pemba Tamang</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════ JS ═══════════ -->
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Nav scroll
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 40) {
+      nav.style.background     = 'rgba(255,255,255,0.92)';
+      nav.style.backdropFilter = 'blur(20px)';
+      nav.style.borderBottom   = '1px solid rgba(186,222,255,0.5)';
+      nav.style.boxShadow      = '0 2px 12px rgba(7,77,133,0.08)';
+    } else {
+      nav.style.background = nav.style.backdropFilter = nav.style.borderBottom = nav.style.boxShadow = '';
+    }
+  });
+
+  // Hamburger
+  const mob = document.getElementById('mobileMenu');
+  let mobOpen = false;
+  document.getElementById('hamburger').addEventListener('click', () => {
+    mobOpen = !mobOpen;
+    mob.style.transform = mobOpen ? 'translateY(0)' : 'translateY(-110%)';
+  });
+
+  // ── LIGHTBOX ──
+  const allItems    = Array.from(document.querySelectorAll('.masonry-item'));
+  let visibleItems  = allItems; // changes when filtered
+  let currentIndex  = 0;
+
+  function lbOpen(globalIndex) {
+    // find position of this item among currently visible items
+    const clicked = allItems[globalIndex];
+    const visIdx  = visibleItems.indexOf(clicked);
+    currentIndex  = visIdx >= 0 ? visIdx : 0;
+    lbShow();
+  }
+
+  function lbShow() {
+    const item = visibleItems[currentIndex];
+    const img  = item.querySelector('img');
+    document.getElementById('lbImg').src = img.src;
+    document.getElementById('lbCounter').textContent = `${currentIndex + 1} / ${visibleItems.length}`;
+    const lb = document.getElementById('lightbox');
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function lbClose() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function lbNav(dir) {
+    currentIndex = (currentIndex + dir + visibleItems.length) % visibleItems.length;
+    lbShow();
+  }
+
+  function lbClickOutside(e) {
+    if (e.target === document.getElementById('lightbox')) lbClose();
+  }
+
+  // Keyboard nav
+  document.addEventListener('keydown', e => {
+    const lb = document.getElementById('lightbox');
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'ArrowRight') lbNav(1);
+    if (e.key === 'ArrowLeft')  lbNav(-1);
+    if (e.key === 'Escape')     lbClose();
+  });
+
+  // ── FILTER ──
+  function filterGallery(cat, btn) {
+    // Update active tab
+    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+
+    // Show/hide items
+    allItems.forEach(item => {
+      const match = cat === 'all' || item.dataset.category === cat;
+      item.style.display = match ? 'block' : 'none';
+    });
+
+    // Update visible items array for lightbox
+    visibleItems = allItems.filter(item => item.style.display !== 'none');
+
+    // Update count label
+    const label = document.getElementById('showing-count');
+    label.textContent = cat === 'all'
+      ? `Showing all ${visibleItems.length} photos`
+      : `Showing ${visibleItems.length} photo${visibleItems.length !== 1 ? 's' : ''}`;
+  }
+
+  // ── SCROLL REVEAL ──
+  const revEls = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  revEls.forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

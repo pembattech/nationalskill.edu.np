@@ -1,242 +1,515 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact Us — National Skill Institute</title>
+  <link rel="shortcut icon" href="./static/img/logo.jpg" type="image/x-icon">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700&display=swap" rel="stylesheet">
 
-    <title>National Skill</title>
-    <link rel="shortcut icon" href="./static/img/logo.jpg" type="image/x-icon">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans:    ['Sora', 'sans-serif'],
+            display: ['Fraunces', 'serif'],
+          },
+          colors: {
+            sky: {
+              50:'#f0f7ff', 100:'#e0efff', 200:'#badeff', 300:'#7ec8fd',
+              400:'#38adf8', 500:'#0e91e9', 600:'#0272c7', 700:'#035aa1',
+              800:'#074d85', 900:'#0b416e', 950:'#082a4a',
+            },
+            cool: {
+              50:'#f4f7fb',  100:'#e8eef6', 200:'#cbd9ec', 300:'#9db8d9',
+              400:'#6993c0', 500:'#4675a8', 600:'#355d8d', 700:'#2b4b73',
+              800:'#263f5f', 900:'#233550', 950:'#161f30',
+            },
+          },
+          boxShadow: {
+            'blue-sm':    '0 4px 16px rgba(2,114,199,0.15)',
+            'blue-md':    '0 12px 40px rgba(2,114,199,0.22)',
+            'blue-lg':    '0 24px 64px rgba(2,114,199,0.28)',
+            'card':       '0 2px 12px rgba(7,77,133,0.08)',
+            'card-hover': '0 16px 48px rgba(7,77,133,0.16)',
+          },
+        }
+      }
+    }
+  </script>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Sora', sans-serif; overflow-x: hidden; background: #f4f7fb; color: #233550; }
 
-    <link rel="stylesheet" href="./static/css/styles.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    /* Grain overlay */
+    body::after {
+      content:''; position:fixed; inset:0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+      pointer-events:none; z-index:9999; opacity:0.28;
+    }
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+    /* Scroll reveal */
+    .reveal { opacity:0; transform:translateY(28px); transition:opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+    .reveal-d1 { transition-delay:0.1s; }
+    .reveal-d2 { transition-delay:0.2s; }
+    .reveal-d3 { transition-delay:0.3s; }
+    .reveal-d4 { transition-delay:0.4s; }
+
+    /* Hero stagger */
+    .ha1 { opacity:0; animation:fadeUp 0.7s 0.2s ease forwards; }
+    .ha2 { opacity:0; animation:fadeUp 0.7s 0.36s ease forwards; }
+    .ha3 { opacity:0; animation:fadeUp 0.7s 0.52s ease forwards; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);} }
+
+    /* Grid bg */
+    .grid-bg {
+      background-image: linear-gradient(rgba(2,114,199,0.065) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(2,114,199,0.065) 1px, transparent 1px);
+      background-size:56px 56px;
+      mask-image: radial-gradient(ellipse 90% 90% at 50% 50%, black, transparent);
+    }
+
+    /* Orbs */
+    .orb { position:absolute; border-radius:50%; filter:blur(70px); pointer-events:none; }
+    @keyframes floatA { 0%,100%{transform:translateY(0) scale(1);} 50%{transform:translateY(-24px) scale(1.04);} }
+    @keyframes floatB { 0%,100%{transform:translateY(0) scale(1);} 50%{transform:translateY(-16px) scale(1.03);} }
+
+    /* Nav hover underline */
+    .nl { position:relative; }
+    .nl::after { content:''; position:absolute; left:0; right:0; bottom:-2px; height:2px; background:#0272c7; border-radius:1px; transform:scaleX(0); transform-origin:left; transition:transform 0.25s cubic-bezier(0.16,1,0.3,1); }
+    .nl:hover::after,.nl.active::after { transform:scaleX(1); }
+
+    /* Card top accent */
+    .card-top::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,#0272c7,#38adf8,transparent); border-radius:3px 3px 0 0; }
+
+    /* Contact card hover glow */
+    .contact-card { transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s; }
+    .contact-card:hover { transform: translateY(-8px); box-shadow: 0 24px 56px rgba(2,114,199,0.18); }
+
+    /* Pulse dot */
+    @keyframes pulseDot { 0%,100%{opacity:1;} 50%{opacity:0.25;} }
+    .pulse-dot { animation: pulseDot 1.5s ease-in-out infinite; }
+
+    /* Input focus ring */
+    .form-input:focus { outline:none; border-color:#0272c7; box-shadow:0 0 0 3px rgba(2,114,199,0.15); }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width:5px; }
+    ::-webkit-scrollbar-track { background:#e8eef6; }
+    ::-webkit-scrollbar-thumb { background:#9db8d9; border-radius:3px; }
+
+    /* Map rounded corners override */
+    .map-frame { border-radius:20px; overflow:hidden; }
+  </style>
 </head>
 
 <body>
-    <div class="main-container">
-        <div class="site-pusher">
 
-            <header class="header">
-                <div class="hamburger-bar" style="display: flex; justify-content: space-between; padding:0 10px;">
-                    <div class="hamburger">
-                        <a href="#" class="header__icon" id="header__icon"></a>
-                    </div>
+<!-- ═══════════════════════════ NAV ═══════════════════════════ -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 h-[72px] flex items-center justify-between px-8 md:px-12 transition-all duration-400">
+  <!-- Logo -->
+  <a href="./index.html" class="flex items-center gap-3 no-underline">
+    <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-sky-500 to-sky-700 grid place-items-center shadow-blue-sm flex-shrink-0">
+      <span class="font-display font-black text-white text-lg leading-none">N</span>
+    </div>
+    <span class="font-display font-bold text-cool-800 text-[17px] tracking-tight">National Skill</span>
+  </a>
 
-                    <div class="logo-forsmallscreen">
-                        <a class="logo" href="./index.html">
-                            <img class="logo-img" src="./static/img/nationalskill_baner.png" alt="National Skill" style="width: 180px;">
-                        </a>
-                    </div>
-                </div>
+  <!-- Desktop links -->
+  <ul class="hidden md:flex items-center gap-0.5 list-none m-0 p-0">
+    <li><a href="./index.html"     class="nl text-[13px] font-medium text-cool-600 px-3 py-2 rounded-lg hover:text-sky-700 hover:bg-sky-50 transition-colors no-underline">Home</a></li>
+    <li><a href="./aboutus.html"   class="nl text-[13px] font-medium text-cool-600 px-3 py-2 rounded-lg hover:text-sky-700 hover:bg-sky-50 transition-colors no-underline">About Us</a></li>
+    <li><a href="./gallery.html"   class="nl text-[13px] font-medium text-cool-600 px-3 py-2 rounded-lg hover:text-sky-700 hover:bg-sky-50 transition-colors no-underline">Gallery</a></li>
+    <li><a href="./korea.html"     class="nl text-[13px] font-medium text-cool-600 px-3 py-2 rounded-lg hover:text-sky-700 hover:bg-sky-50 transition-colors no-underline">Korea</a></li>
+    <li><a href="./quicklink.html" class="nl text-[13px] font-medium text-cool-600 px-3 py-2 rounded-lg hover:text-sky-700 hover:bg-sky-50 transition-colors no-underline">Quick Link</a></li>
+    <li><a href="./contactus.html" class="nl active text-[13px] font-medium text-sky-700 px-3 py-2 rounded-lg hover:bg-sky-50 transition-colors no-underline">Contact</a></li>
+  </ul>
 
+  <!-- CTA -->
+  <div class="hidden md:flex items-center gap-3">
+    <a href="./contactus.html" class="text-[13px] font-semibold text-cool-600 border border-cool-200 px-5 py-2.5 rounded-full hover:border-sky-400 hover:text-sky-700 transition-all no-underline">Contact</a>
+    <a href="https://nationalskill-register.vercel.app/" class="text-[13px] font-semibold text-white bg-sky-600 px-5 py-2.5 rounded-full hover:bg-sky-700 shadow-blue-sm hover:shadow-blue-md hover:-translate-y-px transition-all no-underline">Register Now</a>
+  </div>
 
-                <nav class="menu">
-                    <div class="nav-bar">
-                        <a class="logo nav-item" href="./index.html">
-                            <img class="logo-img" src="./static/img/nationalskill_baner.png" alt="National Skill" style="width: 180px;">
-                        </a>
+  <!-- Hamburger -->
+  <button id="hamburger" class="md:hidden flex flex-col gap-[5px] p-2 cursor-pointer bg-transparent border-0">
+    <span class="block w-6 h-0.5 bg-cool-700 rounded transition-all duration-300"></span>
+    <span class="block w-6 h-0.5 bg-cool-700 rounded transition-all duration-300"></span>
+    <span class="block w-6 h-0.5 bg-cool-700 rounded transition-all duration-300"></span>
+  </button>
+</nav>
 
-                        <ul class="nav-list">
-                            <a class="nav-link home-tab" href="./index.html">
-                                <li class="nav-item">Home</li>
-                            </a>
-                            <a class="nav-link about-tab" href="./aboutus.html">
-                                <li class="nav-item">About Us</li>
-                            </a>
+<!-- Mobile drawer -->
+<div id="mobileMenu" class="fixed top-[72px] left-0 right-0 z-40 bg-white/97 backdrop-blur-xl border-b border-sky-100 px-8 py-6 flex flex-col gap-1 -translate-y-full transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
+  <a href="./index.html"     class="text-cool-600 text-[15px] py-3 border-b border-sky-50 hover:text-sky-700 transition-colors no-underline">Home</a>
+  <a href="./aboutus.html"   class="text-cool-600 text-[15px] py-3 border-b border-sky-50 hover:text-sky-700 transition-colors no-underline">About Us</a>
+  <a href="./gallery.html"   class="text-cool-600 text-[15px] py-3 border-b border-sky-50 hover:text-sky-700 transition-colors no-underline">Gallery</a>
+  <a href="./korea.html"     class="text-cool-600 text-[15px] py-3 border-b border-sky-50 hover:text-sky-700 transition-colors no-underline">Korea</a>
+  <a href="./quicklink.html" class="text-cool-600 text-[15px] py-3 border-b border-sky-50 hover:text-sky-700 transition-colors no-underline">Quick Link</a>
+  <a href="./contactus.html" class="text-sky-700 font-semibold text-[15px] py-3 border-b border-sky-50 no-underline">Contact</a>
+  <a href="https://nationalskill-register.vercel.app/" class="text-sky-600 font-bold text-[15px] pt-3 no-underline">Register Now →</a>
+</div>
 
-                            <!-- <a class="nav-link notice-tab" href="./noticeboard.html">
-                                <li class="nav-item">Notice Board</li>
-                            </a> -->
-                            <a class="nav-link gallery-tab" href="./gallery.html">
-                                <li class="nav-item">Gallery</li>
-                            </a>
-                            <a class="nav-link contact-tab" href="./contactus.html">
-                                <li class="nav-item">Contact Us</li>
-                            </a>
-                            <a class="nav-link register-tab" href="https://nationalskill-register.vercel.app/">
-                                <li class="nav-item">Register</li>
-                            </a>
+<!-- ═══════════════════════════ HERO / PAGE HEADER ═══════════════════════════ -->
+<section class="relative min-h-[48vh] flex items-center justify-center overflow-hidden pt-[72px]">
+  <div class="absolute inset-0 bg-gradient-to-br from-sky-50 via-cool-50 to-white"></div>
+  <div class="absolute inset-0 grid-bg"></div>
 
-                        </ul>
+  <!-- Orbs -->
+  <div class="orb w-[480px] h-[480px] bg-sky-200/45 -top-24 -right-16" style="animation:floatA 10s ease-in-out infinite;"></div>
+  <div class="orb w-[320px] h-[320px] bg-sky-300/25 bottom-0 -left-16" style="animation:floatB 8s ease-in-out infinite; animation-delay:-4s;"></div>
 
-                        <div class="right-nav">
-                            <div class="nav-item">
-                                <a href="./korea.html" class="nav-link korea-tab">Korea</a>
-                                
-                            </div>
-                            <div class="nav-item">
-                                <a class="nav-link quicklink-tab" href="./quicklink.html">
-                                    Quick Link
-                                </a>
-                            </div>
-
-                            <div class="theme-switch nav-item">
-                                <div class="switch"></div>
-                            </div>
-
-
-                        </div>
-                    </div>
-
-                </nav>
-                <div class="horizontal-line below-nav"></div>
-            </header>
-
-            <div class="container">
-
-                <div class="contactus-wrapper">
-                    <div class="heading">
-                        <p><span>CONTACT</span> US</p>
-                    </div>
-
-                    <div class="contact-flex">
-                        <div class="contact-loc card-bg">
-                            <div class="loc-ico contact-icon">
-                                <img src="./static/img/assets/location.png" alt="">
-                            </div>
-
-                            <div class="short-info">
-                                <p>COME TO</p>
-                            </div>
-
-                            <div class="content">
-                                <p>Suryabinayak, Bhaktapur</p>
-                            </div>
-                        </div>
-                        <div class="contact-call card-bg">
-                            <div class="call-ico contact-icon">
-                                <img src="./static/img/assets/phone-call.png" alt="">
-                            </div>
-
-                            <div class="short-info">
-                                <p>CALL TO</p>
-                            </div>
-
-                            <div class="content">
-                                <p><a href="tel:9769321075">9769321075</a></p>
-                                <p></p>
-                            </div>
-                        </div>
-                        <div class="contact-connect card-bg">
-                            <div class="connect-ico contact-icon">
-                                <img src="./static/img/assets/gmail.png" alt="">
-                            </div>
-
-                            <div class="short-info">
-                                <p>CONNECT TO</p>
-                            </div>
-
-
-                            <div class="content">
-                                <p><a href="mailto:nationalskill.edu.np@gmail.com">nationalskill.edu.np@gmail.com</a></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            
-            <footer>
-                <div class="footer-wrapper">
-                    <div class="content short-brief">
-                        <a class="logo" href="./index.html">
-                            <img class="footer logo-img" src="./static/img/logo.jpg" alt="National Skill">
-                        </a>
-
-                        <p>National Skill Institute in Bhaktapur offers Korean, English, Japanese language, and computer skills training. Master speaking, listening, reading, and writing in Korean or Japanese or English, or gain computer skills from beginner to advanced coding. Our experienced teachers and modern facilities will help you reach your goals and open doors to new opportunities.
-                        </p>
-                    </div>
-
-                    <div class="footer-flex">
-                        <div class="connetwithnationalskill">
-                            <div class="heading">
-                                <p>Find National Skill on</p>
-                            </div>
-                            <div class="content social-links">
-                                <div class="footer-img__content">
-
-                                    <a href="https://www.facebook.com/profile.php?id=100081353035987" target="_blank">
-                                        <img class="footer-img" src="./static/img/assets/facebook.png" alt="Facebook">
-                                        Facebook
-                                    </a>
-                                </div>
-                                <div class="footer-img__content">
-
-                                    <a href="https://www.youtube.com/@computerskill_np">
-                                        <img class="footer-img" src="./static/img/assets/youtube.png" alt="YouTube">
-                                        YouTube
-                                    </a>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="company-info">
-                            <div class="heading">
-                                <p>Company</p>
-                            </div>
-
-                            <div class="content">
-                                <ul>
-                                    <a class="about-tab" href="./aboutus.html">
-                                        <li>About Us</li>
-                                    </a>
-                                    <!-- <a class="notice-tab" href="#">
-                                        <li>Notice Board</li>
-                                    </a> -->
-                                    <a class="gallery-tab" href="./gallery.html">
-                                        <li>Gallery</li>
-                                    </a>
-                                    <a class="contact-tab" href="./contactus.html">
-                                        <li>Contact Us</li>
-                                    </a>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="getintouch">
-                            <div class="heading">
-                                <p>Get In Touch</p>
-                            </div>
-                            <div class="content">
-                                <div class="footer-img__content">
-                                    <img class="footer-img" src="./static/img/assets/location.png" alt="">
-                                    <p>
-                                        Suryabinayak, Bhaktapur
-                                    </p>
-                                </div>
-                                <div class="footer-img__content">
-                                    <img class="footer-img" src="./static/img/assets/phone-call.png" alt="">
-                                    <p>
-                                        <a href="tel:9769321075">9769321075</a>
-                                        
-                                    </p>
-                                </div>
-                                <div class="footer-img__content">
-                                    <img class="footer-img" src="./static/img/assets/gmail.png" alt="">
-                                    <p>
-                                        <a href="mailto:nationalskill.edu.np@gmail.com">nationalskill.edu.np@gmail.com</a>
-                                    </p>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="horizontal-line" style="padding-top: 10px;"></div>
-          <p style="text-align: center;">Copyright © <span id="currentyear"></span> . National Skill. All Rights Reserved. Developed By: <a href="https://www.pembatamang.com.np"><strong><u class="pemba-link">PembaTamang</u></strong></a></a></p>
-                </div>
-
-            </footer>
-            <div class="site-cache" id="site-cache"></div>
-        </div>
-
+  <div class="relative z-10 text-center px-6 py-20">
+    <!-- Eyebrow -->
+    <div class="ha1 inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.18em] uppercase text-sky-600 bg-sky-50/80 border border-sky-200 px-4 py-2 rounded-full mb-8 backdrop-blur-sm">
+      <span class="w-1.5 h-1.5 rounded-full bg-sky-500 pulse-dot"></span>
+      We'd love to hear from you
     </div>
 
-    <script src="./static/js/script.js"></script>
+    <h1 class="ha2 font-display font-black leading-tight tracking-tight text-cool-900 mb-5" style="font-size:clamp(42px,7vw,82px);">
+      Get In <span class="text-sky-600">Touch</span>
+    </h1>
+
+    <p class="ha3 text-lg text-cool-500 max-w-lg mx-auto leading-relaxed">
+      Visit us in Bhaktapur, call us, or send a message. We're happy to help you start your learning journey.
+    </p>
+  </div>
+
+  <!-- Wave -->
+  <div class="absolute bottom-0 left-0 right-0">
+    <svg viewBox="0 0 1440 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full block">
+      <path d="M0 48 L0 24 Q360 0 720 24 Q1080 48 1440 24 L1440 48 Z" fill="#f4f7fb"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ CONTACT CARDS ═══════════════════════════ -->
+<section class="bg-cool-50 px-6 md:px-16 py-20">
+  <div class="max-w-5xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      <!-- Location -->
+      <div class="reveal contact-card relative card-top bg-white border border-sky-100 rounded-3xl p-10 text-center shadow-card overflow-hidden group cursor-pointer">
+        <div class="absolute inset-0 bg-gradient-to-br from-sky-50/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none rounded-3xl"></div>
+        <!-- Icon ring -->
+        <div class="relative z-10 w-16 h-16 mx-auto mb-6 rounded-2xl bg-sky-50 border border-sky-100 grid place-items-center shadow-blue-sm group-hover:bg-sky-600 group-hover:border-sky-600 group-hover:shadow-blue-md transition-all duration-350">
+          <svg class="w-7 h-7 text-sky-600 group-hover:text-white transition-colors duration-350" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+          </svg>
+        </div>
+        <p class="relative z-10 text-[10px] font-bold tracking-[0.18em] uppercase text-sky-500 mb-2">Come To</p>
+        <h3 class="relative z-10 font-display font-bold text-cool-800 text-xl mb-3">Our Location</h3>
+        <p class="relative z-10 text-cool-500 text-[15px] leading-relaxed">Suryabinayak,<br>Bhaktapur, Nepal</p>
+      </div>
+
+      <!-- Phone -->
+      <div class="reveal reveal-d1 contact-card relative card-top bg-white border border-sky-100 rounded-3xl p-10 text-center shadow-card overflow-hidden group">
+        <div class="absolute inset-0 bg-gradient-to-br from-sky-50/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none rounded-3xl"></div>
+        <div class="relative z-10 w-16 h-16 mx-auto mb-6 rounded-2xl bg-sky-50 border border-sky-100 grid place-items-center shadow-blue-sm group-hover:bg-sky-600 group-hover:border-sky-600 group-hover:shadow-blue-md transition-all duration-350">
+          <svg class="w-7 h-7 text-sky-600 group-hover:text-white transition-colors duration-350" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+          </svg>
+        </div>
+        <p class="relative z-10 text-[10px] font-bold tracking-[0.18em] uppercase text-sky-500 mb-2">Call To</p>
+        <h3 class="relative z-10 font-display font-bold text-cool-800 text-xl mb-3">Phone Number</h3>
+        <a href="tel:9769321075" class="relative z-10 block text-cool-500 text-[15px] hover:text-sky-600 transition-colors no-underline font-medium">9769321075</a>
+      </div>
+
+      <!-- Email -->
+      <div class="reveal reveal-d2 contact-card relative card-top bg-white border border-sky-100 rounded-3xl p-10 text-center shadow-card overflow-hidden group">
+        <div class="absolute inset-0 bg-gradient-to-br from-sky-50/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none rounded-3xl"></div>
+        <div class="relative z-10 w-16 h-16 mx-auto mb-6 rounded-2xl bg-sky-50 border border-sky-100 grid place-items-center shadow-blue-sm group-hover:bg-sky-600 group-hover:border-sky-600 group-hover:shadow-blue-md transition-all duration-350">
+          <svg class="w-7 h-7 text-sky-600 group-hover:text-white transition-colors duration-350" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+        </div>
+        <p class="relative z-10 text-[10px] font-bold tracking-[0.18em] uppercase text-sky-500 mb-2">Connect To</p>
+        <h3 class="relative z-10 font-display font-bold text-cool-800 text-xl mb-3">Email Address</h3>
+        <a href="mailto:nationalskill.edu.np@gmail.com" class="relative z-10 block text-cool-500 text-[13px] hover:text-sky-600 transition-colors no-underline font-medium break-all leading-relaxed">nationalskill.edu.np@gmail.com</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ CONTACT FORM + MAP ═══════════════════════════ -->
+<section class="bg-white px-6 md:px-16 py-24">
+  <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-start">
+
+    <!-- Form -->
+    <div>
+      <div class="reveal inline-flex items-center gap-2.5 text-[11px] font-bold tracking-[0.18em] uppercase text-sky-600 mb-5">
+        <span class="w-6 h-px bg-sky-500 block"></span> Send a Message
+      </div>
+      <h2 class="reveal reveal-d1 font-display font-black text-cool-900 leading-tight mb-3" style="font-size:clamp(28px,3.5vw,44px);">
+        We'll Get Back<br><span class="text-sky-600">To You Soon</span>
+      </h2>
+      <p class="reveal reveal-d2 text-cool-500 text-[15px] leading-relaxed mb-10">
+        Fill out the form below and our team will reach out as quickly as possible.
+      </p>
+
+      <form class="reveal reveal-d3 space-y-5" onsubmit="handleSubmit(event)">
+        <!-- Name -->
+        <div>
+          <label class="block text-[12px] font-semibold tracking-[0.08em] uppercase text-cool-500 mb-2">Full Name</label>
+          <input type="text" placeholder="e.g. Ram Shrestha" required
+            class="form-input w-full bg-cool-50 border border-cool-200 rounded-xl px-5 py-3.5 text-[14px] text-cool-800 placeholder-cool-400 transition-all duration-200" />
+        </div>
+        <!-- Phone -->
+        <div>
+          <label class="block text-[12px] font-semibold tracking-[0.08em] uppercase text-cool-500 mb-2">Phone Number</label>
+          <input type="tel" placeholder="e.g. 9800000000" required
+            class="form-input w-full bg-cool-50 border border-cool-200 rounded-xl px-5 py-3.5 text-[14px] text-cool-800 placeholder-cool-400 transition-all duration-200" />
+        </div>
+        <!-- Email -->
+        <div>
+          <label class="block text-[12px] font-semibold tracking-[0.08em] uppercase text-cool-500 mb-2">Email Address</label>
+          <input type="email" placeholder="you@email.com"
+            class="form-input w-full bg-cool-50 border border-cool-200 rounded-xl px-5 py-3.5 text-[14px] text-cool-800 placeholder-cool-400 transition-all duration-200" />
+        </div>
+        <!-- Course interest -->
+        <div>
+          <label class="block text-[12px] font-semibold tracking-[0.08em] uppercase text-cool-500 mb-2">Course Interest</label>
+          <select class="form-input w-full bg-cool-50 border border-cool-200 rounded-xl px-5 py-3.5 text-[14px] text-cool-700 transition-all duration-200 appearance-none">
+            <option value="">Select a course…</option>
+            <option>Korean Language</option>
+            <option>Japanese Language</option>
+            <option>English Language</option>
+            <option>Basic Computer</option>
+            <option>Graphic Design</option>
+            <option>Programming</option>
+            <option>Hardware / Software</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <!-- Message -->
+        <div>
+          <label class="block text-[12px] font-semibold tracking-[0.08em] uppercase text-cool-500 mb-2">Message</label>
+          <textarea rows="4" placeholder="Tell us how we can help…"
+            class="form-input w-full bg-cool-50 border border-cool-200 rounded-xl px-5 py-3.5 text-[14px] text-cool-800 placeholder-cool-400 transition-all duration-200 resize-none"></textarea>
+        </div>
+        <!-- Submit -->
+        <button type="submit"
+          class="w-full inline-flex items-center justify-center gap-2 text-[14px] font-semibold text-white bg-sky-600 px-8 py-4 rounded-xl hover:bg-sky-700 shadow-blue-sm hover:shadow-blue-md hover:-translate-y-0.5 transition-all duration-200 mt-2">
+          Send Message
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+          </svg>
+        </button>
+
+        <!-- Success message (hidden by default) -->
+        <div id="successMsg" class="hidden mt-4 flex items-center gap-3 bg-sky-50 border border-sky-200 text-sky-700 rounded-xl px-5 py-4 text-[14px] font-medium">
+          <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          Thank you! We'll be in touch soon.
+        </div>
+      </form>
+    </div>
+
+    <!-- Map + Social -->
+    <div class="reveal reveal-d1 space-y-6">
+      <!-- Map -->
+      <div>
+        <div class="inline-flex items-center gap-2.5 text-[11px] font-bold tracking-[0.18em] uppercase text-sky-600 mb-5">
+          <span class="w-6 h-px bg-sky-500 block"></span> Find Us
+        </div>
+        <h2 class="font-display font-black text-cool-900 leading-tight mb-6" style="font-size:clamp(28px,3.5vw,44px);">
+          Our <span class="text-sky-600">Location</span>
+        </h2>
+        <div class="map-frame shadow-card border border-sky-100" style="height:300px;">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3533.4853399254567!2d85.43374947498558!3d27.672061526460147!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb1b30a1b6addf%3A0x2c42acfa5e4e1cbe!2sSuryabinayak%2C%20Bhaktapur%2044800!5e0!3m2!1sen!2snp!4v1700000000000!5m2!1sen!2snp"
+            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+        <a href="https://maps.google.com/?q=Suryabinayak,Bhaktapur" target="_blank"
+           class="inline-flex items-center gap-2 text-[13px] font-semibold text-sky-700 border border-sky-200 px-5 py-2.5 rounded-full hover:bg-sky-50 hover:border-sky-400 transition-all mt-4 no-underline">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          Get Directions
+        </a>
+      </div>
+
+      <!-- Social -->
+      <div class="relative card-top bg-cool-50 border border-sky-100 rounded-3xl p-8 shadow-card overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-sky-50/60 to-transparent pointer-events-none rounded-3xl"></div>
+        <p class="relative z-10 text-[11px] font-bold tracking-[0.18em] uppercase text-sky-500 mb-5">Follow Us On</p>
+        <div class="relative z-10 flex flex-col gap-3">
+          <a href="https://www.facebook.com/profile.php?id=100081353035987" target="_blank"
+             class="flex items-center gap-4 bg-white border border-cool-200 rounded-2xl px-5 py-4 hover:border-sky-400 hover:shadow-blue-sm hover:-translate-y-0.5 transition-all duration-250 no-underline group">
+            <div class="w-10 h-10 rounded-xl bg-[#1877F2] grid place-items-center flex-shrink-0">
+              <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </div>
+            <div>
+              <p class="text-[13px] font-semibold text-cool-800 m-0 group-hover:text-sky-700 transition-colors">Facebook</p>
+              <p class="text-[11px] text-cool-400 m-0">National Skill Institute</p>
+            </div>
+            <svg class="w-4 h-4 text-cool-300 ml-auto group-hover:text-sky-400 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+          </a>
+
+          <a href="https://www.youtube.com/@computerskill_np" target="_blank"
+             class="flex items-center gap-4 bg-white border border-cool-200 rounded-2xl px-5 py-4 hover:border-sky-400 hover:shadow-blue-sm hover:-translate-y-0.5 transition-all duration-250 no-underline group">
+            <div class="w-10 h-10 rounded-xl bg-[#FF0000] grid place-items-center flex-shrink-0">
+              <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </div>
+            <div>
+              <p class="text-[13px] font-semibold text-cool-800 m-0 group-hover:text-sky-700 transition-colors">YouTube</p>
+              <p class="text-[11px] text-cool-400 m-0">@computerskill_np</p>
+            </div>
+            <svg class="w-4 h-4 text-cool-300 ml-auto group-hover:text-sky-400 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ CTA BANNER ═══════════════════════════ -->
+<section class="bg-cool-50 px-6 md:px-16 py-12">
+  <div class="max-w-6xl mx-auto">
+    <div class="reveal relative bg-gradient-to-r from-sky-600 to-sky-800 rounded-3xl p-12 md:p-16 text-center overflow-hidden shadow-blue-lg">
+      <div class="absolute -right-20 -top-20 w-64 h-64 rounded-full bg-white/10 pointer-events-none"></div>
+      <div class="absolute -left-10 -bottom-10 w-40 h-40 rounded-full bg-white/5 pointer-events-none"></div>
+      <div class="absolute right-36 bottom-4 w-20 h-20 rounded-full bg-sky-400/25 pointer-events-none"></div>
+      <div class="relative z-10">
+        <div class="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.18em] uppercase text-sky-200 bg-white/10 border border-white/20 px-4 py-1.5 rounded-full mb-6">
+          <span class="w-1.5 h-1.5 rounded-full bg-sky-300 pulse-dot"></span>
+          Admissions Open Now
+        </div>
+        <h2 class="font-display font-black text-white leading-tight mb-5" style="font-size:clamp(26px,4vw,48px);">
+          Ready to Start<br>Your Journey?
+        </h2>
+        <p class="text-sky-200 text-base mb-10 max-w-md mx-auto leading-relaxed">Join hundreds of students who transformed their careers through language and tech skills.</p>
+        <a href="https://nationalskill-register.vercel.app/"
+           class="inline-flex items-center gap-2 text-[15px] font-bold text-sky-700 bg-white px-10 py-4 rounded-full hover:bg-sky-50 shadow-blue-sm hover:-translate-y-1 hover:shadow-blue-md transition-all no-underline">
+          Register Now
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
+<footer class="bg-cool-950 text-cool-300 px-6 md:px-16 pt-20 pb-8">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid md:grid-cols-4 gap-12 mb-16">
+
+      <!-- Brand -->
+      <div class="md:col-span-2">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-sky-500 to-sky-700 grid place-items-center flex-shrink-0">
+            <span class="font-display font-black text-white text-lg leading-none">N</span>
+          </div>
+          <span class="font-display font-bold text-white text-[17px]">National Skill</span>
+        </div>
+        <p class="text-[14px] text-cool-400 leading-relaxed max-w-xs mb-8">
+          National Skill Institute offers Korean, English, Japanese, and computer skills training. Modern facilities, expert teachers, real results.
+        </p>
+        <div class="flex gap-3 flex-wrap">
+          <a href="https://www.facebook.com/profile.php?id=100081353035987" target="_blank"
+             class="inline-flex items-center gap-2 text-[13px] text-cool-400 border border-cool-700 px-4 py-2 rounded-lg hover:border-sky-500 hover:text-sky-400 hover:bg-sky-500/10 transition-all no-underline">
+            <span class="font-bold">f</span> Facebook
+          </a>
+          <a href="https://www.youtube.com/@computerskill_np" target="_blank"
+             class="inline-flex items-center gap-2 text-[13px] text-cool-400 border border-cool-700 px-4 py-2 rounded-lg hover:border-sky-500 hover:text-sky-400 hover:bg-sky-500/10 transition-all no-underline">
+            <span>▶</span> YouTube
+          </a>
+        </div>
+      </div>
+
+      <!-- Company -->
+      <div>
+        <h5 class="text-[11px] font-bold tracking-[0.15em] uppercase text-cool-500 mb-5">Company</h5>
+        <ul class="space-y-3 list-none p-0 m-0">
+          <li><a href="./aboutus.html"   class="text-[14px] text-cool-400 hover:text-sky-400 transition-colors no-underline">About Us</a></li>
+          <li><a href="./gallery.html"   class="text-[14px] text-cool-400 hover:text-sky-400 transition-colors no-underline">Gallery</a></li>
+          <li><a href="./korea.html"     class="text-[14px] text-cool-400 hover:text-sky-400 transition-colors no-underline">Korea Program</a></li>
+          <li><a href="./quicklink.html" class="text-[14px] text-cool-400 hover:text-sky-400 transition-colors no-underline">Quick Links</a></li>
+          <li><a href="./contactus.html" class="text-[14px] text-sky-400 no-underline font-medium">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <h5 class="text-[11px] font-bold tracking-[0.15em] uppercase text-cool-500 mb-5">Get In Touch</h5>
+        <div class="space-y-4">
+          <div class="flex items-start gap-3">
+            <span class="text-sky-500 mt-0.5 text-sm">📍</span>
+            <p class="text-[14px] text-cool-400 m-0">Suryabinayak, Bhaktapur, Nepal</p>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-sky-500 text-sm">📞</span>
+            <a href="tel:9769321075" class="text-[14px] text-cool-400 hover:text-sky-400 transition-colors no-underline">9769321075</a>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="text-sky-500 mt-0.5 text-sm">✉</span>
+            <a href="mailto:nationalskill.edu.np@gmail.com" class="text-[14px] text-cool-400 hover:text-sky-400 transition-colors no-underline break-all">nationalskill.edu.np@gmail.com</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="border-t border-cool-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-[13px] text-cool-500">
+      <p class="m-0">Copyright © <span id="year"></span> National Skill Institute. All Rights Reserved.</p>
+      <p class="m-0">Developed by <a href="https://www.pembatamang.com.np" class="text-sky-500 hover:text-sky-400 transition-colors no-underline">Pemba Tamang</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════ JS ═══════════════════════════ -->
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Nav scroll glass effect
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 40) {
+      nav.style.background      = 'rgba(255,255,255,0.92)';
+      nav.style.backdropFilter  = 'blur(20px)';
+      nav.style.borderBottom    = '1px solid rgba(186,222,255,0.5)';
+      nav.style.boxShadow       = '0 2px 12px rgba(7,77,133,0.08)';
+    } else {
+      nav.style.background      = '';
+      nav.style.backdropFilter  = '';
+      nav.style.borderBottom    = '';
+      nav.style.boxShadow       = '';
+    }
+  });
+
+  // Hamburger
+  const mob = document.getElementById('mobileMenu');
+  let mobOpen = false;
+  document.getElementById('hamburger').addEventListener('click', () => {
+    mobOpen = !mobOpen;
+    mob.style.transform = mobOpen ? 'translateY(0)' : 'translateY(-110%)';
+  });
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  revealEls.forEach(el => obs.observe(el));
+
+  // Form submit
+  function handleSubmit(e) {
+    e.preventDefault();
+    const msg = document.getElementById('successMsg');
+    msg.classList.remove('hidden');
+    msg.classList.add('flex');
+    e.target.reset();
+    setTimeout(() => {
+      msg.classList.add('hidden');
+      msg.classList.remove('flex');
+    }, 5000);
+  }
+</script>
+</body>
+</html>

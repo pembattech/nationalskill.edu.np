@@ -1,426 +1,576 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Korea — National Skill Institute</title>
+  <link rel="shortcut icon" href="./static/img/logo.jpg" type="image/x-icon">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700&display=swap" rel="stylesheet">
 
-    <title>National Skill</title>
-    <link rel="shortcut icon" href="./static/img/logo.jpg" type="image/x-icon">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans:    ['Sora', 'sans-serif'],
+            display: ['Fraunces', 'serif'],
+          },
+          colors: {
+            sky: {
+              50:'#f0f7ff', 100:'#e0efff', 200:'#badeff', 300:'#7ec8fd',
+              400:'#38adf8', 500:'#0e91e9', 600:'#0272c7', 700:'#035aa1',
+              800:'#074d85', 900:'#0b416e', 950:'#082a4a',
+            },
+            cool: {
+              50:'#f4f7fb',  100:'#e8eef6', 200:'#cbd9ec', 300:'#9db8d9',
+              400:'#6993c0', 500:'#4675a8', 600:'#355d8d', 700:'#2b4b73',
+              800:'#263f5f', 900:'#233550', 950:'#161f30',
+            },
+          },
+          boxShadow: {
+            'blue-sm':    '0 4px 16px rgba(2,114,199,0.15)',
+            'blue-md':    '0 12px 40px rgba(2,114,199,0.22)',
+            'blue-lg':    '0 24px 64px rgba(2,114,199,0.28)',
+            'card':       '0 2px 12px rgba(7,77,133,0.08)',
+            'card-hover': '0 16px 48px rgba(7,77,133,0.16)',
+          },
+        }
+      }
+    }
+  </script>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Sora', sans-serif; overflow-x: hidden; background: #f4f7fb; color: #233550; }
 
-    <link rel="stylesheet" href="./static/css/styles.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    /* Grain */
+    body::after {
+      content:''; position:fixed; inset:0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+      pointer-events:none; z-index:9999; opacity:0.28;
+    }
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+    /* Scroll reveal */
+    .reveal { opacity:0; transform:translateY(28px); transition:opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+    .reveal-d1 { transition-delay:0.1s; }
+    .reveal-d2 { transition-delay:0.2s; }
+    .reveal-d3 { transition-delay:0.3s; }
+    .reveal-d4 { transition-delay:0.4s; }
 
+    /* Hero stagger */
+    .ha1 { opacity:0; animation:fadeUp 0.7s 0.2s ease forwards; }
+    .ha2 { opacity:0; animation:fadeUp 0.7s 0.36s ease forwards; }
+    .ha3 { opacity:0; animation:fadeUp 0.7s 0.52s ease forwards; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);} }
+
+    /* Orbs */
+    .orb { position:absolute; border-radius:50%; filter:blur(70px); pointer-events:none; }
+    @keyframes floatA { 0%,100%{transform:translateY(0) scale(1);} 50%{transform:translateY(-24px) scale(1.04);} }
+    @keyframes floatB { 0%,100%{transform:translateY(0) scale(1);} 50%{transform:translateY(-16px) scale(1.03);} }
+
+    /* Grid bg */
+    .grid-bg {
+      background-image: linear-gradient(rgba(2,114,199,0.065) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(2,114,199,0.065) 1px, transparent 1px);
+      background-size:56px 56px;
+      mask-image: radial-gradient(ellipse 90% 90% at 50% 50%, black, transparent);
+    }
+
+    /* Nav hover underline */
+    .nl { position:relative; }
+    .nl::after { content:''; position:absolute; left:0; right:0; bottom:-2px; height:2px; background:#0272c7; border-radius:1px; transform:scaleX(0); transform-origin:left; transition:transform 0.25s cubic-bezier(0.16,1,0.3,1); }
+    .nl:hover::after,.nl.active::after { transform:scaleX(1); }
+
+    /* Pulse dot */
+    @keyframes pulseDot { 0%,100%{opacity:1;} 50%{opacity:0.25;} }
+    .pulse-dot { animation: pulseDot 1.5s ease-in-out infinite; }
+
+    /* Card top accent */
+    .card-top::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,#0272c7,#38adf8,transparent); border-radius:3px 3px 0 0; }
+
+    /* Popup */
+    .popup-overlay {
+      position:fixed; inset:0; z-index:1000;
+      background:rgba(8,42,74,0.45); backdrop-filter:blur(12px);
+      display:grid; place-items:center;
+      opacity:0; pointer-events:none;
+      transition:opacity 0.4s;
+    }
+    .popup-overlay.open { opacity:1; pointer-events:all; }
+    .popup-box {
+      background:white; border-radius:24px; padding:36px;
+      max-width:520px; width:calc(100% - 2rem);
+      border:1px solid #e0efff;
+      box-shadow:0 24px 64px rgba(2,114,199,0.2);
+      transform:scale(0.95) translateY(12px);
+      transition:transform 0.45s cubic-bezier(0.16,1,0.3,1);
+      position:relative;
+    }
+    .popup-overlay.open .popup-box { transform:scale(1) translateY(0); }
+
+    /* Section divider */
+    .section-label { display:inline-flex; align-items:center; gap:10px; font-size:11px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:#0272c7; }
+    .section-label::before { content:''; width:24px; height:1px; background:#0272c7; display:block; }
+
+    /* Skill test image */
+    .skill-img {
+      border-radius:16px; overflow:hidden; position:relative;
+      box-shadow: 0 2px 12px rgba(7,77,133,0.08);
+      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s;
+    }
+    .skill-img:hover { transform:translateY(-6px); box-shadow:0 16px 48px rgba(7,77,133,0.18); }
+    .skill-img img { width:100%; display:block; transition:transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+    .skill-img:hover img { transform:scale(1.05); }
+    .skill-img-overlay {
+      position:absolute; inset:0;
+      background:linear-gradient(to top, rgba(8,42,74,0.55) 0%, transparent 60%);
+      opacity:0; transition:opacity 0.35s;
+      display:flex; align-items:flex-end; padding:16px;
+    }
+    .skill-img:hover .skill-img-overlay { opacity:1; }
+
+    /* Prose headings inside content */
+    .prose-section h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #0272c7;
+      margin-top: 2rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .prose-section h3::before { content:''; width:3px; height:1.1em; background:#0272c7; border-radius:2px; display:block; flex-shrink:0; }
+    .prose-section p { color:#4675a8; font-size:15px; line-height:1.85; margin-bottom:0; }
+
+    /* TOC */
+    .toc-item {
+      display:flex; align-items:center; gap:10px;
+      padding:10px 14px; border-radius:10px;
+      font-size:13px; font-weight:500; color:#4675a8;
+      text-decoration:none;
+      border:1px solid transparent;
+      transition:all 0.2s;
+    }
+    .toc-item:hover { background:#f0f7ff; border-color:#badeff; color:#0272c7; }
+    .toc-item .dot { width:6px; height:6px; border-radius:50%; background:#9db8d9; flex-shrink:0; transition:background 0.2s; }
+    .toc-item:hover .dot { background:#0272c7; }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width:5px; }
+    ::-webkit-scrollbar-track { background:#e8eef6; }
+    ::-webkit-scrollbar-thumb { background:#9db8d9; border-radius:3px; }
+  </style>
 </head>
 
 <body>
-    <div class="main-container">
-        <div class="site-pusher">
 
-            <header class="header">
-                <div class="hamburger-bar" style="display: flex; justify-content: space-between; padding:0 10px;">
-                    <div class="hamburger">
-                        <a href="#" class="header__icon" id="header__icon"></a>
-                    </div>
+<!-- ═══════════════ POPUP ═══════════════ -->
+<div id="popup" class="popup-overlay">
+  <div class="popup-box">
+    <button id="closePopup" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-cool-50 border border-cool-200 text-cool-500 grid place-items-center text-sm font-bold hover:bg-red-500 hover:text-white hover:border-transparent transition-all duration-200 cursor-pointer">✕</button>
+    <div class="inline-flex items-center gap-2 text-[10px] font-bold tracking-[0.18em] uppercase text-sky-600 bg-sky-50 border border-sky-200 px-4 py-1.5 rounded-full mb-4">
+      <span class="w-1.5 h-1.5 rounded-full bg-sky-500 pulse-dot"></span>
+      Korean Language
+    </div>
+    <h2 class="font-display font-bold text-cool-900 text-2xl mb-1">Korean Language Pass Students</h2>
+    <p class="text-cool-500 text-sm mb-5 leading-relaxed">Congratulations to all students who passed the Korean Language exam!</p>
+    <div class="rounded-2xl overflow-hidden border border-sky-100">
+      <img src="./static/img/12345.png" alt="Korean Pass Students" class="w-full block">
+    </div>
+  </div>
+</div>
 
-                    <div class="logo-forsmallscreen">
-                        <a class="logo" href="./index.html">
-                            <img class="logo-img" src="./static/img/nationalskill_baner.png" alt="National Skill" style="width: 180px;">
-                        </a>
-                    </div>
-                </div>
+<!-- ═══════════════ NAV ═══════════════ -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 h-[72px] flex items-center justify-between px-8 md:px-12 transition-all duration-400">
+  <a href="./index.html" class="flex items-center gap-3 no-underline">
+    <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-sky-500 to-sky-700 grid place-items-center shadow-blue-sm flex-shrink-0">
+      <span class="font-display font-black text-white text-lg leading-none">N</span>
+    </div>
+    <span class="font-display font-bold text-cool-800 text-[17px] tracking-tight">National Skill</span>
+  </a>
 
+  <ul class="hidden md:flex items-center gap-0.5 list-none m-0 p-0">
+    <li><a href="./index.html"     class="nl text-[13px] font-medium text-cool-600 px-3 py-2 rounded-lg hover:text-sky-700 hover:bg-sky-50 transition-colors no-underline">Home</a></li>
+    <li><a href="./aboutus.html"   class="nl text-[13px] font-medium text-cool-600 px-3 py-2 rounded-lg hover:text-sky-700 hover:bg-sky-50 transition-colors no-underline">About Us</a></li>
+    <li><a href="./gallery.html"   class="nl text-[13px] font-medium text-cool-600 px-3 py-2 rounded-lg hover:text-sky-700 hover:bg-sky-50 transition-colors no-underline">Gallery</a></li>
+    <li><a href="./korea.html"     class="nl active text-[13px] font-medium text-sky-700 px-3 py-2 rounded-lg hover:bg-sky-50 transition-colors no-underline">Korea</a></li>
+    <li><a href="./quicklink.html" class="nl text-[13px] font-medium text-cool-600 px-3 py-2 rounded-lg hover:text-sky-700 hover:bg-sky-50 transition-colors no-underline">Quick Link</a></li>
+    <li><a href="./contactus.html" class="nl text-[13px] font-medium text-cool-600 px-3 py-2 rounded-lg hover:text-sky-700 hover:bg-sky-50 transition-colors no-underline">Contact</a></li>
+  </ul>
 
-                <nav class="menu">
-                    <div class="nav-bar">
-                        <a class="logo nav-item" href="./index.html">
-                            <img class="logo-img" src="./static/img/nationalskill_baner.png" alt="National Skill" style="width: 180px;">
-                        </a>
+  <div class="hidden md:flex items-center gap-3">
+    <a href="./contactus.html" class="text-[13px] font-semibold text-cool-600 border border-cool-200 px-5 py-2.5 rounded-full hover:border-sky-400 hover:text-sky-700 transition-all no-underline">Contact</a>
+    <a href="https://nationalskill-register.vercel.app/" class="text-[13px] font-semibold text-white bg-sky-600 px-5 py-2.5 rounded-full hover:bg-sky-700 shadow-blue-sm hover:shadow-blue-md hover:-translate-y-px transition-all no-underline">Register Now</a>
+  </div>
 
-                        <ul class="nav-list">
-                            <a class="nav-link home-tab" href="./index.html">
-                                <li class="nav-item">Home</li>
-                            </a>
-                            <a class="nav-link about-tab" href="./aboutus.html">
-                                <li class="nav-item">About Us</li>
-                            </a>
+  <button id="hamburger" class="md:hidden flex flex-col gap-[5px] p-2 cursor-pointer bg-transparent border-0">
+    <span class="block w-6 h-0.5 bg-cool-700 rounded transition-all duration-300"></span>
+    <span class="block w-6 h-0.5 bg-cool-700 rounded transition-all duration-300"></span>
+    <span class="block w-6 h-0.5 bg-cool-700 rounded transition-all duration-300"></span>
+  </button>
+</nav>
 
-                            <!-- <a class="nav-link notice-tab" href="./noticeboard.html">
-                                <li class="nav-item">Notice Board</li>
-                            </a> -->
-                            <a class="nav-link gallery-tab" href="./gallery.html">
-                                <li class="nav-item">Gallery</li>
-                            </a>
-                            <a class="nav-link contact-tab" href="./contactus.html">
-                                <li class="nav-item">Contact Us</li>
-                            </a>
-                            <a class="nav-link register-tab" href="https://nationalskill-register.vercel.app/">
-                                <li class="nav-item">Register</li>
-                            </a>
+<!-- Mobile drawer -->
+<div id="mobileMenu" class="fixed top-[72px] left-0 right-0 z-40 bg-white/97 backdrop-blur-xl border-b border-sky-100 px-8 py-6 flex flex-col gap-1 -translate-y-full transition-transform duration-500">
+  <a href="./index.html"     class="text-cool-600 text-[15px] py-3 border-b border-sky-50 hover:text-sky-700 transition-colors no-underline">Home</a>
+  <a href="./aboutus.html"   class="text-cool-600 text-[15px] py-3 border-b border-sky-50 hover:text-sky-700 transition-colors no-underline">About Us</a>
+  <a href="./gallery.html"   class="text-cool-600 text-[15px] py-3 border-b border-sky-50 hover:text-sky-700 transition-colors no-underline">Gallery</a>
+  <a href="./korea.html"     class="text-sky-700 font-semibold text-[15px] py-3 border-b border-sky-50 no-underline">Korea</a>
+  <a href="./quicklink.html" class="text-cool-600 text-[15px] py-3 border-b border-sky-50 hover:text-sky-700 transition-colors no-underline">Quick Link</a>
+  <a href="./contactus.html" class="text-cool-600 text-[15px] py-3 border-b border-sky-50 hover:text-sky-700 transition-colors no-underline">Contact</a>
+  <a href="https://nationalskill-register.vercel.app/" class="text-sky-600 font-bold text-[15px] pt-3 no-underline">Register Now →</a>
+</div>
 
-                        </ul>
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="relative min-h-[52vh] flex items-center justify-center overflow-hidden pt-[72px]">
+  <div class="absolute inset-0 bg-gradient-to-br from-sky-50 via-cool-50 to-white"></div>
+  <div class="absolute inset-0 grid-bg"></div>
+  <div class="orb w-[500px] h-[500px] bg-sky-200/40 -top-28 -right-16" style="animation:floatA 10s ease-in-out infinite;"></div>
+  <div class="orb w-[320px] h-[320px] bg-sky-300/22 bottom-0 -left-12" style="animation:floatB 8s ease-in-out infinite; animation-delay:-4s;"></div>
 
-                        <div class="right-nav">
-                            <div class="nav-item">
-                                <a href="./korea.html" class="nav-link korea-tab">Korea</a>
+  <!-- Korean flag accent strip -->
+  <div class="absolute top-[72px] left-0 right-0 h-1 bg-gradient-to-r from-transparent via-red-400/40 to-transparent"></div>
 
-                            </div>
-                            <div class="nav-item">
-                                <a class="nav-link quicklink-tab" href="./quicklink.html">
-                                    Quick Link
-                                </a>
-                            </div>
+  <div class="relative z-10 text-center px-6 py-20 max-w-3xl mx-auto">
+    <div class="ha1 inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.18em] uppercase text-sky-600 bg-sky-50/80 border border-sky-200 px-4 py-2 rounded-full mb-8 backdrop-blur-sm">
+      <span class="w-1.5 h-1.5 rounded-full bg-sky-500 pulse-dot"></span>
+      East Asia · Culture · Language
+    </div>
+    <h1 class="ha2 font-display font-black leading-tight tracking-tight text-cool-900 mb-5" style="font-size:clamp(44px,7.5vw,88px);">
+      Discover <span class="text-sky-600">Korea</span>
+    </h1>
+    <p class="ha3 text-lg text-cool-500 leading-relaxed max-w-xl mx-auto">
+      Explore the rich culture, history, and language of Korea — and prepare yourself for real opportunities through our Korean language and skill training programs.
+    </p>
+    <div class="ha3 flex items-center justify-center gap-3 mt-8 flex-wrap">
+      <a href="#culture" class="inline-flex items-center gap-2 text-[14px] font-semibold text-white bg-sky-600 px-7 py-3.5 rounded-full shadow-blue-sm hover:bg-sky-700 hover:-translate-y-0.5 transition-all no-underline">
+        Explore Culture
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+      </a>
+      <a href="#skill-test" class="inline-flex items-center gap-2 text-[14px] font-semibold text-sky-700 border-2 border-sky-200 bg-white/60 backdrop-blur-sm px-7 py-3.5 rounded-full hover:border-sky-400 hover:bg-white transition-all no-underline">
+        Skill Test Program
+      </a>
+    </div>
+  </div>
 
-                            <div class="theme-switch nav-item">
-                                <div class="switch"></div>
-                            </div>
+  <div class="absolute bottom-0 left-0 right-0">
+    <svg viewBox="0 0 1440 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full block">
+      <path d="M0 48 L0 24 Q360 0 720 24 Q1080 48 1440 24 L1440 48 Z" fill="#f4f7fb"/>
+    </svg>
+  </div>
+</section>
 
+<!-- ═══════════════ QUICK STATS BAR ═══════════════ -->
+<section class="bg-cool-50 px-6 md:px-16 py-10">
+  <div class="max-w-6xl mx-auto">
+    <div class="reveal grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="bg-white border border-sky-100 rounded-2xl px-6 py-5 text-center shadow-card">
+        <div class="font-display font-black text-3xl text-sky-600 mb-1">5,000+</div>
+        <div class="text-[11px] font-semibold uppercase tracking-[0.12em] text-cool-400">Years of History</div>
+      </div>
+      <div class="bg-white border border-sky-100 rounded-2xl px-6 py-5 text-center shadow-card">
+        <div class="text-3xl mb-1">🇰🇷</div>
+        <div class="text-[11px] font-semibold uppercase tracking-[0.12em] text-cool-400">South Korea</div>
+      </div>
+      <div class="bg-white border border-sky-100 rounded-2xl px-6 py-5 text-center shadow-card">
+        <div class="font-display font-black text-3xl text-sky-600 mb-1">Hangul</div>
+        <div class="text-[11px] font-semibold uppercase tracking-[0.12em] text-cool-400">Unique Script</div>
+      </div>
+      <div class="bg-white border border-sky-100 rounded-2xl px-6 py-5 text-center shadow-card">
+        <div class="font-display font-black text-3xl text-sky-600 mb-1">Hallyu</div>
+        <div class="text-[11px] font-semibold uppercase tracking-[0.12em] text-cool-400">Korean Wave</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-                        </div>
-                    </div>
+<!-- ═══════════════ MAIN CONTENT ═══════════════ -->
+<section id="culture" class="bg-white px-6 md:px-16 py-24">
+  <div class="max-w-6xl mx-auto grid lg:grid-cols-[1fr_300px] gap-16 items-start">
 
-                </nav>
-                <div class="horizontal-line below-nav"></div>
-            </header>
-            <div class="container">
-                <div class="popup-overlay" id="popup">
-                    <div class="popup-content">
-                        <div>
+    <!-- Article -->
+    <div>
+      <div class="reveal section-label mb-4">About Korea</div>
+      <h2 class="reveal reveal-d1 font-display font-black text-cool-900 leading-tight mb-6" style="font-size:clamp(28px,3.5vw,46px);">
+        A Nation of Rich Culture<br><span class="text-sky-600">& Deep History</span>
+      </h2>
+      <p class="reveal reveal-d2 text-cool-500 text-[15px] leading-relaxed mb-10">
+        Korea, a region in East Asia divided into two distinct sovereign states — North Korea and South Korea — boasts a rich and diverse cultural heritage that dates back thousands of years. Despite the division, both share common cultural roots and traditions, while also developing unique characteristics over the decades.
+      </p>
 
-                            <div class="heading">
-                                <div style="background-color: white; padding: 10px; border-radius: 10px;">
-                                    <div class="heading">
+      <!-- Content sections -->
+      <div class="reveal reveal-d3 prose-section space-y-8">
 
-                                        <div class="anim-text-flow" style="flex: 1;">
-                                            <span>Korean Language Pass Students</span>
-                                        </div>
-                                        <span id="closePopup">&times</span>
-                                    </div>
-                                    <div class="horizontal-line"></div>
-                                    <img src="./static/img/12345.png" alt="Korean Pass Student." style="width: 100%;">
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="korea-wrapper">
-                    <div class="heading" style="text-align: left;">
-                        <p><span>KOREA</span></p>
-                    </div>
-
-                    <div class="divide-container">
-
-                        <div class="content">
-                            <p>
-
-                                Korea, a region in East Asia divided into two distinct sovereign states—North Korea and
-                                South Korea—boasts a rich and diverse cultural heritage that dates back thousands of
-                                years.
-                                The Korean culture is deeply influenced by its history, geography, and socio-political
-                                changes. Despite the division, both North and South Korea share common cultural roots
-                                and
-                                traditions, although they have also developed unique cultural characteristics over the
-                                decades.
-                            </p>
-
-                            <div class="heading" style="text-align: left;">
-                                <p>
-                                    Historical Background
-                                </p>
-                            </div>
-                            <p>
-
-                                Korean culture has evolved over millennia, with influences from neighboring China and
-                                Japan,
-                                yet
-                                it has maintained a distinct identity. The Three Kingdoms period (57 BC – 668 AD),
-                                comprising
-                                Goguryeo, Baekje, and Silla, was pivotal in forming the foundation of Korean culture,
-                                with
-                                significant developments in art, religion, and governance. The subsequent Goryeo
-                                (918–1392)
-                                and
-                                Joseon (1392–1897) dynasties further shaped Korean culture, introducing Confucianism as
-                                a
-                                guiding philosophy and witnessing the flourishing of Korean arts and literature.
-
-                            </p>
-
-                            <div class="heading" style="text-align: left;">
-                                <p>
-                                    Language and Literature
-                                </p>
-                            </div>
-                            <p>
-
-                                The Korean language, Hangul, is a unique writing system created during the Joseon
-                                Dynasty in
-                                1443 by King Sejong the Great. Hangul is celebrated for its scientific design and ease
-                                of
-                                learning. Korean literature has a rich history, with classical works like "Samguk Yusa"
-                                (Memorabilia of the Three Kingdoms) and "The Tale of Chunhyang" being notable examples.
-                                Modern
-                                Korean literature has gained international acclaim, with authors like Han Kang and Ko Un
-                                receiving global recognition.
-                            </p>
-
-                            <div class="heading" style="text-align: left;">
-                                <p>
-                                    Arts and Crafts
-                                </p>
-                            </div>
-                            <p>
-
-                                Korean traditional arts include painting, calligraphy, pottery, and music. The celadon
-                                pottery
-                                of the Goryeo Dynasty is renowned for its exquisite beauty and craftsmanship.
-                                Traditional
-                                Korean
-                                painting, known as "Minhwa," often depicts everyday life, animals, and plants with
-                                vibrant
-                                colors and detailed patterns. Calligraphy holds a significant place in Korean culture,
-                                emphasizing the aesthetic expression of characters.
-                            </p>
-
-                            <div class="heading" style="text-align: left;">
-                                <p>
-                                    Music and Dance
-                                </p>
-                            </div>
-                            <p>
-
-
-                                Traditional Korean music, or "Gugak," encompasses a variety of genres, including court
-                                music,
-                                folk music, and religious music. Instruments like the "gayageum" (a zither-like string
-                                instrument) and "janggu" (an hourglass-shaped drum) are integral to Korean music.
-                                Traditional
-                                Korean dance, such as "Seungmu" (Buddhist monk dance) and "Talchum" (mask dance), is
-                                characterized by graceful movements and colorful costumes.
-                            </p>
-
-                            <div class="heading" style="text-align: left;">
-                                <p>
-                                    Religion and Philosophy
-
-                                </p>
-                            </div>
-                            <p>
-
-                                Confucianism, Buddhism, and Shamanism have profoundly influenced Korean culture.
-                                Confucianism,
-                                introduced during the Goryeo Dynasty and becoming state philosophy in Joseon, shaped
-                                Korean
-                                social structure, ethics, and educational systems. Buddhism, with its beautiful temples
-                                and
-                                rituals, continues to be a significant spiritual practice. Shamanism, an indigenous
-                                belief
-                                system, persists in rituals and folk practices, reflecting a deep connection with nature
-                                and
-                                ancestral spirits.
-
-                            </p>
-
-                            <div class="heading" style="text-align: left;">
-                                <p>
-                                    Cuisine
-                                </p>
-                            </div>
-                            <p>
-
-                                Korean cuisine, or "Hansik," is known for its bold flavors and diverse dishes. Kimchi, a
-                                fermented vegetable dish, is a staple in Korean meals. Other popular dishes include
-                                "Bulgogi"
-                                (marinated beef), "Bibimbap" (mixed rice with vegetables), and "Japchae" (stir-fried
-                                glass
-                                noodles). Korean cuisine emphasizes balance and harmony, often featuring a variety of
-                                side
-                                dishes ("banchan") that complement the main course.
-                            </p>
-
-                            <div class="heading" style="text-align: left;">
-                                <p>
-                                    Festivals and Holidays
-                                </p>
-                            </div>
-                            <p>
-
-                                Korean festivals and holidays, such as "Seollal" (Lunar New Year) and "Chuseok" (Harvest
-                                Festival), are celebrated with traditional rituals, family gatherings, and special
-                                foods.
-                                These
-                                festivals reflect Korea's agrarian past and its emphasis on family and ancestral
-                                respect.
-                            </p>
-
-                            <div class="heading" style="text-align: left;">
-                                <p>
-                                    Modern Culture
-                                </p>
-                            </div>
-                            <p>
-
-                                South Korea has become a global cultural powerhouse, particularly through "Hallyu" or
-                                the
-                                Korean
-                                Wave, which includes K-pop, Korean dramas (K-dramas), and films. Internationally
-                                acclaimed
-                                K-pop
-                                groups like BTS and Blackpink, along with award-winning films like "Parasite," have
-                                significantly boosted Korea's cultural influence worldwide.
-
-                                North Korea, while more isolated, maintains its cultural traditions through
-                                state-sponsored
-                                events and performances that emphasize socialist themes and the leadership of the ruling
-                                party.
-                                Traditional Korean culture is preserved, albeit with a distinct North Korean character.
-
-
-                            </p>
-
-                        </div>
-                        <div class="content">
-                            <div class="heading" style="padding-top: 0;">
-                                <p><span>Skill Test</span></p>
-                            </div>
-
-                            <div class="skill-test">
-                                <a href="https://www.youtube.com/@computerskill_np" target="_blank">
-                                    <img src="./static/img/gallery/korean/401140706_203523079466950_677012777211854058_n.jpg" alt="">
-                                </a>
-
-                                    <a href="https://www.youtube.com/@computerskill_np" target="_blank">
-                                        <img src="./static/img/gallery/korean/hand power.jpg" alt="Hand Power">
-                                    </a>
-                                
-                                    <a href="https://www.youtube.com/@computerskill_np" target="_blank">
-                                        <img src="./static/img/gallery/korean/skill test ring.jpg" alt="Skill Test Ring">
-                                    </a>
-
-                                <a href="https://www.youtube.com/@computerskill_np" target="_blank">
-                                    <img src="./static/img/gallery/korean/wood board.jpg" alt="Wood Board">
-                                </a>
-
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-            <footer>
-                <div class="footer-wrapper">
-                    <div class="content short-brief">
-                        <a class="logo" href="./index.html">
-                            <img class="footer logo-img" src="./static/img/logo.jpg" alt="National Skill">
-                        </a>
-
-                        <p>National Skill Institute in Bhaktapur offers Korean, English, Japanese language, and computer
-                            skills training. Master speaking, listening, reading, and writing in Korean or Japanese or
-                            English, or gain computer skills from beginner to advanced coding. Our experienced teachers
-                            and modern facilities will help you reach your goals and open doors to new opportunities.
-                        </p>
-                    </div>
-
-                    <div class="footer-flex">
-                        <div class="connetwithnationalskill">
-                            <div class="heading">
-                                <p>Find National Skill on</p>
-                            </div>
-                            <div class="content social-links">
-                                <div class="footer-img__content">
-
-                                    <a href="https://www.facebook.com/profile.php?id=100081353035987" target="_blank">
-                                        <img class="footer-img" src="./static/img/assets/facebook.png" alt="Facebook">
-                                        Facebook
-                                    </a>
-                                </div>
-                                <div class="footer-img__content">
-
-                                    <a href="https://www.youtube.com/@computerskill_np" target="_blank">
-                                        <img class="footer-img" src="./static/img/assets/youtube.png" alt="YouTube">
-                                        YouTube
-                                    </a>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="company-info">
-                            <div class="heading">
-                                <p>Company</p>
-                            </div>
-
-                            <div class="content">
-                                <ul>
-                                    <a class="about-tab" href="./aboutus.html">
-                                        <li>About Us</li>
-                                    </a>
-                                    <!-- <a class="notice-tab" href="#">
-                                        <li>Notice Board</li>
-                                    </a> -->
-                                    <a class="gallery-tab" href="./gallery.html">
-                                        <li>Gallery</li>
-                                    </a>
-                                    <a class="contact-tab" href="./contactus.html">
-                                        <li>Contact Us</li>
-                                    </a>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="getintouch">
-                            <div class="heading">
-                                <p>Get In Touch</p>
-                            </div>
-                            <div class="content">
-                                <div class="footer-img__content">
-                                    <img class="footer-img" src="./static/img/assets/location.png" alt="">
-                                    <p>
-                                        Suryabinayak, Bhaktapur
-                                    </p>
-                                </div>
-                                <div class="footer-img__content">
-                                    <img class="footer-img" src="./static/img/assets/phone-call.png" alt="">
-                                    <p>
-                                        <a href="tel:9769321075">9769321075</a>
-
-                                    </p>
-                                </div>
-                                <div class="footer-img__content">
-                                    <img class="footer-img" src="./static/img/assets/gmail.png" alt="">
-                                    <p>
-                                        <a
-                                            href="mailto:nationalskill.edu.np@gmail.com">nationalskill.edu.np@gmail.com</a>
-                                    </p>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="horizontal-line" style="padding-top: 10px;"></div>
-                    <p style="text-align: center;">Copyright © <span id="currentyear"></span> . National Skill. All
-                        Rights Reserved. Developed By: <a href="https://www.pembatamang.com.np"><strong><u class="pemba-link">Pemba
-                                    Tamang</u></strong></a></a></p>
-                </div>
-
-            </footer>
-            <div class="site-cache" id="site-cache"></div>
+        <div class="relative card-top bg-cool-50 border border-sky-100 rounded-2xl p-7 overflow-hidden">
+          <h3>Historical Background</h3>
+          <p class="mt-3">Korean culture has evolved over millennia, with influences from neighboring China and Japan, yet maintaining a distinct identity. The Three Kingdoms period (57 BC – 668 AD), comprising Goguryeo, Baekje, and Silla, was pivotal in forming the foundation of Korean culture. The subsequent Goryeo (918–1392) and Joseon (1392–1897) dynasties further shaped Korean culture, introducing Confucianism as a guiding philosophy and witnessing the flourishing of Korean arts and literature.</p>
         </div>
 
+        <div class="relative card-top bg-cool-50 border border-sky-100 rounded-2xl p-7 overflow-hidden">
+          <h3>Language &amp; Literature</h3>
+          <p class="mt-3">The Korean language, Hangul, is a unique writing system created during the Joseon Dynasty in 1443 by King Sejong the Great. Celebrated for its scientific design and ease of learning, Korean literature has a rich history with classical works like "Samguk Yusa" and "The Tale of Chunhyang." Modern Korean literature has gained international acclaim, with authors like Han Kang receiving global recognition.</p>
+        </div>
+
+        <div class="relative card-top bg-cool-50 border border-sky-100 rounded-2xl p-7 overflow-hidden">
+          <h3>Arts &amp; Crafts</h3>
+          <p class="mt-3">Korean traditional arts include painting, calligraphy, pottery, and music. The celadon pottery of the Goryeo Dynasty is renowned for its exquisite beauty and craftsmanship. Traditional Korean painting "Minhwa" depicts everyday life with vibrant colors and detailed patterns, while calligraphy holds a significant place in aesthetic expression.</p>
+        </div>
+
+        <div class="relative card-top bg-cool-50 border border-sky-100 rounded-2xl p-7 overflow-hidden">
+          <h3>Music &amp; Dance</h3>
+          <p class="mt-3">Traditional Korean music "Gugak" encompasses court music, folk music, and religious music. Instruments like the gayageum (zither-like string instrument) and janggu (hourglass-shaped drum) are integral. Traditional Korean dance such as Seungmu (Buddhist monk dance) and Talchum (mask dance) is characterized by graceful movements and colorful costumes.</p>
+        </div>
+
+        <div class="relative card-top bg-cool-50 border border-sky-100 rounded-2xl p-7 overflow-hidden">
+          <h3>Religion &amp; Philosophy</h3>
+          <p class="mt-3">Confucianism, Buddhism, and Shamanism have profoundly influenced Korean culture. Confucianism shaped Korean social structure, ethics, and educational systems. Buddhism continues as a significant spiritual practice, while Shamanism persists in rituals and folk practices, reflecting a deep connection with nature and ancestral spirits.</p>
+        </div>
+
+        <div class="relative card-top bg-cool-50 border border-sky-100 rounded-2xl p-7 overflow-hidden">
+          <h3>Cuisine</h3>
+          <p class="mt-3">Korean cuisine "Hansik" is known for its bold flavors and diverse dishes. Kimchi — a fermented vegetable dish — is a staple in Korean meals. Other popular dishes include Bulgogi (marinated beef), Bibimbap (mixed rice with vegetables), and Japchae (stir-fried glass noodles). Korean cuisine emphasizes balance and harmony, featuring a variety of side dishes (banchan) that complement the main course.</p>
+        </div>
+
+        <div class="relative card-top bg-cool-50 border border-sky-100 rounded-2xl p-7 overflow-hidden">
+          <h3>Festivals &amp; Holidays</h3>
+          <p class="mt-3">Korean festivals such as Seollal (Lunar New Year) and Chuseok (Harvest Festival) are celebrated with traditional rituals, family gatherings, and special foods. These festivals reflect Korea's agrarian past and its emphasis on family and ancestral respect.</p>
+        </div>
+
+        <div class="relative overflow-hidden rounded-2xl p-7 bg-gradient-to-br from-sky-600 to-sky-800 text-white border border-sky-500 shadow-blue-md">
+          <div class="absolute -right-8 -bottom-8 w-36 h-36 rounded-full bg-white/10 pointer-events-none"></div>
+          <h3 class="!text-white font-display font-bold text-xl mb-3 flex items-center gap-3">
+            <span class="w-1.5 h-6 bg-sky-300 rounded-full block flex-shrink-0"></span>
+            Modern Culture — Hallyu 한류
+          </h3>
+          <p class="!text-sky-100 mt-3">South Korea has become a global cultural powerhouse through the Korean Wave — encompassing K-pop, K-dramas, and films. Internationally acclaimed groups like BTS and Blackpink, along with award-winning films like "Parasite," have significantly boosted Korea's cultural influence worldwide. South Korea's rise as a technology and cultural hub makes Korean language skills increasingly valuable.</p>
+        </div>
+
+      </div>
     </div>
 
-    <script src="./static/js/script.js"></script>
+    <!-- Sticky sidebar -->
+    <div class="hidden lg:block">
+      <div class="sticky top-24 space-y-5">
 
+        <!-- TOC -->
+        <div class="bg-cool-50 border border-sky-100 rounded-2xl p-6 shadow-card">
+          <p class="text-[11px] font-bold tracking-[0.15em] uppercase text-cool-400 mb-4">On This Page</p>
+          <nav class="flex flex-col gap-1">
+            <a href="#culture"    class="toc-item"><span class="dot"></span>About Korea</a>
+            <a href="#history"    class="toc-item"><span class="dot"></span>Historical Background</a>
+            <a href="#language"   class="toc-item"><span class="dot"></span>Language &amp; Literature</a>
+            <a href="#cuisine"    class="toc-item"><span class="dot"></span>Cuisine</a>
+            <a href="#modern"     class="toc-item"><span class="dot"></span>Modern Culture</a>
+            <a href="#skill-test" class="toc-item"><span class="dot"></span>Skill Test Program</a>
+          </nav>
+        </div>
 
+        <!-- CTA card -->
+        <div class="relative card-top bg-white border border-sky-100 rounded-2xl p-6 shadow-card overflow-hidden">
+          <div class="absolute inset-0 bg-gradient-to-br from-sky-50/70 to-transparent pointer-events-none rounded-2xl"></div>
+          <div class="relative z-10">
+            <div class="text-2xl mb-3">🇰🇷</div>
+            <h4 class="font-display font-bold text-cool-800 text-[16px] mb-2">Learn Korean</h4>
+            <p class="text-cool-500 text-[13px] leading-relaxed mb-4">Join our Korean language program and open doors to work and life in Korea.</p>
+            <a href="https://nationalskill-register.vercel.app/" class="block w-full text-center text-[13px] font-semibold text-white bg-sky-600 px-4 py-3 rounded-xl hover:bg-sky-700 shadow-blue-sm transition-all no-underline">
+              Enroll Now →
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick contact -->
+        <div class="bg-cool-50 border border-sky-100 rounded-2xl p-6 shadow-card">
+          <p class="text-[11px] font-bold tracking-[0.15em] uppercase text-cool-400 mb-4">Questions?</p>
+          <div class="flex flex-col gap-3">
+            <a href="tel:9769321075" class="flex items-center gap-3 text-[13px] text-cool-600 hover:text-sky-600 transition-colors no-underline">
+              <span class="w-8 h-8 rounded-lg bg-sky-50 border border-sky-100 grid place-items-center text-sky-500 flex-shrink-0">📞</span>
+              9769321075
+            </a>
+            <a href="mailto:nationalskill.edu.np@gmail.com" class="flex items-start gap-3 text-[13px] text-cool-600 hover:text-sky-600 transition-colors no-underline break-all">
+              <span class="w-8 h-8 rounded-lg bg-sky-50 border border-sky-100 grid place-items-center text-sky-500 flex-shrink-0 mt-0.5">✉</span>
+              nationalskill.edu.np@gmail.com
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ SKILL TEST ═══════════════ -->
+<section id="skill-test" class="bg-cool-50 px-6 md:px-16 py-24">
+  <div class="max-w-6xl mx-auto">
+
+    <div class="mb-14">
+      <div class="reveal section-label mb-4">Korean Program</div>
+      <h2 class="reveal reveal-d1 font-display font-black text-cool-900 leading-tight mb-4" style="font-size:clamp(28px,4vw,50px);">
+        Skill Test <span class="text-sky-600">Training</span>
+      </h2>
+      <p class="reveal reveal-d2 text-cool-500 text-[15px] leading-relaxed max-w-xl">
+        Our Korean skill test preparation program covers practical hands-on training. Here's a glimpse of our students in action, preparing for Korea-bound opportunities.
+      </p>
+    </div>
+
+    <!-- 2x2 skill images -->
+    <div class="grid grid-cols-2 gap-5">
+      <a href="https://www.youtube.com/@computerskill_np" target="_blank"
+         class="reveal skill-img group">
+        <img src="./static/img/gallery/korean/401140706_203523079466950_677012777211854058_n.jpg" alt="Korean Skill Test" loading="lazy">
+        <div class="skill-img-overlay">
+          <span class="text-white text-[12px] font-semibold">Watch on YouTube ↗</span>
+        </div>
+      </a>
+      <a href="https://www.youtube.com/@computerskill_np" target="_blank"
+         class="reveal reveal-d1 skill-img group">
+        <img src="./static/img/gallery/korean/hand power.jpg" alt="Hand Power" loading="lazy">
+        <div class="skill-img-overlay">
+          <span class="text-white text-[12px] font-semibold">Watch on YouTube ↗</span>
+        </div>
+      </a>
+      <a href="https://www.youtube.com/@computerskill_np" target="_blank"
+         class="reveal reveal-d2 skill-img group">
+        <img src="./static/img/gallery/korean/skill test ring.jpg" alt="Skill Test Ring" loading="lazy">
+        <div class="skill-img-overlay">
+          <span class="text-white text-[12px] font-semibold">Watch on YouTube ↗</span>
+        </div>
+      </a>
+      <a href="https://www.youtube.com/@computerskill_np" target="_blank"
+         class="reveal reveal-d3 skill-img group">
+        <img src="./static/img/gallery/korean/wood board.jpg" alt="Wood Board" loading="lazy">
+        <div class="skill-img-overlay">
+          <span class="text-white text-[12px] font-semibold">Watch on YouTube ↗</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- YouTube CTA -->
+    <div class="reveal mt-10 flex items-center gap-4 flex-wrap">
+      <a href="https://www.youtube.com/@computerskill_np" target="_blank"
+         class="inline-flex items-center gap-3 text-[14px] font-semibold text-white bg-[#FF0000] px-7 py-3.5 rounded-full hover:bg-red-600 hover:-translate-y-0.5 shadow-[0_4px_16px_rgba(255,0,0,0.25)] hover:shadow-[0_8px_28px_rgba(255,0,0,0.35)] transition-all no-underline">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        Watch More on YouTube
+      </a>
+      <a href="https://nationalskill-register.vercel.app/" class="inline-flex items-center gap-2 text-[14px] font-semibold text-sky-700 border border-sky-200 px-7 py-3.5 rounded-full hover:bg-sky-50 hover:border-sky-400 transition-all no-underline">
+        Register for Korean Program →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CTA BANNER ═══════════════ -->
+<section class="bg-white px-6 md:px-16 py-12">
+  <div class="max-w-6xl mx-auto">
+    <div class="reveal relative bg-gradient-to-r from-sky-600 to-sky-800 rounded-3xl p-12 md:p-16 text-center overflow-hidden shadow-blue-lg">
+      <div class="absolute -right-20 -top-20 w-64 h-64 rounded-full bg-white/10 pointer-events-none"></div>
+      <div class="absolute -left-10 -bottom-10 w-40 h-40 rounded-full bg-white/5 pointer-events-none"></div>
+      <div class="relative z-10">
+        <div class="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.18em] uppercase text-sky-200 bg-white/10 border border-white/20 px-4 py-1.5 rounded-full mb-6">
+          <span class="w-1.5 h-1.5 rounded-full bg-sky-300 pulse-dot"></span>
+          Korean Program — Open Now
+        </div>
+        <h2 class="font-display font-black text-white leading-tight mb-5" style="font-size:clamp(26px,4vw,48px);">
+          Start Your Korean<br>Language Journey
+        </h2>
+        <p class="text-sky-200 text-base mb-10 max-w-md mx-auto leading-relaxed">Master Korean language and practical skills to unlock opportunities in South Korea's thriving job market.</p>
+        <a href="https://nationalskill-register.vercel.app/"
+           class="inline-flex items-center gap-2 text-[15px] font-bold text-sky-700 bg-white px-10 py-4 rounded-full hover:bg-sky-50 shadow-blue-sm hover:-translate-y-1 hover:shadow-blue-md transition-all no-underline">
+          Register Now
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer class="bg-cool-950 text-cool-300 px-6 md:px-16 pt-20 pb-8">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid md:grid-cols-4 gap-12 mb-16">
+      <div class="md:col-span-2">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-sky-500 to-sky-700 grid place-items-center flex-shrink-0">
+            <span class="font-display font-black text-white text-lg leading-none">N</span>
+          </div>
+          <span class="font-display font-bold text-white text-[17px]">National Skill</span>
+        </div>
+        <p class="text-[14px] text-cool-400 leading-relaxed max-w-xs mb-8">National Skill Institute offers Korean, English, Japanese, and computer skills training. Modern facilities, expert teachers, real results.</p>
+        <div class="flex gap-3 flex-wrap">
+          <a href="https://www.facebook.com/profile.php?id=100081353035987" target="_blank" class="inline-flex items-center gap-2 text-[13px] text-cool-400 border border-cool-700 px-4 py-2 rounded-lg hover:border-sky-500 hover:text-sky-400 hover:bg-sky-500/10 transition-all no-underline"><span class="font-bold">f</span> Facebook</a>
+          <a href="https://www.youtube.com/@computerskill_np" target="_blank" class="inline-flex items-center gap-2 text-[13px] text-cool-400 border border-cool-700 px-4 py-2 rounded-lg hover:border-sky-500 hover:text-sky-400 hover:bg-sky-500/10 transition-all no-underline"><span>▶</span> YouTube</a>
+        </div>
+      </div>
+      <div>
+        <h5 class="text-[11px] font-bold tracking-[0.15em] uppercase text-cool-500 mb-5">Company</h5>
+        <ul class="space-y-3 list-none p-0 m-0">
+          <li><a href="./aboutus.html"   class="text-[14px] text-cool-400 hover:text-sky-400 transition-colors no-underline">About Us</a></li>
+          <li><a href="./gallery.html"   class="text-[14px] text-cool-400 hover:text-sky-400 transition-colors no-underline">Gallery</a></li>
+          <li><a href="./korea.html"     class="text-[14px] text-sky-400 no-underline font-medium">Korea Program</a></li>
+          <li><a href="./quicklink.html" class="text-[14px] text-cool-400 hover:text-sky-400 transition-colors no-underline">Quick Links</a></li>
+          <li><a href="./contactus.html" class="text-[14px] text-cool-400 hover:text-sky-400 transition-colors no-underline">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5 class="text-[11px] font-bold tracking-[0.15em] uppercase text-cool-500 mb-5">Get In Touch</h5>
+        <div class="space-y-4">
+          <div class="flex items-start gap-3"><span class="text-sky-500 mt-0.5 text-sm">📍</span><p class="text-[14px] text-cool-400 m-0">Suryabinayak, Bhaktapur, Nepal</p></div>
+          <div class="flex items-center gap-3"><span class="text-sky-500 text-sm">📞</span><a href="tel:9769321075" class="text-[14px] text-cool-400 hover:text-sky-400 transition-colors no-underline">9769321075</a></div>
+          <div class="flex items-start gap-3"><span class="text-sky-500 mt-0.5 text-sm">✉</span><a href="mailto:nationalskill.edu.np@gmail.com" class="text-[14px] text-cool-400 hover:text-sky-400 transition-colors no-underline break-all">nationalskill.edu.np@gmail.com</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="border-t border-cool-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-[13px] text-cool-500">
+      <p class="m-0">Copyright © <span id="year"></span> National Skill Institute. All Rights Reserved.</p>
+      <p class="m-0">Developed by <a href="https://www.pembatamang.com.np" class="text-sky-500 hover:text-sky-400 transition-colors no-underline">Pemba Tamang</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════ JS ═══════════════ -->
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Nav scroll
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 40) {
+      nav.style.background = 'rgba(255,255,255,0.92)';
+      nav.style.backdropFilter = 'blur(20px)';
+      nav.style.borderBottom = '1px solid rgba(186,222,255,0.5)';
+      nav.style.boxShadow = '0 2px 12px rgba(7,77,133,0.08)';
+    } else {
+      nav.style.background = nav.style.backdropFilter = nav.style.borderBottom = nav.style.boxShadow = '';
+    }
+  });
+
+  // Hamburger
+  const mob = document.getElementById('mobileMenu');
+  let mobOpen = false;
+  document.getElementById('hamburger').addEventListener('click', () => {
+    mobOpen = !mobOpen;
+    mob.style.transform = mobOpen ? 'translateY(0)' : 'translateY(-110%)';
+  });
+
+  // Popup
+  const popup    = document.getElementById('popup');
+  const popupBox = popup.querySelector('.popup-box');
+  setTimeout(() => popup.classList.add('open'), 1400);
+  document.getElementById('closePopup').addEventListener('click', () => popup.classList.remove('open'));
+  popup.addEventListener('click', e => { if (e.target === popup) popup.classList.remove('open'); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') popup.classList.remove('open'); });
+
+  // Scroll reveal
+  const revEls = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  revEls.forEach(el => obs.observe(el));
+</script>
 </body>
-
 </html>
